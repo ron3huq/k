@@ -1,0 +1,284 @@
+<title>Sơ đồ CNXHKH</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;800&display=swap">
+<style>
+/* Bố cục: mỗi chương là một cây nhánh dọc (gốc → nhánh → lá), có chế độ che đáp án để tự kiểm tra */
+:root{--bg:#faf7f6;--card:#fff;--tx:#231b1a;--mu:#7a6d6b;--ln:#e6dcda;--ac:#a3231f;--acs:#f7e4e2;--gold:#8a6200;--golds:#fbf1d6;
+--f:"Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#171312;--card:#211b1a;--tx:#efe7e5;--mu:#a89996;--ln:#3a302e;--ac:#ff7b73;--acs:#3b1d1b;--gold:#e8c063;--golds:#352b14;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#171312;--card:#211b1a;--tx:#efe7e5;--mu:#a89996;--ln:#3a302e;--ac:#ff7b73;--acs:#3b1d1b;--gold:#e8c063;--golds:#352b14;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--tx);font:15px/1.55 var(--f)}
+.w{max-width:860px;margin:0 auto;padding-block:18px 60px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1{font-size:24px;font-weight:800;margin:0;text-wrap:balance}
+.lead{color:var(--mu);margin:4px 0 14px;max-width:65ch}
+.tools{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);display:flex;flex-wrap:wrap;gap:8px;padding:8px 0;border-bottom:1px solid var(--ln)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.tools a,.tools button{font:600 13px var(--f);border:1px solid var(--ln);background:var(--card);color:var(--tx);border-radius:999px;padding:5px 11px;text-decoration:none;cursor:pointer}
+.tools button#hide{background:var(--ac);border-color:var(--ac);color:var(--card)}
+.tools button:focus-visible,.tools a:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+section{margin-top:26px}
+h2{font-size:18px;font-weight:800;margin:0 0 10px;display:flex;gap:10px;align-items:baseline;text-wrap:balance}
+h2 span{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ac);white-space:nowrap}
+.tree,.tree ul{list-style:none;margin:0;padding:0}
+.tree ul{margin-left:12px;padding-left:14px;border-left:2px solid var(--ln)}
+.tree li{position:relative;padding:3px 0}
+.tree ul>li::before{content:"";position:absolute;left:-14px;top:15px;width:10px;border-top:2px solid var(--ln)}
+.tree>li>b{display:inline-block;background:var(--acs);color:var(--ac);padding:2px 9px;border-radius:6px;margin-top:6px}
+.tree b{font-weight:600}
+.v{transition:filter .15s}
+body.quiz .v{filter:blur(6px);cursor:pointer;user-select:none}
+body.quiz .v.show{filter:none}
+.tip{background:var(--golds);color:var(--tx);border-radius:8px;padding:9px 12px;margin-top:10px}
+.tip strong{color:var(--gold)}
+.tbl{overflow-x:auto;margin-top:8px}
+table{border-collapse:collapse;width:100%;font-size:14px;font-variant-numeric:tabular-nums}
+td,th{border-bottom:1px solid var(--ln);padding:6px 8px;text-align:left;vertical-align:top}
+th{color:var(--mu);font-weight:600;font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+td:first-child{font-weight:800;color:var(--ac);white-space:nowrap}
+.how ol{padding-left:20px;margin:6px 0}.how li{margin:4px 0}
+@media (prefers-reduced-motion:reduce){.v{transition:none}}
+</style>
+
+<div class="w">
+<h1>Sơ đồ tư duy Chủ nghĩa xã hội khoa học</h1>
+<p class="lead">Tóm tắt 7 chương theo Bài giảng CNXHKH PTIT 2021. Bấm <b>Che đáp án</b> để các ý bị làm mờ, tự nhớ lại trước rồi chạm vào từng ý để xem. Cách này giúp nhớ lâu hơn nhiều so với đọc lại.</p>
+
+<nav class="tools">
+<button id="hide" type="button">Che đáp án</button>
+<a href="#meo">Cách ôn</a><a href="#so">Số & năm</a>
+<a href="#c1">C1</a><a href="#c2">C2</a><a href="#c3">C3</a><a href="#c4">C4</a><a href="#c5">C5</a><a href="#c6">C6</a><a href="#c7">C7</a>
+</nav>
+
+<section id="meo" class="how">
+<h2><span>Bắt đầu</span>Cách ôn nhanh mà nhớ lâu</h2>
+<ol>
+<li><b>Học theo khung trước, chi tiết sau.</b> Mỗi chương chỉ cần thuộc các con số (3 phát kiến, 4 đặc điểm, 8 đặc trưng...) rồi gắn ý vào từng số.</li>
+<li><b>Tự gợi nhớ thay vì đọc lại.</b> Bật "Che đáp án", nhìn nhánh rồi nói thầm các ý, sau đó chạm để kiểm tra. Ý nào sai thì đánh dấu để ôn lại.</li>
+<li><b>Dùng câu thần chú</b> trong ô vàng ở mỗi chương. Đọc to vài lần là nhớ thứ tự.</li>
+<li><b>Ôn giãn cách:</b> học chương nào thì ôn lại chương đó sau 1 ngày, 3 ngày và trước hôm thi. Mỗi lần ôn chỉ mất 5 phút với sơ đồ này.</li>
+<li><b>Làm trắc nghiệm ngay sau khi xem sơ đồ</b> (bật đúng chương đó trên trang trắc nghiệm), rồi bấm "Làm lại câu sai".</li>
+</ol>
+</section>
+
+<section id="so">
+<h2><span>Học thuộc</span>Bảng số và năm hay ra đề</h2>
+<div class="tbl"><table>
+<tr><th>Mốc</th><th>Sự kiện</th></tr>
+<tr><td>1843–1848</td><td class="v">Mác, Ăngghen chuyển biến lập trường: duy tâm → duy vật, dân chủ cách mạng → cộng sản</td></tr>
+<tr><td>1844</td><td class="v">Mác: Góp phần phê phán triết học pháp quyền của Hêghen – Lời nói đầu</td></tr>
+<tr><td>2/1848</td><td class="v">Tuyên ngôn của Đảng Cộng sản → CNXHKH ra đời</td></tr>
+<tr><td>1864</td><td class="v">Quốc tế I thành lập</td></tr>
+<tr><td>1867</td><td class="v">Tư bản tập 1 → duy vật lịch sử thành nguyên lý đã chứng minh</td></tr>
+<tr><td>1871</td><td class="v">Công xã Pari (phôi thai dân chủ XHCN)</td></tr>
+<tr><td>1875</td><td class="v">Phê phán Cương lĩnh Gôta (thời kỳ quá độ, chuyên chính vô sản)</td></tr>
+<tr><td>1878</td><td class="v">Chống Đuyrinh: CNXH từ không tưởng đến khoa học</td></tr>
+<tr><td>1895</td><td class="v">Ăngghen qua đời</td></tr>
+<tr><td>1902</td><td class="v">Lênin: Làm gì?</td></tr>
+<tr><td>1917</td><td class="v">Cách mạng Tháng Mười, Nhà nước Xô viết, dân chủ XHCN chính thức xác lập</td></tr>
+<tr><td>1924–1953</td><td class="v">Thời đoạn Xtalin</td></tr>
+<tr><td>11/1957</td><td class="v">Hội nghị Matxcơva: 9 quy luật chung xây dựng CNXH</td></tr>
+<tr><td>1/1960</td><td class="v">Hội nghị 81 Đảng: khái niệm "thời đại hiện nay"</td></tr>
+<tr><td>1978</td><td class="v">Trung Quốc cải cách mở cửa (TƯ 3 khóa XI)</td></tr>
+<tr><td>1986</td><td class="v">Đại hội VI: đổi mới, "nhìn thẳng vào sự thật..."</td></tr>
+<tr><td>1991</td><td class="v">Cương lĩnh: 6 đặc trưng, 7 phương hướng</td></tr>
+<tr><td>2001</td><td class="v">Đại hội IX: định nghĩa "bỏ qua chế độ TBCN"</td></tr>
+<tr><td>2011</td><td class="v">Cương lĩnh bổ sung: 8 đặc trưng, 8 phương hướng, 8 mối quan hệ lớn</td></tr>
+<tr><td>2021</td><td class="v">Đại hội XIII: 12 định hướng, mốc 2025 / 2030 / 2045</td></tr>
+</table></div>
+</section>
+
+<section id="c1">
+<h2><span>Chương 1</span>Nhập môn CNXHKH</h2>
+<ul class="tree">
+<li><b>Khái niệm</b><ul>
+<li>Nghĩa rộng: <span class="v">chính là chủ nghĩa Mác – Lênin</span></li>
+<li>Nghĩa hẹp: <span class="v">1 trong 3 bộ phận, luận giải từ góc độ chính trị – xã hội (môn học dùng nghĩa này)</span></li></ul></li>
+<li><b>Điều kiện ra đời (40s thế kỷ XIX)</b><ul>
+<li>Kinh tế – xã hội: <span class="v">cách mạng công nghiệp; 2 giai cấp đối lập tư sản – công nhân</span></li>
+<li>3 phát minh khoa học tự nhiên: <span class="v">học thuyết tiến hóa; bảo toàn và chuyển hóa năng lượng; học thuyết tế bào</span></li>
+<li>3 tiền đề lý luận: <span class="v">triết học cổ điển Đức (Hêghen, Phoiơbắc); KTCT cổ điển Anh (Xmít, Ricácđô); CNXH không tưởng phê phán (Xanh Ximông, Phuriê, Oen) = tiền đề trực tiếp</span></li>
+<li>Không tưởng hạn chế: <span class="v">không thấy quy luật xã hội, không thấy lực lượng tiên phong (GCCN), không có biện pháp hiện thực</span></li>
+<li>Điều kiện đủ: <span class="v">vai trò của Mác (1818–1883) và Ăngghen (1820–1895)</span></li></ul></li>
+<li><b>3 phát kiến vĩ đại</b><ul>
+<li>Thứ nhất: <span class="v">chủ nghĩa duy vật lịch sử</span></li>
+<li>Thứ hai: <span class="v">giá trị thặng dư → CNTB diệt vong về mặt KINH TẾ</span></li>
+<li>Thứ ba: <span class="v">sứ mệnh lịch sử GCCN → về mặt CHÍNH TRỊ – XÃ HỘI; khắc phục hạn chế của không tưởng</span></li></ul></li>
+<li><b>Các giai đoạn phát triển</b><ul>
+<li>Mác, Ăngghen: <span class="v">không tưởng → khoa học; sau Công xã Pari: đập tan bộ máy quan liêu, không đập tan toàn bộ nhà nước tư sản</span></li>
+<li>Lênin (1870–1924): <span class="v">lý luận → hiện thực (1917); đảng kiểu mới; quy luật phát triển không đều → cách mạng thắng ở khâu yếu nhất; hệ thống chuyên chính vô sản = Đảng + Xô viết + công đoàn; NEP, kinh tế nhiều thành phần, CNTB nhà nước</span></li>
+<li>Việt Nam đổi mới: <span class="v">độc lập dân tộc gắn CNXH; đổi mới kinh tế là trung tâm; 3 trụ cột: kinh tế trung tâm, xây dựng Đảng then chốt, văn hóa nền tảng tinh thần</span></li></ul></li>
+<li><b>Đối tượng, phương pháp</b><ul>
+<li>Khách thể: <span class="v">lĩnh vực chính trị – xã hội</span></li>
+<li>Đối tượng: <span class="v">quy luật chính trị – xã hội của hình thái KT-XH cộng sản chủ nghĩa</span></li>
+<li>Phương pháp chung nhất: <span class="v">duy vật biện chứng và duy vật lịch sử</span></li>
+<li>Phương pháp đặc thù: <span class="v">khảo sát, phân tích về mặt chính trị – xã hội dựa trên điều kiện KT-XH cụ thể</span></li>
+<li>Trả lời câu hỏi: <span class="v">bằng CON ĐƯỜNG NÀO đi từ CNTB lên CNXH</span></li></ul></li>
+</ul>
+<p class="tip"><strong>Thần chú:</strong> "TIẾN – NĂNG – TẾ" (3 phát minh) · "ĐỨC – ANH – PHÁP" (3 nguồn lý luận) · "DUY – GIÁ – SỨ" (3 phát kiến theo thứ tự). <b>Giá</b> = kinh tế, <b>Sứ</b> = chính trị. Mác biến không tưởng thành khoa học, Lênin biến khoa học thành hiện thực.</p>
+</section>
+
+<section id="c2">
+<h2><span>Chương 2</span>Sứ mệnh lịch sử của giai cấp công nhân</h2>
+<ul class="tree">
+<li><b>Vị trí</b><ul><li><span class="v">Phạm trù trung tâm, nguyên lý xuất phát của CNXHKH</span></li></ul></li>
+<li><b>Khái niệm GCCN</b><ul>
+<li>Phương diện KT-XH: <span class="v">lao động công nghiệp, máy móc; không có TLSX, bán sức lao động, bị bóc lột giá trị thặng dư</span></li>
+<li>Phương diện CT-XH: <span class="v">sản phẩm của CNTB; đối kháng không điều hòa với tư sản</span></li></ul></li>
+<li><b>Nội dung sứ mệnh</b><ul>
+<li>Kinh tế: <span class="v">cải tạo QHSX TBCN, xây dựng QHSX XHCN</span></li>
+<li>Chính trị – xã hội: <span class="v">lật đổ tư sản, lập nhà nước của nhân dân lao động</span></li>
+<li>Văn hóa – tư tưởng: <span class="v">thay hệ tư tưởng tư sản bằng hệ tư tưởng GCCN</span></li>
+<li>Ở nước TBCN: <span class="v">trước mắt chống bất công, đòi dân sinh dân chủ; lâu dài giành chính quyền</span></li>
+<li>Đặc điểm: <span class="v">xóa bỏ triệt để tư hữu (không thay tư hữu này bằng tư hữu khác); mục tiêu cao nhất là giải phóng con người</span></li></ul></li>
+<li><b>Điều kiện</b><ul>
+<li>Khách quan: <span class="v">địa vị KT-XH (bộ phận quan trọng nhất của LLSX) + đặc điểm CT-XH</span></li>
+<li>4 đặc điểm CT-XH: <span class="v">tiên tiến nhất; tổ chức kỷ luật cao; cách mạng triệt để; bản chất quốc tế</span></li>
+<li>Chủ quan: <span class="v">GCCN phát triển; Đảng Cộng sản (quan trọng nhất, quyết định); liên minh công – nông (không thể thiếu)</span></li>
+<li>Quy luật ra đời Đảng: <span class="v">chủ nghĩa Mác + phong trào công nhân</span></li></ul></li>
+<li><b>GCCN hiện nay</b><ul>
+<li>Biến đổi: <span class="v">"trí tuệ hóa", "trung lưu hóa" (cổ phần, nhưng cổ đông lớn vẫn quyết định)</span></li></ul></li>
+<li><b>GCCN Việt Nam</b><ul>
+<li>Đặc điểm: <span class="v">ra đời đầu thế kỷ XX (khai thác thuộc địa của Pháp); gốc chủ yếu từ nông dân; đối kháng trực tiếp tư bản thực dân Pháp, KHÔNG trực tiếp với tư sản dân tộc; sớm có Đảng</span></li>
+<li>Hiện nay: <span class="v">đi đầu CNH-HĐH; công nhân khu vực nhà nước là nòng cốt</span></li>
+<li>Then chốt: <span class="v">xây dựng, chỉnh đốn Đảng</span>; nhiệm vụ chiến lược: <span class="v">trí thức hóa công nhân</span></li></ul></li>
+</ul>
+<p class="tip"><strong>Thần chú:</strong> 4 đặc điểm chính trị – xã hội là "TIÊN – KỶ – TRIỆT – QUỐC". Khách quan nói về <b>địa vị</b>, chủ quan nói về <b>Đảng</b>.</p>
+</section>
+
+<section id="c3">
+<h2><span>Chương 3</span>CNXH và thời kỳ quá độ</h2>
+<ul class="tree">
+<li><b>Hình thái KT-XH</b><ul>
+<li>5 hình thái: <span class="v">cộng sản nguyên thủy → chiếm hữu nô lệ → phong kiến → TBCN → cộng sản chủ nghĩa</span></li>
+<li>CSCN gồm 2 giai đoạn: <span class="v">thấp = CNXH; cao = CNCS</span></li>
+<li>2 tiền đề vật chất: <span class="v">LLSX phát triển + GCCN trưởng thành (đánh dấu bằng sự ra đời của Đảng)</span></li>
+<li>Con đường: <span class="v">cách mạng vô sản (hòa bình về lý thuyết có thể nhưng chưa từng xảy ra)</span></li></ul></li>
+<li><b>6 đặc trưng CNXH (Mác – Lênin)</b><ul>
+<li><span class="v">1. Giải phóng giai cấp, dân tộc, xã hội, con người</span></li>
+<li><span class="v">2. Do nhân dân lao động làm chủ (đặc trưng bản chất)</span></li>
+<li><span class="v">3. Kinh tế phát triển cao, công hữu TLSX chủ yếu (đặc trưng kinh tế)</span></li>
+<li><span class="v">4. Nhà nước kiểu mới mang bản chất GCCN</span></li>
+<li><span class="v">5. Văn hóa phát triển cao</span></li>
+<li><span class="v">6. Dân tộc bình đẳng, hữu nghị với các nước</span></li></ul></li>
+<li><b>Thời kỳ quá độ</b><ul>
+<li>2 loại: <span class="v">trực tiếp (từ CNTB phát triển, chưa từng diễn ra); gián tiếp (Việt Nam, Trung Quốc)</span></li>
+<li>Bắt đầu – kết thúc: <span class="v">giành chính quyền → xây dựng xong CNXH</span></li>
+<li>Kinh tế: <span class="v">nhiều thành phần; Lênin nêu 5: gia trưởng, hàng hóa nhỏ, tư bản, tư bản nhà nước, XHCN</span></li>
+<li>Chính trị: <span class="v">chuyên chính vô sản; đấu tranh giai cấp hình thức mới (hòa bình tổ chức xây dựng)</span></li>
+<li>Xã hội: <span class="v">nhiều giai cấp; phân phối theo lao động là chủ đạo</span></li>
+<li>Câu của Lênin: <span class="v">"bắc những chiếc cầu nhỏ" qua CNTB nhà nước; CNTB nhà nước = 3/4 CNXH</span></li></ul></li>
+<li><b>Việt Nam</b><ul>
+<li>Bỏ qua TBCN (Đại hội IX) là: <span class="v">bỏ qua VỊ TRÍ THỐNG TRỊ của QHSX và kiến trúc thượng tầng TBCN; vẫn tiếp thu thành tựu khoa học, công nghệ</span></li>
+<li>Cương lĩnh 2011, 8 đặc trưng: <span class="v">dân giàu, nước mạnh, dân chủ, công bằng, văn minh · nhân dân làm chủ · kinh tế cao + QHSX tiến bộ phù hợp · văn hóa tiên tiến đậm đà bản sắc · con người ấm no tự do hạnh phúc · dân tộc bình đẳng đoàn kết · Nhà nước pháp quyền do Đảng lãnh đạo · hữu nghị hợp tác</span></li>
+<li>8 phương hướng: <span class="v">phương hướng 1 là CNH-HĐH, 2 là kinh tế thị trường định hướng XHCN, ..., 8 là xây dựng Đảng</span></li>
+<li>Mục tiêu Đại hội XIII: <span class="v">2025 thu nhập trung bình thấp · 2030 trung bình cao · 2045 nước phát triển, thu nhập cao</span></li></ul></li>
+</ul>
+<p class="tip"><strong>Thần chú số Cương lĩnh:</strong> 1991 là "6 – 7" (6 đặc trưng, 7 phương hướng). 2011 là "8 – 8 – 8" (đặc trưng, phương hướng, mối quan hệ). Đại hội XIII có 12 định hướng. Ba mốc mục tiêu: <b>50 năm thống nhất (2025), 100 năm Đảng (2030), 100 năm nước (2045)</b>.</p>
+</section>
+
+<section id="c4">
+<h2><span>Chương 4</span>Dân chủ và Nhà nước XHCN</h2>
+<ul class="tree">
+<li><b>Dân chủ</b><ul>
+<li>Gốc từ: <span class="v">Demokratos, nghĩa là quyền lực thuộc về nhân dân</span></li>
+<li>3 nghĩa (Mác – Lênin): <span class="v">giá trị, nhu cầu của con người · hình thái nhà nước (không có dân chủ phi giai cấp) · nguyên tắc tổ chức (+ tập trung = tập trung dân chủ)</span></li>
+<li>Lênin: <span class="v">dân chủ là bình đẳng, xóa bỏ phân chia giai cấp</span>; Hồ Chí Minh: <span class="v">dân là chủ và dân làm chủ</span></li>
+<li>Lịch sử: <span class="v">nguyên thủy (dân chủ quân sự, Đại hội nhân dân) → chủ nô → phong kiến (không có, độc tài chuyên chế) → tư sản → XHCN (1917)</span></li>
+<li>3 nền dân chủ: <span class="v">chủ nô, tư sản, XHCN</span></li></ul></li>
+<li><b>Dân chủ XHCN</b><ul>
+<li>Chính trị: <span class="v">bản chất GCCN + tính nhân dân rộng rãi + tính dân tộc sâu sắc; nhất nguyên, Đảng lãnh đạo</span></li>
+<li>Kinh tế: <span class="v">công hữu TLSX chủ yếu</span></li>
+<li>Tư tưởng: <span class="v">chủ nghĩa Mác – Lênin</span></li>
+<li>So với dân chủ tư sản: <span class="v">cho đa số (tư sản: thiểu số); nhất nguyên (tư sản: đa nguyên); công hữu (tư sản: tư hữu)</span></li></ul></li>
+<li><b>Nhà nước XHCN</b><ul>
+<li>3 cách chia chức năng: <span class="v">theo phạm vi: đối nội / đối ngoại · theo lĩnh vực: chính trị, kinh tế, văn hóa, xã hội · theo tính chất: giai cấp (trấn áp) / xã hội (tổ chức xây dựng)</span></li>
+<li>Quan hệ với dân chủ: <span class="v">dân chủ là nền tảng; nhà nước là công cụ thực hiện dân chủ</span></li>
+<li>Lênin gọi là: <span class="v">"nửa nhà nước"</span></li></ul></li>
+<li><b>Việt Nam</b><ul>
+<li>Ra đời: <span class="v">từ chế độ dân chủ nhân dân sau Cách mạng Tháng Tám 1945</span></li>
+<li>Dân chủ là: <span class="v">vừa mục tiêu vừa động lực; gián tiếp (đại diện) + trực tiếp</span></li>
+<li>Nhà nước pháp quyền: <span class="v">quyền lực thống nhất, có phân công, phối hợp, kiểm soát giữa lập pháp – hành pháp – tư pháp; tập trung dân chủ; Đảng lãnh đạo</span></li>
+<li>Giải pháp: <span class="v">Đảng trong sạch = điều kiện TIÊN QUYẾT · Nhà nước pháp quyền = điều kiện THỰC THI · kinh tế thị trường định hướng XHCN = cơ sở KINH TẾ</span></li></ul></li>
+</ul>
+<p class="tip"><strong>Mẹo:</strong> phong kiến không có nền dân chủ, nên lịch sử chỉ có <b>3 nền</b>: Nô – Tư – XHCN. Chia chức năng nhà nước theo "<b>Phạm vi – Lĩnh vực – Tính chất</b>" (PLT).</p>
+</section>
+
+<section id="c5">
+<h2><span>Chương 5</span>Cơ cấu xã hội – giai cấp và liên minh</h2>
+<ul class="tree">
+<li><b>Cơ cấu xã hội</b><ul>
+<li>Các loại: <span class="v">dân cư, nghề nghiệp, giai cấp, dân tộc, tôn giáo</span></li>
+<li>Quan trọng hàng đầu: <span class="v">cơ cấu xã hội – giai cấp (gắn với sở hữu, đảng phái, nhà nước); không được tuyệt đối hóa</span></li></ul></li>
+<li><b>3 quy luật biến đổi trong thời kỳ quá độ</b><ul>
+<li><span class="v">1. Gắn liền và bị quy định bởi cơ cấu kinh tế</span></li>
+<li><span class="v">2. Phức tạp, đa dạng, xuất hiện tầng lớp mới (doanh nhân, tiểu chủ...)</span></li>
+<li><span class="v">3. Vừa đấu tranh vừa liên minh, xích lại gần nhau</span></li></ul></li>
+<li><b>Liên minh</b><ul>
+<li>Mác: <span class="v">thiếu liên minh với nông dân ("bạn đồng minh tự nhiên") thì cuộc đấu tranh thành "bài ai điếu"</span></li>
+<li>Lênin: <span class="v">nguyên tắc cao nhất của chuyên chính là giữ liên minh công – nông</span></li>
+<li>Góc độ quyết định nhất trong thời kỳ quá độ: <span class="v">KINH TẾ</span></li>
+<li>3 nguyên tắc: <span class="v">kết hợp đúng lợi ích · Đảng lãnh đạo · tự nguyện</span></li></ul></li>
+<li><b>Việt Nam</b><ul>
+<li>Vai trò: <span class="v">công nhân lãnh đạo, nòng cốt · nông dân có vị trí chiến lược, giảm dần về tỷ lệ · trí thức là lực lượng lao động sáng tạo đặc biệt quan trọng · doanh nhân (Nghị quyết 09, 2013)</span></li>
+<li>3 nội dung liên minh: <span class="v">kinh tế (cơ bản, quyết định nhất) · chính trị · văn hóa – xã hội</span></li>
+<li>Nền tảng đại đoàn kết: <span class="v">liên minh công – nông – trí thức do Đảng lãnh đạo</span></li></ul></li>
+</ul>
+<p class="tip"><strong>Thần chú:</strong> 3 quy luật là "KINH – ĐA – LIÊN" (kinh tế quyết định, đa dạng, liên minh). 3 nguyên tắc liên minh là "LỢI – ĐẢNG – TỰ" (lợi ích, Đảng, tự nguyện).</p>
+</section>
+
+<section id="c6">
+<h2><span>Chương 6</span>Dân tộc và tôn giáo</h2>
+<ul class="tree">
+<li><b>Dân tộc</b><ul>
+<li>Dân tộc – quốc gia, 5 đặc trưng: <span class="v">kinh tế chung · lãnh thổ · nhà nước · ngôn ngữ chung · tâm lý, văn hóa</span></li>
+<li>Dân tộc – tộc người, 3 đặc trưng: <span class="v">ngôn ngữ · văn hóa · ý thức tự giác tộc người</span></li>
+<li>2 xu hướng: <span class="v">tách ra (đầu CNTB, do thức tỉnh ý thức dân tộc) · liên hiệp (thời chủ nghĩa đế quốc, do LLSX và giao lưu)</span></li>
+<li>Cương lĩnh dân tộc: <span class="v">bình đẳng (cơ sở) · tự quyết (tách ra hoặc liên hiệp) · liên hiệp công nhân các dân tộc (gắn kết thành chỉnh thể)</span></li>
+<li>Đặc điểm Việt Nam: <span class="v">chênh lệch dân số · cư trú xen kẽ · thiểu số ở địa bàn chiến lược · phát triển không đều · đoàn kết lâu đời · văn hóa đa dạng thống nhất</span></li>
+<li>Quan điểm Đảng: <span class="v">vấn đề chiến lược, cơ bản, lâu dài và cấp bách</span></li></ul></li>
+<li><b>Tôn giáo</b><ul>
+<li>Bản chất: <span class="v">hình thái ý thức xã hội phản ánh HƯ ẢO hiện thực; thế giới quan duy tâm</span></li>
+<li>3 nguồn gốc: <span class="v">tự nhiên, kinh tế – xã hội · nhận thức (tuyệt đối hóa mặt chủ thể) · tâm lý (sợ hãi, biết ơn)</span></li>
+<li>3 tính chất: <span class="v">lịch sử · quần chúng · chính trị</span></li>
+<li>4 nguyên tắc: <span class="v">tôn trọng tự do tín ngưỡng · khắc phục tiêu cực gắn với xây dựng xã hội mới · phân biệt mặt chính trị (đối kháng) và tư tưởng (không đối kháng) · quan điểm lịch sử cụ thể</span></li>
+<li>Việt Nam: <span class="v">đa dạng, chung sống hòa bình; cốt lõi công tác tôn giáo là VẬN ĐỘNG QUẦN CHÚNG; trách nhiệm của cả hệ thống chính trị</span></li></ul></li>
+<li><b>Quan hệ dân tộc – tôn giáo</b><ul>
+<li><span class="v">Chi phối bởi tín ngưỡng thờ cúng tổ tiên; giải quyết tôn giáo trên cơ sở vấn đề dân tộc</span></li>
+<li>4 vùng trọng điểm bị lợi dụng: <span class="v">Tây Bắc, Tây Nguyên, Tây Nam Bộ, Tây duyên hải miền Trung</span></li></ul></li>
+</ul>
+<p class="tip"><strong>Thần chú:</strong> Cương lĩnh dân tộc là "BÌNH – TỰ – LIÊN". Tính chất tôn giáo là "LỊCH – QUẦN – CHÍNH". Bốn vùng đều là "<b>4 chữ TÂY</b>". Mặt chính trị là đối kháng, mặt tư tưởng là không đối kháng.</p>
+</section>
+
+<section id="c7">
+<h2><span>Chương 7</span>Gia đình</h2>
+<ul class="tree">
+<li><b>Khái niệm</b><ul>
+<li>Cơ sở hình thành: <span class="v">hôn nhân (cơ bản) + huyết thống, nuôi dưỡng</span></li>
+<li>Hồ Chí Minh: <span class="v">"hạt nhân của xã hội là gia đình"</span></li></ul></li>
+<li><b>3 vị trí</b><ul><li><span class="v">tế bào của xã hội · tổ ấm hạnh phúc · cầu nối cá nhân với xã hội</span></li></ul></li>
+<li><b>4 chức năng cơ bản</b><ul>
+<li><span class="v">tái sản xuất con người (đặc thù, không gì thay thế)</span></li>
+<li><span class="v">nuôi dưỡng, giáo dục</span></li>
+<li><span class="v">kinh tế và tổ chức tiêu dùng (đơn vị duy nhất tái sản xuất sức lao động)</span></li>
+<li><span class="v">thỏa mãn nhu cầu tâm sinh lý, tình cảm</span></li>
+<li>Ngoài ra: <span class="v">văn hóa, chính trị</span></li></ul></li>
+<li><b>4 cơ sở xây dựng</b><ul>
+<li><span class="v">kinh tế – xã hội (công hữu, xóa tư hữu) · chính trị – xã hội (Luật Hôn nhân và gia đình) · văn hóa · chế độ hôn nhân tiến bộ</span></li>
+<li>Hôn nhân tiến bộ: <span class="v">tự nguyện (có quyền ly hôn nhưng không khuyến khích) · một vợ một chồng, bình đẳng · đảm bảo pháp lý</span></li></ul></li>
+<li><b>Biến đổi ở Việt Nam</b><ul>
+<li><span class="v">gia đình hạt nhân phổ biến; giảm sinh, giảm nhu cầu con trai; từ đơn vị kinh tế sang đơn vị TÌNH CẢM; giáo dục xã hội bao trùm giáo dục gia đình</span></li>
+<li>Thách thức lớn nhất: <span class="v">mâu thuẫn giữa các thế hệ</span></li>
+<li>4 phương hướng: <span class="v">Đảng lãnh đạo · phát triển kinh tế · kế thừa truyền thống + tiếp thu tiến bộ · phong trào gia đình văn hóa</span></li></ul></li>
+</ul>
+<p class="tip"><strong>Thần chú:</strong> 3 vị trí là "TẾ BÀO – TỔ ẤM – CẦU NỐI". 4 chức năng là "SINH – DẠY – KINH – TÌNH". Hôn nhân tiến bộ là "TỰ NGUYỆN – MỘT VỢ MỘT CHỒNG – PHÁP LÝ".</p>
+</section>
+</div>
+
+<script>
+var btn=document.getElementById('hide');
+btn.onclick=function(){var on=document.body.classList.toggle('quiz');
+document.querySelectorAll('.v.show').forEach(function(e){e.classList.remove('show')});
+btn.textContent=on?'Hiện tất cả':'Che đáp án'};
+document.addEventListener('click',function(e){var v=e.target.closest('.v');if(v&&document.body.classList.contains('quiz'))v.classList.toggle('show')});
+</script>
