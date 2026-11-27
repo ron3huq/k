@@ -214,6 +214,7 @@ function resolve(){
     if(G.boss){G.lasers.push({y:gy,t:0});sfxLaser();G.boss.hp--;G.boss.hit=0.25;if(G.boss.hp<=0){killBoss()}}
     else if(G.n%8===0)summonBoss();
     hudUp();save();G.wait=0.45;
+    if(TTS&&P.voice){var run=G;G.wait=99;var go=function(){if(G===run&&G.wait>0.3)G.wait=0.3};say("Đúng! "+o.t,go);setTimeout(go,(2+o.t.length/9)*1000)}
   }else{
     G.combo=0;G.shield--;P.b[g.i]=0;G.shake=0.4;burst(G.shipX,G.shipY,"#ff4f72",36);sfxBad();
     try{navigator.vibrate&&navigator.vibrate(150)}catch(e){}
