@@ -80,6 +80,7 @@ padding-top:16px;padding-bottom:calc(env(safe-area-inset-bottom,0px) + 16px);pad
   <div><div class="lbl" style="margin-bottom:6px">Chinh phục thiên hà · <span id="mPct">0</span>%</div><div class="prog"><i id="mBar"></i></div></div>
   <button class="big" id="bAll" type="button">🚀 Bay toàn thiên hà</button>
   <button class="ghost" id="bVoice" type="button">🔈 Giọng đọc</button>
+  <button class="ghost" id="bTest" type="button">🔊 Thử giọng đọc</button>
   <p class="mu" id="voiceNote" style="font-size:13px;margin:-6px 0 0"></p>
   <div class="lbl">Hoặc chọn hành tinh (chương)</div>
   <div class="galaxy" id="galaxy"></div>
@@ -186,8 +187,22 @@ function phrase(q,a,ok){var head=ok?["Chính xác!","Đúng rồi!","Giỏi lắ
   if(/\?$/.test(q))return[head,q,"Đáp án là: "+a+"."];
   return[head,q+", "+low+"."]}
 function say(t,after){sayParts([t],after)}
-function sayParts(parts,after){if(!TTS||!P.voice)return;try{speechSynthesis.cancel();parts.forEach(function(t,k){var u=new SpeechSynthesisUtterance(clean(t));u.lang="vi-VN";if(VI)u.voice=VI;u.rate=1;u.pitch=k===0?1.1:1;if(after&&k===parts.length-1)u.onend=after;speechSynthesis.speak(u)})}catch(e){}}
-function hush(){if(TTS)try{speechSynthesis.cancel()}catch(e){}}
+function sayParts(parts,after){if(!TTS||!P.voice)return;try{sCancel();parts.forEach(function(t,k){var u=new SpeechSynthesisUtterance(clean(t));u.lang="vi-VN";if(VI)u.voice=VI;u.rate=1;u.pitch=k===0?1.1:1;if(after&&k===parts.length-1)u.onend=after;speechSynthesis.speak(u)})}catch(e){}}
+function hush(){if(TTS)sCancel()}
+/* ---------- mở khóa và chẩn đoán giọng đọc trên điện thoại ---------- */
+var SPOK=false,UNL=false;
+function sCancel(){try{if(speechSynthesis.speaking||speechSynthesis.pending)speechSynthesis.cancel()}catch(e){}}
+function ttsHelp(msg){var d=document.getElementById("ttsHelp");if(!d){d=document.createElement("div");d.id="ttsHelp";
+  d.style.cssText="position:fixed;left:12px;right:12px;bottom:calc(env(safe-area-inset-bottom,0px) + 12px);z-index:20;background:var(--panel);color:var(--tx);border:2px solid #ff6b6b;border-radius:14px;padding:12px 14px;font-size:14px;line-height:1.45;max-width:560px;margin:0 auto";
+  document.body.appendChild(d)}
+  d.innerHTML='<b>🔇 Không phát được giọng đọc</b><div style="margin-top:4px"></div><ul style="margin:6px 0 8px;padding-left:18px"><li>Nếu bạn đang mở trong <b>ứng dụng Claude</b>: ứng dụng có thể chặn giọng đọc. Hãy mở link này bằng <b>Chrome</b> (Android) hoặc <b>Safari</b> (iPhone), đăng nhập claude.ai.</li><li>iPhone: gạt tắt nút <b>im lặng</b> bên hông máy, tăng âm lượng.</li><li>Android: tăng <b>âm lượng phương tiện</b>; vào Cài đặt → Chuyển văn bản thành giọng nói → chọn Google, tải giọng <b>Tiếng Việt</b>.</li></ul><button type="button" style="border:0;border-radius:10px;padding:8px 14px;background:#ff6b6b;color:#1a0b0b;font-weight:800">Đã hiểu</button>';
+  d.querySelector("div").textContent=msg||"";d.querySelector("button").onclick=function(){d.remove()}}
+/* gọi ngay trong sự kiện chạm (iPhone chỉ cho phát tiếng khi lời đọc đầu tiên nằm trong lần chạm) */
+function unlockTTS(){if(!TTS){ttsHelp("Trình duyệt này không có chức năng đọc văn bản.");return}if(UNL)return;UNL=true;
+  try{var u=new SpeechSynthesisUtterance("Bắt đầu");u.lang="vi-VN";if(VI)u.voice=VI;u.volume=1;u.onstart=function(){SPOK=true;var d=document.getElementById("ttsHelp");if(d)d.remove()};
+    speechSynthesis.resume();speechSynthesis.speak(u)}catch(e){}
+  setTimeout(function(){if(!SPOK){UNL=false;var n=0;try{n=speechSynthesis.getVoices().length}catch(e){}ttsHelp(n?"":"Máy không có giọng đọc nào khả dụng trong trình duyệt này.")}},3000)}
+
 function readQ(){if(!G||!G.gate)return;var q=Q[G.gate.i],t=q[1];if(P.voice===2)G.gate.opts.forEach(function(o,k){t+=". "+"ABCD"[k]+": "+o.t});say(t)}
 var VN=["Tắt","Đọc câu hỏi","Đọc câu hỏi + đáp án"];
 function voiceNote(){var b1=$("bVoice"),b2=$("bVoice2");var t="🔈 Giọng đọc: "+VN[P.voice||0];if(b1)b1.textContent=t;if(b2)b2.textContent=t;
@@ -225,7 +240,7 @@ function start(ch){
   if(!Q.length)return;
   G={shipX:0,ch:ch,score:0,shield:3,combo:0,n:0,wave:1,pend:[],recent:[],right:0,up:0,boss:null,bossKills:0,miss:[],shipRow:1,shipY:0,parts:[],texts:[],shake:0,lasers:[],gate:null,wait:0.6};
   state="play";["menu","over","pause","rescue","review"].forEach(function(id){$(id).hidden=true});$("hud").hidden=false;hudUp();layout();G.shipY=TOP+RH*1.5;G.shipX=SX;
-  tone(300,.25,"triangle",.06,900);if(TTS&&P.voice)say(" ");
+  tone(300,.25,"triangle",.06,900);if(P.voice)unlockTTS();
 }
 function spawn(){
   var i=nextQ(),q=Q[i];G.recent.push(i);if(G.recent.length>25)G.recent.shift();
@@ -367,7 +382,7 @@ function menu(){
     h+='<button type="button" class="planet" data-c="'+c+'"><span class="ring" style="background:conic-gradient('+PC[c]+' '+pc*3.6+'deg,#2c2860 0)"><i>'+pc+'%</i></span><span><b>Hành tinh '+c+'</b><small>'+CH[c]+' · '+mm[0]+'/'+mm[1]+'</small></span></button>'}
   $("galaxy").innerHTML=h;voiceNote();$("bSnd").textContent="Âm thanh: "+(P.snd?"bật":"tắt");
 }
-$("bVoice").onclick=cycleVoice;$("bVoice2").onclick=cycleVoice;
+$("bVoice").onclick=cycleVoice;$("bTest").onclick=function(){UNL=false;SPOK=false;unlockTTS();setTimeout(function(){say("Xin chào, đây là giọng đọc ôn thi chủ nghĩa xã hội khoa học.")},900)};$("bVoice2").onclick=cycleVoice;
 $("qtext").onclick=readQ;$("qtext").style.cursor="pointer";
 $("galaxy").onclick=function(e){var b=e.target.closest(".planet");if(b)start(+b.dataset.c)};
 
