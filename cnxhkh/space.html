@@ -214,7 +214,7 @@ function resolve(){
     if(G.boss){G.lasers.push({y:gy,t:0});sfxLaser();G.boss.hp--;G.boss.hit=0.25;if(G.boss.hp<=0){killBoss()}}
     else if(G.n%8===0)summonBoss();
     hudUp();save();G.wait=0.45;
-    if(TTS&&P.voice){var run=G;G.wait=99;var go=function(){if(G===run&&G.wait>0.3)G.wait=0.3};say("Đúng! "+o.t,go);setTimeout(go,(2+o.t.length/9)*1000)}
+    if(TTS&&P.voice){var run=G;G.wait=99;var go=function(){if(G===run&&G.wait>0.3)G.wait=0.3};var qq=Q[g.i][1];say("Đúng! "+qq+" "+o.t,go);setTimeout(go,(2+(qq.length+o.t.length)/9)*1000)}
   }else{
     G.combo=0;G.shield--;P.b[g.i]=0;G.shake=0.4;burst(G.shipX,G.shipY,"#ff4f72",36);sfxBad();
     try{navigator.vibrate&&navigator.vibrate(150)}catch(e){}
@@ -228,7 +228,7 @@ function killBoss(){var bx=W*0.6,by=TOP+RH*2;for(var k=0;k<4;k++)burst(bx+(Math.
   G.texts.push({x:W/2,y:TOP+RH*2,t:"HẠ TRÙM! +500",c:"#ffd23f",l:1.8,big:1});hudUp()}
 
 function openRescue(g,row){
-  state="rescue";var q=Q[g.i];say("Sai rồi. Đáp án đúng là: "+q[2]);$("rQ").textContent=q[1];
+  state="rescue";var q=Q[g.i];say("Sai rồi. "+q[1]+" "+q[2]);$("rQ").textContent=q[1];
   $("rOpts").innerHTML="";g.opts.forEach(function(o,k){var b=document.createElement("button");b.type="button";b.className="opt"+(o.c?" ok":k===row?" bad":"");
     b.innerHTML="<b>"+"ABCD"[k]+"</b><span></span>";b.querySelector("span").textContent=o.t;b.onclick=function(){
       if(!o.c){$("rMsg").textContent="Chưa đúng. Đáp án đúng là ô màu xanh.";tone(200,.1);return}
