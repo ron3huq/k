@@ -1,0 +1,307 @@
+<title>Phi Đội Lý Luận</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bungee&family=Be+Vietnam+Pro:wght@400;600;800&display=swap">
+<style>
+/* Game không gian toàn màn hình: canvas phía sau, câu hỏi ghim trên cùng, các lớp menu nổi bằng HTML */
+:root{--bg:#070614;--panel:#141130ee;--line:#2c2860;--tx:#f1efff;--mu:#9a94c8;--hi:#ffd23f;--ok:#39e29a;--bad:#ff4f72;--cy:#4fd8ff;
+--disp:"Bungee","Be Vietnam Pro",system-ui,sans-serif;--body:"Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color-scheme:dark}
+html,body{height:100%;overflow:hidden}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--tx);font:15px/1.45 var(--body);-webkit-tap-highlight-color:transparent;touch-action:manipulation;user-select:none}
+canvas{position:fixed;inset:0;width:100%;height:100%;display:block}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible{outline:2px solid var(--hi);outline-offset:2px}
+.disp{font-family:var(--disp);font-weight:400}
+#hud{position:fixed;top:0;left:0;right:0;z-index:3;padding-top:calc(env(safe-area-inset-top,0px) + 8px);padding-bottom:8px;padding-left:max(12px,env(safe-area-inset-left,0px));padding-right:max(12px,env(safe-area-inset-right,0px));background:linear-gradient(var(--bg) 70%,transparent)}
+.bar{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--mu)}
+.bar .sc{margin-left:auto;font-family:var(--disp);font-size:20px;color:var(--hi);font-variant-numeric:tabular-nums}
+.bar button{background:none;border:1px solid var(--line);border-radius:8px;padding:2px 8px;color:var(--mu)}
+#shield{font-size:16px;letter-spacing:1px;color:var(--cy)}
+#qtext{margin-top:6px;font-weight:800;font-size:16px;line-height:1.35;text-wrap:balance}
+#qtag{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.08em}
+.layer{position:fixed;inset:0;z-index:5;overflow-y:auto;background:#070614e6;padding-top:calc(env(safe-area-inset-top,0px) + 18px);padding-bottom:calc(env(safe-area-inset-bottom,0px) + 24px);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:560px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
+.title{font-size:30px;line-height:1.05;color:var(--hi);margin:0;text-shadow:0 0 18px #ffd23f55}
+.mu{color:var(--mu)}
+.big{width:100%;border:0;border-radius:14px;padding:15px;background:var(--hi);color:#120f26;font:800 18px var(--body)}
+.ghost{width:100%;border:1px solid var(--line);border-radius:14px;padding:12px;background:var(--panel);font-weight:600}
+.galaxy{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.planet{display:flex;gap:10px;align-items:center;border:1px solid var(--line);background:var(--panel);border-radius:14px;padding:10px;text-align:left}
+.ring{flex:none;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font:12px var(--disp)}
+.ring i{width:34px;height:34px;border-radius:50%;background:#141130;display:grid;place-items:center;font-style:normal}
+.planet small{display:block;color:var(--mu);font-size:12px}
+.planet b{font-size:14px}
+.stat3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.st{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:8px;text-align:center}
+.st b{display:block;font:20px var(--disp);font-variant-numeric:tabular-nums}.st span{font-size:12px;color:var(--mu)}
+.prog{height:10px;background:var(--line);border-radius:99px;overflow:hidden}.prog i{display:block;height:100%;background:linear-gradient(90deg,var(--cy),var(--ok));width:0}
+.lbl{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--mu)}
+.how{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 14px;font-size:14px}
+.how ul{margin:6px 0 0;padding-left:18px}.how li{margin:3px 0}
+.card{background:#141130;border:2px solid var(--bad);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:10px}
+.opt{border:2px solid var(--line);background:#1b1740;border-radius:12px;padding:11px 12px;text-align:left;display:flex;gap:10px}
+.opt b{font-family:var(--disp);font-weight:400;color:var(--mu)}
+.opt.ok{border-color:var(--ok);background:#123a2c}.opt.bad{border-color:var(--bad);background:#3a1424;opacity:.75}
+.miss div{background:var(--panel);border-left:3px solid var(--bad);border-radius:8px;padding:9px 11px;font-size:14px;margin-top:8px}
+.miss em{display:block;font-style:normal;color:var(--ok);font-weight:600;margin-top:3px}
+.center{text-align:center}
+.bigscore{font:46px var(--disp);color:var(--hi);font-variant-numeric:tabular-nums}
+</style>
+
+<canvas id="cv"></canvas>
+
+<div id="hud" hidden>
+  <div class="bar"><span id="shield">◆◆◆</span><span id="wave">Đợt 1</span><button id="bPause" type="button">II</button><span class="sc" id="score">0</span></div>
+  <div id="qtag"></div>
+  <div id="qtext"></div>
+</div>
+
+<div class="layer" id="menu">
+<div class="wrap">
+  <h1 class="title disp">Phi Đội<br>Lý Luận</h1>
+  <p class="mu" style="margin:0">Lái phi thuyền lao qua cổng có đáp án đúng. Đúng thì phá cổng ăn điểm, sai thì mất khiên. Sau mỗi 8 câu có trùm xuất hiện, trả lời đúng để bắn hạ nó.</p>
+  <div class="stat3">
+    <div class="st"><b id="mBest">0</b><span>Kỷ lục</span></div>
+    <div class="st"><b id="mMast">0</b><span>Câu đã thuộc</span></div>
+    <div class="st"><b id="mToday">0/40</b><span>Nhiệm vụ hôm nay</span></div>
+  </div>
+  <div><div class="lbl" style="margin-bottom:6px">Chinh phục thiên hà · <span id="mPct">0</span>%</div><div class="prog"><i id="mBar"></i></div></div>
+  <button class="big" id="bAll" type="button">🚀 Bay toàn thiên hà</button>
+  <div class="lbl">Hoặc chọn hành tinh (chương)</div>
+  <div class="galaxy" id="galaxy"></div>
+  <div class="how">
+    <b>Cách chơi</b>
+    <ul>
+      <li>Chạm vào một hàng để bay sang hàng đó. Chạm lần nữa vào chính hàng đó để lao nhanh và ăn thêm điểm.</li>
+      <li>Trên máy tính: phím ↑ ↓ hoặc 1–4 để đổi hàng, phím Space để lao.</li>
+      <li>Đâm sai cổng: game dừng lại, bạn phải tự chạm vào đáp án đúng mới bay tiếp. Câu đó sẽ quay lại sau 3 câu nữa để bạn trả lời lại.</li>
+      <li>Mỗi câu có 6 cấp ghi nhớ. Đúng thì lên cấp, sai thì về 0. Từ cấp 3 trở lên là đã thuộc. Câu chưa thuộc xuất hiện nhiều hơn hẳn.</li>
+    </ul>
+  </div>
+  <p class="mu" id="loadMsg" style="font-size:13px;margin:0">Đang tải câu hỏi…</p>
+</div>
+</div>
+
+<div class="layer" id="rescue" hidden>
+<div class="wrap">
+  <div class="card">
+    <div class="disp" style="color:var(--bad);font-size:18px">Va chạm! Khiên −1</div>
+    <div id="rQ" style="font-weight:800"></div>
+    <div id="rOpts" style="display:flex;flex-direction:column;gap:8px"></div>
+    <div class="mu" id="rMsg" style="font-size:14px">Đọc đáp án xanh, rồi chạm vào nó để bay tiếp. Câu này sẽ quay lại sau 3 câu nữa.</div>
+  </div>
+</div>
+</div>
+
+<div class="layer" id="pause" hidden>
+<div class="wrap">
+  <h2 class="title disp" style="font-size:26px">Tạm dừng</h2>
+  <button class="big" id="bResume" type="button">Bay tiếp</button>
+  <button class="ghost" id="bQuit" type="button">Về bản đồ</button>
+  <button class="ghost" id="bSnd" type="button">Âm thanh: bật</button>
+</div>
+</div>
+
+<div class="layer" id="over" hidden>
+<div class="wrap">
+  <div class="center">
+    <div class="disp" style="font-size:20px;color:var(--bad)">Phi thuyền nổ tung</div>
+    <div class="bigscore" id="oScore">0</div>
+    <div class="mu" id="oSub"></div>
+  </div>
+  <div class="stat3">
+    <div class="st"><b id="oRight">0</b><span>Câu đúng</span></div>
+    <div class="st"><b id="oUp">0</b><span>Câu mới thuộc</span></div>
+    <div class="st"><b id="oBoss">0</b><span>Trùm hạ gục</span></div>
+  </div>
+  <button class="big" id="bAgain" type="button">🚀 Bay lại</button>
+  <button class="ghost" id="bMap" type="button">Về bản đồ</button>
+  <div class="miss" id="oMiss"></div>
+</div>
+</div>
+
+<script>
+var CH=["","Nhập môn","Sứ mệnh GCCN","CNXH & quá độ","Dân chủ & Nhà nước","Cơ cấu XH-GC","Dân tộc & Tôn giáo","Gia đình"];
+var PC=["","#ff8a5b","#ffd23f","#39e29a","#4fd8ff","#a98bff","#ff6fb5","#9be15d"];
+var Q=[],$=function(i){return document.getElementById(i)};
+var P={b:{},best:0,day:"",today:0,snd:true};
+try{var r0=localStorage.getItem("cnxh-space");if(r0)P=Object.assign(P,JSON.parse(r0))}catch(e){}
+function save(){try{localStorage.setItem("cnxh-space",JSON.stringify(P))}catch(e){}}
+function box(i){return P.b[i]||0}
+function todayKey(){return new Date().toDateString()}
+if(P.day!==todayKey()){P.day=todayKey();P.today=0}
+
+/* ---------- âm thanh ---------- */
+var AC=null;
+function tone(f,d,type,vol,slide){if(!P.snd)return;try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();var o=AC.createOscillator(),g=AC.createGain(),t=AC.currentTime;
+o.type=type||"square";o.frequency.setValueAtTime(f,t);if(slide)o.frequency.exponentialRampToValueAtTime(slide,t+d);g.gain.setValueAtTime(vol||.05,t);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g);g.connect(AC.destination);o.start(t);o.stop(t+d)}catch(e){}}
+function sfxOk(c){tone(500+c*30,.1);setTimeout(function(){tone(800+c*30,.14)},70)}
+function sfxBad(){tone(220,.4,"sawtooth",.07,60)}
+function sfxBoom(){tone(120,.5,"triangle",.09,40)}
+function sfxLaser(){tone(1400,.15,"square",.03,300)}
+
+/* ---------- canvas ---------- */
+var cv=$("cv"),cx=cv.getContext("2d"),W=0,H=0,DPR=1;
+function resize(){DPR=Math.min(2,window.devicePixelRatio||1);W=innerWidth;H=innerHeight;cv.width=W*DPR;cv.height=H*DPR;cx.setTransform(DPR,0,0,DPR,0,0);layout()}
+addEventListener("resize",resize);
+var stars=[];for(var i=0;i<120;i++)stars.push({x:Math.random(),y:Math.random(),z:Math.random()*0.8+0.2});
+
+var G=null,state="menu",TOP=120,BOT=0,RH=80,SX=40;
+function layout(){if(state==="menu"||!G){BOT=H-20;return}
+  TOP=$("hud").offsetHeight+6;BOT=H-Math.max(14,(parseFloat(getComputedStyle(document.documentElement).paddingBottom)||0)+14);
+  RH=(BOT-TOP)/4;SX=Math.max(30,W*0.07);if(G.gate)fitGate(G.gate)}
+
+function wrapText(t,maxW){var w=t.split(" "),lines=[],cur="";for(var i=0;i<w.length;i++){var s=cur?cur+" "+w[i]:w[i];if(cx.measureText(s).width>maxW&&cur){lines.push(cur);cur=w[i]}else cur=s}if(cur)lines.push(cur);return lines}
+function fitGate(g){g.w=Math.min(W*0.7,420);g.tx=W-g.w-max0(10);var inner=g.w-46;
+  g.opts.forEach(function(o){var fs=15;for(;fs>=10;fs--){cx.font="600 "+fs+"px "+getComputedStyle(document.body).getPropertyValue("--body");var L=wrapText(o.t,inner);if(L.length*fs*1.25<=RH-14){o.fs=fs;o.L=L;return}}
+    o.fs=10;cx.font="600 10px sans-serif";o.L=wrapText(o.t,inner).slice(0,Math.max(1,Math.floor((RH-14)/12.5)))})}
+
+function max0(v){return Math.max(v,parseFloat(getComputedStyle(document.documentElement).paddingRight)||0)}
+/* ---------- chọn câu: lặp lại ngắt quãng ---------- */
+var WT=[10,7,4,1.5,0.7,0.3];
+function nextQ(){
+  for(var k=0;k<G.pend.length;k++)if(G.pend[k].due<=G.n){var it=G.pend.splice(k,1)[0];return it.i}
+  var pool=[],t=0;Q.forEach(function(q,i){if(G.ch&&q[0]!==G.ch)return;if(G.recent.indexOf(i)>=0)return;var w=WT[Math.min(5,box(i))];pool.push([i,w]);t+=w});
+  if(!pool.length){G.recent=[];return nextQ()}
+  var x=Math.random()*t;for(var j=0;j<pool.length;j++){x-=pool[j][1];if(x<=0)return pool[j][0]}return pool[pool.length-1][0]}
+function sh(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
+
+function start(ch){
+  if(!Q.length)return;
+  G={shipX:0,ch:ch,score:0,shield:3,combo:0,n:0,wave:1,pend:[],recent:[],right:0,up:0,boss:null,bossKills:0,miss:[],shipRow:1,shipY:0,parts:[],texts:[],shake:0,lasers:[],gate:null,wait:0.6};
+  state="play";["menu","over","pause","rescue"].forEach(function(id){$(id).hidden=true});$("hud").hidden=false;hudUp();layout();G.shipY=TOP+RH*1.5;G.shipX=SX;
+  tone(300,.25,"triangle",.06,900);
+}
+function spawn(){
+  var i=nextQ(),q=Q[i];G.recent.push(i);if(G.recent.length>25)G.recent.shift();
+  var opts=sh(q.slice(2).map(function(t,k){return{t:t,c:k===0}}));
+  $("qtag").textContent="Hành tinh "+q[0]+" · "+CH[q[0]]+(G.boss?" · TRÙM":"");$("qtext").textContent=q[1];layout();
+  var chars=q[1].length+q.slice(2).join("").length,T=Math.min(16,Math.max(5,4+chars/19-(G.wave-1)*0.5));
+  var g={i:i,opts:opts,x:W+10,T:T,boost:false,t:0};fitGate(g);G.gate=g;
+}
+function hudUp(){$("score").textContent=G.score;$("shield").textContent="◆".repeat(Math.max(0,G.shield))+"◇".repeat(Math.max(0,5-G.shield));$("wave").textContent=G.boss?"TRÙM "+"■".repeat(G.boss.hp)+"□".repeat(G.boss.max-G.boss.hp):"Đợt "+G.wave}
+function mult(){return G.combo>=12?4:G.combo>=7?3:G.combo>=3?2:1}
+function rowAt(y){return Math.max(0,Math.min(3,Math.floor((y-TOP)/RH)))}
+
+function resolve(){
+  var g=G.gate,row=G.shipRow,o=g.opts[row],gy=TOP+RH*row+RH/2;burst(g.x+20,gy,o.c?"#39e29a":"#ff4f72",20);G.gate=null;G.n++;
+  var b=box(g.i);
+  if(o.c){
+    G.combo++;G.right++;var bonus=Math.round(Math.max(0,1-g.t/g.T)*120),pts=(100+bonus)*mult();G.score+=pts;
+    P.b[g.i]=Math.min(5,b+1);if(b<3&&b+1>=3){G.up++;P.today++}
+    burst(g.x+40,gy,PC[Q[g.i][0]]||"#ffd23f",28);G.texts.push({x:Math.max(10,g.x-40),y:gy-10,t:"+"+pts+(mult()>1?" x"+mult():""),c:"#ffd23f",l:1});
+    if(G.combo===3||G.combo===7||G.combo===12)G.texts.push({x:W/2,y:TOP+RH*2,t:"COMBO x"+mult()+"!",c:"#4fd8ff",l:1.4,big:1});
+    sfxOk(Math.min(G.combo,12));
+    if(G.combo%10===0&&G.shield<5){G.shield++;G.texts.push({x:W/2,y:TOP+RH*2+40,t:"+1 KHIÊN",c:"#39e29a",l:1.4,big:1})}
+    if(G.boss){G.lasers.push({y:gy,t:0});sfxLaser();G.boss.hp--;G.boss.hit=0.25;if(G.boss.hp<=0){killBoss()}}
+    else if(G.n%8===0)summonBoss();
+    hudUp();save();G.wait=0.45;
+  }else{
+    G.combo=0;G.shield--;P.b[g.i]=0;G.shake=0.4;burst(G.shipX,G.shipY,"#ff4f72",36);sfxBad();
+    try{navigator.vibrate&&navigator.vibrate(150)}catch(e){}
+    G.pend.push({i:g.i,due:G.n+3});if(!G.boss&&G.n%8===0)summonBoss();if(G.miss.indexOf(g.i)<0)G.miss.push(g.i);hudUp();save();
+    openRescue(g,row);
+  }
+}
+function summonBoss(){G.boss={hp:4+Math.min(4,G.wave),max:4+Math.min(4,G.wave),y:0,t:0,hit:0};G.texts.push({x:W/2,y:TOP+RH*2,t:"TRÙM XUẤT HIỆN",c:"#ff4f72",l:1.8,big:1});tone(90,.8,"sawtooth",.06,180);hudUp()}
+function killBoss(){var bx=W*0.6,by=TOP+RH*2;for(var k=0;k<4;k++)burst(bx+(Math.random()-.5)*60,by+(Math.random()-.5)*60,["#ffd23f","#ff4f72","#4fd8ff"][k%3],40);
+  sfxBoom();G.boss=null;G.bossKills++;G.wave++;G.score+=500;if(G.shield<5)G.shield++;G.shake=0.5;
+  G.texts.push({x:W/2,y:TOP+RH*2,t:"HẠ TRÙM! +500",c:"#ffd23f",l:1.8,big:1});hudUp()}
+
+function openRescue(g,row){
+  state="rescue";var q=Q[g.i];$("rQ").textContent=q[1];
+  $("rOpts").innerHTML="";g.opts.forEach(function(o,k){var b=document.createElement("button");b.type="button";b.className="opt"+(o.c?" ok":k===row?" bad":"");
+    b.innerHTML="<b>"+"ABCD"[k]+"</b><span></span>";b.querySelector("span").textContent=o.t;b.onclick=function(){
+      if(!o.c){$("rMsg").textContent="Chưa đúng. Đáp án đúng là ô màu xanh.";tone(200,.1);return}
+      $("rescue").hidden=true;if(G.shield<=0)return gameOver();state="play";G.wait=0.5;tone(600,.1,"triangle")};$("rOpts").appendChild(b)});
+  $("rMsg").textContent="Đọc đáp án xanh, rồi chạm vào nó để bay tiếp. Câu này sẽ quay lại sau 3 câu nữa.";
+  setTimeout(function(){$("rescue").hidden=false},380);
+}
+function gameOver(){
+  state="over";$("hud").hidden=true;if(G.score>P.best)P.best=G.score;save();
+  $("oScore").textContent=G.score;$("oSub").textContent=(G.score>=P.best&&G.score>0?"🏆 Kỷ lục! · ":"")+"Đợt "+G.wave+" · "+G.n+" cổng";
+  $("oRight").textContent=G.right;$("oUp").textContent=G.up;$("oBoss").textContent=G.bossKills;
+  $("oMiss").innerHTML=G.miss.length?'<div class="lbl">Ôn lại câu đã đâm sai</div>':"";
+  G.miss.forEach(function(i){var d=document.createElement("div");d.innerHTML="<span></span><em></em>";d.querySelector("span").textContent=Q[i][1];d.querySelector("em").textContent="✔ "+Q[i][2];$("oMiss").appendChild(d)});
+  $("over").hidden=false;sfxBoom();
+}
+function burst(x,y,c,n){for(var k=0;k<n;k++){var a=Math.random()*6.283,s=60+Math.random()*260;G.parts.push({x:x,y:y,vx:Math.cos(a)*s,vy:Math.sin(a)*s,l:0.6+Math.random()*0.5,c:c})}}
+
+/* ---------- điều khiển ---------- */
+function goRow(r){if(state!=="play"||!G)return;if(r===G.shipRow&&G.gate){G.gate.boost=true;return}G.shipRow=r;tone(700,.04,"sine",.03)}
+cv.addEventListener("pointerdown",function(e){if(state!=="play")return;if(e.clientY<TOP)return;goRow(rowAt(e.clientY))});
+addEventListener("keydown",function(e){if(state!=="play")return;var k=e.key;
+  if(k==="ArrowUp"||k==="w")goRow(Math.max(0,G.shipRow-1));else if(k==="ArrowDown"||k==="s")goRow(Math.min(3,G.shipRow+1));
+  else if(k>="1"&&k<="4")goRow(+k-1);else if("abcdABCD".indexOf(k)>=0)goRow("abcd".indexOf(k.toLowerCase()));else if(k===" "){if(G.gate)G.gate.boost=true;e.preventDefault()}else if(k==="Escape")pause()});
+function pause(){if(state!=="play")return;state="pause";$("pause").hidden=false}
+$("bPause").onclick=pause;$("bResume").onclick=function(){$("pause").hidden=true;state="play"};
+$("bQuit").onclick=function(){$("pause").hidden=true;menu()};
+$("bSnd").onclick=function(){P.snd=!P.snd;save();$("bSnd").textContent="Âm thanh: "+(P.snd?"bật":"tắt")};
+$("bAgain").onclick=function(){start(G.ch)};$("bMap").onclick=menu;$("bAll").onclick=function(){start(0)};
+document.addEventListener("visibilitychange",function(){if(document.hidden)pause()});
+
+/* ---------- vòng lặp ---------- */
+var last=performance.now();
+function loop(now){var dt=Math.min(0.05,(now-last)/1000);last=now;update(dt);draw();requestAnimationFrame(loop)}
+function update(dt){
+  var sp=state==="play"?1:0.25;stars.forEach(function(s){s.x-=s.z*dt*0.08*(G&&G.gate&&G.gate.boost?6:1)*(state==="menu"?0.5:1);if(s.x<0){s.x=1;s.y=Math.random()}});
+  if(!G)return;
+  G.parts.forEach(function(p){p.x+=p.vx*dt;p.y+=p.vy*dt;p.vx*=0.96;p.vy*=0.96;p.l-=dt});G.parts=G.parts.filter(function(p){return p.l>0});
+  G.texts.forEach(function(t){t.y-=30*dt;t.l-=dt});G.texts=G.texts.filter(function(t){return t.l>0});
+  G.lasers.forEach(function(l){l.t+=dt});G.lasers=G.lasers.filter(function(l){return l.t<0.3});
+  G.shake=Math.max(0,G.shake-dt);if(G.boss){G.boss.t+=dt;G.boss.hit=Math.max(0,G.boss.hit-dt)}
+  if(state!=="play")return;
+  var ty=TOP+RH*G.shipRow+RH/2;G.shipY+=(ty-G.shipY)*Math.min(1,dt*14);if(!G.gate)G.shipX+=(SX-G.shipX)*Math.min(1,dt*8);
+  if(!G.gate){G.wait-=dt;if(G.wait<=0)spawn();return}
+  var g=G.gate;g.x+=(g.tx-g.x)*Math.min(1,dt*10);if(g.x-g.tx>4)return;
+  g.t+=dt*(g.boost?4:1);var pr=Math.min(1,g.t/g.T);G.shipX=SX+(g.tx-SX-26)*pr*pr;if(pr>=1)resolve();
+}
+function rr(x,y,w,h,r){cx.beginPath();cx.moveTo(x+r,y);cx.arcTo(x+w,y,x+w,y+h,r);cx.arcTo(x+w,y+h,x,y+h,r);cx.arcTo(x,y+h,x,y,r);cx.arcTo(x,y,x+w,y,r);cx.closePath()}
+function draw(){
+  cx.fillStyle="#070614";cx.fillRect(0,0,W,H);
+  cx.save();if(G&&G.shake>0)cx.translate((Math.random()-.5)*G.shake*30,(Math.random()-.5)*G.shake*30);
+  stars.forEach(function(s){cx.fillStyle="rgba(200,200,255,"+(s.z*0.8)+")";var sz=s.z*2;cx.fillRect(s.x*W,s.y*H,sz*(G&&G.gate&&G.gate.boost?5:1),sz)});
+  if(G&&state!=="menu"){
+    var body=getComputedStyle(document.body).getPropertyValue("--body");
+    for(var r=1;r<4;r++){cx.strokeStyle="rgba(79,216,255,0.08)";cx.setLineDash([6,10]);cx.beginPath();cx.moveTo(0,TOP+RH*r);cx.lineTo(W,TOP+RH*r);cx.stroke()}cx.setLineDash([]);
+    cx.fillStyle="rgba(79,216,255,0.06)";cx.fillRect(0,TOP+RH*G.shipRow,W,RH);
+    if(G.boss){var b=G.boss,bx=W*0.6,by=TOP+RH*2+Math.sin(b.t*1.5)*RH*0.5;cx.save();cx.globalAlpha=b.hit>0?0.9:0.45;cx.translate(bx,by);cx.scale(3,3);
+      cx.fillStyle=b.hit>0?"#ffffff":"#ff4f72";cx.beginPath();cx.moveTo(-34,0);cx.lineTo(-10,-26);cx.lineTo(30,-18);cx.lineTo(16,0);cx.lineTo(30,18);cx.lineTo(-10,26);cx.closePath();cx.fill();
+      cx.fillStyle="#070614";cx.beginPath();cx.arc(-6,0,8,0,6.283);cx.fill();cx.fillStyle="#ffd23f";cx.beginPath();cx.arc(-6,0,4,0,6.283);cx.fill();
+      cx.restore();
+      G.lasers.forEach(function(l){cx.strokeStyle="rgba(79,216,255,"+(1-l.t/0.3)+")";cx.lineWidth=4;cx.beginPath();cx.moveTo(G.shipX+20,G.shipY);cx.lineTo(bx,by);cx.stroke();cx.lineWidth=1})}
+    if(G.gate){var g=G.gate;
+      for(var k=0;k<4;k++){var o=g.opts[k],y=TOP+RH*k+5,h=RH-10,sel=k===G.shipRow;
+        rr(g.x,y,g.w,h,12);cx.fillStyle=sel?"rgba(40,34,100,0.95)":"rgba(20,17,48,0.92)";cx.fill();cx.lineWidth=sel?3:1.5;cx.strokeStyle=sel?"#ffd23f":"#4b45a0";cx.stroke();
+        cx.fillStyle=sel?"#ffd23f":"#4b45a0";cx.beginPath();cx.arc(g.x+18,y+h/2,12,0,6.283);cx.fill();
+        cx.fillStyle="#070614";cx.font="14px "+getComputedStyle(document.body).getPropertyValue("--disp");cx.textAlign="center";cx.textBaseline="middle";cx.fillText("ABCD"[k],g.x+18,y+h/2+1);
+        cx.textAlign="left";cx.fillStyle="#f1efff";cx.font="600 "+o.fs+"px "+body;var lh=o.fs*1.25,y0=y+h/2-(o.L.length-1)*lh/2;
+        o.L.forEach(function(line,m){cx.fillText(line,g.x+38,y0+m*lh)})}
+      var p=Math.max(0,1-g.t/g.T);cx.fillStyle="#2c2860";cx.fillRect(0,BOT+4,W,4);cx.fillStyle=p<0.3?"#ff4f72":"#ffd23f";cx.fillRect(0,BOT+4,W*p,4)}
+    if(state!=="over"){cx.save();cx.translate(G.shipX,G.shipY);var fl=8+Math.random()*8+(G.gate&&G.gate.boost?18:0);
+      cx.fillStyle="#ff8a5b";cx.beginPath();cx.moveTo(-14,-6);cx.lineTo(-14-fl,0);cx.lineTo(-14,6);cx.fill();
+      cx.fillStyle="#f1efff";cx.beginPath();cx.moveTo(22,0);cx.lineTo(-14,-14);cx.lineTo(-8,0);cx.lineTo(-14,14);cx.closePath();cx.fill();
+      cx.fillStyle="#4fd8ff";cx.beginPath();cx.arc(4,0,5,0,6.283);cx.fill();
+      if(G.shield>0){cx.strokeStyle="rgba(79,216,255,"+(0.15+0.1*G.shield)+")";cx.lineWidth=2;cx.beginPath();cx.arc(2,0,24,0,6.283);cx.stroke()}cx.restore()}
+    G.parts.forEach(function(p){cx.globalAlpha=Math.max(0,p.l);cx.fillStyle=p.c;cx.fillRect(p.x,p.y,3,3)});cx.globalAlpha=1;
+    G.texts.forEach(function(t){cx.globalAlpha=Math.min(1,t.l);cx.fillStyle=t.c;cx.textAlign=t.big?"center":"left";cx.font=(t.big?24:18)+"px "+getComputedStyle(document.body).getPropertyValue("--disp");cx.fillText(t.t,t.x,t.y)});cx.globalAlpha=1;cx.textAlign="left";
+  }
+  cx.restore();
+}
+
+function mastered(ch){var n=0,t=0;Q.forEach(function(q,i){if(ch&&q[0]!==ch)return;t++;if(box(i)>=3)n++});return[n,t]}
+function menu(){
+  state="menu";$("hud").hidden=true;["over","pause","rescue"].forEach(function(id){$(id).hidden=true});$("menu").hidden=false;
+  if(P.day!==todayKey()){P.day=todayKey();P.today=0;save()}
+  var m=mastered(0);$("mBest").textContent=P.best;$("mMast").textContent=m[0];$("mToday").textContent=Math.min(P.today,40)+"/40"+(P.today>=40?" ✓":"");
+  var pct=m[1]?Math.round(m[0]*100/m[1]):0;$("mPct").textContent=pct;$("mBar").style.width=pct+"%";
+  var h="";for(var c=1;c<=7;c++){var mm=mastered(c),pc=mm[1]?Math.round(mm[0]*100/mm[1]):0;
+    h+='<button type="button" class="planet" data-c="'+c+'"><span class="ring" style="background:conic-gradient('+PC[c]+' '+pc*3.6+'deg,#2c2860 0)"><i>'+pc+'%</i></span><span><b>Hành tinh '+c+'</b><small>'+CH[c]+' · '+mm[0]+'/'+mm[1]+'</small></span></button>'}
+  $("galaxy").innerHTML=h;$("bSnd").textContent="Âm thanh: "+(P.snd?"bật":"tắt");
+}
+$("galaxy").onclick=function(e){var b=e.target.closest(".planet");if(b)start(+b.dataset.c)};
+
+resize();menu();requestAnimationFrame(loop);
+fetch("q.json").then(function(r){return r.json()}).then(function(d){Q=d;$("loadMsg").hidden=true;menu()})
+.catch(function(){$("loadMsg").textContent="Không tải được câu hỏi. Hãy tải lại trang."});
+</script>
