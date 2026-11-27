@@ -30,6 +30,15 @@ button:focus-visible,select:focus-visible{outline:2px solid var(--moon);outline-
 .set label{display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--mu);min-width:0}
 .set select{background:#0f1320;border:1px solid var(--line);border-radius:10px;padding:8px;width:100%}
 .full{grid-column:1/-1}
+.pod{background:linear-gradient(160deg,#1b2236,#141826);border:1px solid #3a4462;border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:10px}
+.pod h2{margin:0;font-size:16px;color:var(--moon)}
+.trk{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px}
+.trk button{text-align:left;border:1px solid var(--line);background:#0f1320;border-radius:10px;padding:8px 10px;font-size:13px}
+.trk button.on{border-color:var(--moon);background:#2a2617;color:var(--moon);font-weight:600}
+.trk small{display:block;color:var(--mu);font-size:11px}
+.pbar{height:6px;background:var(--line);border-radius:99px;overflow:hidden;cursor:pointer}.pbar i{display:block;height:100%;width:0;background:var(--moon)}
+.prow{display:flex;align-items:center;gap:10px}.prow .play{width:60px;height:60px;font-size:24px}
+.ptime{font-size:12px;color:var(--mu);font-variant-numeric:tabular-nums;flex:1;text-align:right}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
 .chip{border:1px solid var(--line);background:#0f1320;border-radius:99px;padding:5px 10px;font-size:13px}
 .chip.on{background:var(--moon);color:#1a1408;border-color:var(--moon);font-weight:600}
@@ -47,6 +56,21 @@ button:focus-visible,select:focus-visible{outline:2px solid var(--moon);outline-
   <h1>🌙 Ôn Thi Trong Đêm</h1>
   <p class="mu" style="margin:0">Nhắm mắt nghe. Máy đọc câu hỏi, chờ vài giây để bạn tự nhớ, rồi đọc đáp án đúng thành một câu trọn ý. Chạy liên tục hết 442 câu rồi tự lặp lại vòng mới. Câu cũ được nhắc lại xen kẽ để nhớ lâu.</p>
 
+  <section class="pod" aria-label="Nghe bằng giọng mới">
+    <h2>🎧 Giọng mới · chạy nền được khi khóa màn hình</h2>
+    <div class="mu" style="font-size:13px">Nội dung giống hệt chế độ bên dưới (câu hỏi → nhớ lại 3 giây → đáp án, đọc 2 lượt, có nhắc lại câu cũ), đã thu sẵn thành file âm thanh. Hết chương này tự sang chương sau, hết chương 7 quay lại chương 1.</div>
+    <div class="trk" id="trk"></div>
+    <div class="pbar" id="pbar"><i id="pfill"></i></div>
+    <div class="prow">
+      <button class="sm" id="aPrev" type="button" aria-label="Chương trước">⏮</button>
+      <button class="play" id="aPlay" type="button" aria-label="Phát giọng mới">▶</button>
+      <button class="sm" id="aNext" type="button" aria-label="Chương sau">⏭</button>
+      <span class="ptime" id="ptime">0:00 / 0:00</span>
+    </div>
+    <audio id="au" preload="none"></audio>
+  </section>
+
+  <div class="mu" style="font-size:13px">Hoặc dùng giọng có sẵn của điện thoại (phải để màn hình sáng):</div>
   <div class="card" id="card">
     <div class="tag" id="tag">Bấm ▶ để bắt đầu</div>
     <div class="q" id="qt">Ví dụ: Tác phẩm đánh dấu sự ra đời của chủ nghĩa xã hội khoa học là:</div>
@@ -223,7 +247,30 @@ function tick(){$("sTimer").textContent=END?"Tắt sau "+Math.max(0,Math.ceil((E
 setInterval(function(){if(RUN)tick()},20000);
 document.addEventListener("visibilitychange",function(){if(!document.hidden&&RUN&&!LOCK)try{navigator.wakeLock.request("screen").then(function(l){LOCK=l}).catch(function(){})}catch(e){}});
 $("bTest").onclick=function(){UNL=false;SPOK=false;unlockTTS()};
-$("bPlay").onclick=function(){RUN?stop():play()};
+$("bPlay").onclick=function(){if(!RUN){try{au.pause()}catch(e){}}RUN?stop():play()};
+
+/* ---------- trình phát file âm thanh (chạy nền) ---------- */
+var au=$("au"),DUR=[69.5,45.9,65.7,45.4,44.5,48.4,34.9],AT={ch:1,t:0};
+try{var a0=localStorage.getItem("cnxh-audio");if(a0)AT=Object.assign(AT,JSON.parse(a0))}catch(e){}
+function asave(){try{localStorage.setItem("cnxh-audio",JSON.stringify(AT))}catch(e){}}
+function fmt(x){x=Math.max(0,Math.floor(x||0));var h=Math.floor(x/3600),m=Math.floor(x%3600/60),s=x%60;return (h?h+":"+(m<10?"0":""):"")+m+":"+(s<10?"0":"")+s}
+function tracks(){var h="";for(var c=1;c<=7;c++)h+='<button type="button" data-c="'+c+'" class="'+(AT.ch===c?"on":"")+'">Chương '+c+'<small>'+CH[c]+' · '+Math.round(DUR[c-1])+' phút</small></button>';$("trk").innerHTML=h}
+function load(c,t){AT.ch=c;AT.t=t||0;asave();tracks();au.src="audio/chuong"+c+".mp3";au.load();
+  var seek=function(){if(AT.t)try{au.currentTime=AT.t}catch(e){}au.removeEventListener("loadedmetadata",seek)};au.addEventListener("loadedmetadata",seek);
+  if("mediaSession" in navigator)try{navigator.mediaSession.metadata=new MediaMetadata({title:"Chương "+c+" · "+CH[c],artist:"Ôn thi CNXHKH",album:"Ôn Thi Trong Đêm"})}catch(e){}}
+function aplay(){if(RUN)stop();if(!au.src||au.src.indexOf("chuong"+AT.ch)<0)load(AT.ch,AT.t);var pr=au.play();if(pr&&pr.catch)pr.catch(function(){})}
+au.addEventListener("play",function(){$("aPlay").textContent="❚❚"});
+au.addEventListener("pause",function(){$("aPlay").textContent="▶";AT.t=au.currentTime;asave()});
+au.addEventListener("ended",function(){load(AT.ch%7+1,0);aplay()});
+au.addEventListener("timeupdate",function(){var d=au.duration||DUR[AT.ch-1]*60;$("pfill").style.width=(au.currentTime*100/d)+"%";$("ptime").textContent=fmt(au.currentTime)+" / "+fmt(d);
+  if(Math.abs(au.currentTime-AT.t)>10){AT.t=au.currentTime;asave()}});
+$("aPlay").onclick=function(){au.paused?aplay():au.pause()};
+$("aNext").onclick=function(){var p=!au.paused;load(AT.ch%7+1,0);if(p)aplay()};
+$("aPrev").onclick=function(){var p=!au.paused;load((AT.ch+5)%7+1,0);if(p)aplay()};
+$("trk").onclick=function(e){var b=e.target.closest("button");if(!b)return;load(+b.dataset.c,0);aplay()};
+$("pbar").onclick=function(e){var r=this.getBoundingClientRect(),d=au.duration;if(d)au.currentTime=d*(e.clientX-r.left)/r.width};
+if("mediaSession" in navigator)try{navigator.mediaSession.setActionHandler("nexttrack",function(){load(AT.ch%7+1,0);aplay()});navigator.mediaSession.setActionHandler("previoustrack",function(){load((AT.ch+5)%7+1,0);aplay()})}catch(e){}
+tracks();$("ptime").textContent=fmt(AT.t)+" / "+fmt(DUR[AT.ch-1]*60);
 function jump(d){var was=!!RUN;stop();S.pos=(S.pos+d+LIST.length)%LIST.length;save();pos();if(LIST.length){OPT=mkOpts(LIST[S.pos]);showCard(LIST[S.pos],false);phase("")}if(was)play()}
 $("bNext").onclick=function(){jump(1)};$("bPrev").onclick=function(){jump(-1)};
 $("bDark").onclick=function(){$("dark").hidden=false;if(!RUN)play()};$("dark").onclick=function(){$("dark").hidden=true};
