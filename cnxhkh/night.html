@@ -45,7 +45,7 @@ button:focus-visible,select:focus-visible{outline:2px solid var(--moon);outline-
 
 <div class="w">
   <h1>🌙 Ôn Thi Trong Đêm</h1>
-  <p class="mu" style="margin:0">Nhắm mắt nghe. Máy đọc câu hỏi, đọc 4 đáp án, chờ bạn nghĩ trong đầu, rồi đọc đáp án đúng thành một câu trọn ý. Câu cũ được nhắc lại xen kẽ để nhớ lâu.</p>
+  <p class="mu" style="margin:0">Nhắm mắt nghe. Máy đọc câu hỏi, chờ vài giây để bạn tự nhớ, rồi đọc đáp án đúng thành một câu trọn ý. Chạy liên tục hết 442 câu rồi tự lặp lại vòng mới. Câu cũ được nhắc lại xen kẽ để nhớ lâu.</p>
 
   <div class="card" id="card">
     <div class="tag" id="tag">Bấm ▶ để bắt đầu</div>
@@ -69,7 +69,7 @@ button:focus-visible,select:focus-visible{outline:2px solid var(--moon);outline-
     </label>
     <label>Kiểu nghe
       <select id="mode">
-        <option value="quiz">Hỏi → chờ nghĩ → đáp án</option>
+        <option value="quiz">Câu hỏi → nhớ lại → đáp án đúng</option>
         <option value="fact">Chỉ nghe kiến thức (nhanh)</option>
       </select></label>
     <label>Thứ tự
@@ -79,7 +79,7 @@ button:focus-visible,select:focus-visible{outline:2px solid var(--moon);outline-
       </select></label>
     <label>Thời gian nghĩ
       <select id="think">
-        <option value="3">3 giây</option><option value="5" selected>5 giây</option><option value="8">8 giây</option><option value="12">12 giây</option>
+        <option value="0">Không chờ</option><option value="3" selected>3 giây</option><option value="5">5 giây</option><option value="8">8 giây</option><option value="12">12 giây</option>
       </select></label>
     <label>Tốc độ đọc
       <select id="rate">
@@ -91,7 +91,7 @@ button:focus-visible,select:focus-visible{outline:2px solid var(--moon);outline-
       </select></label>
     <label>Hẹn giờ tắt
       <select id="sleep">
-        <option value="0">Không</option><option value="15">15 phút</option><option value="30" selected>30 phút</option><option value="45">45 phút</option><option value="60">60 phút</option>
+        <option value="0" selected>Không (chạy liên tục)</option><option value="15">15 phút</option><option value="30">30 phút</option><option value="45">45 phút</option><option value="60">60 phút</option>
       </select></label>
   </div>
 
@@ -100,7 +100,7 @@ button:focus-visible,select:focus-visible{outline:2px solid var(--moon);outline-
     <ul>
       <li>Để màn hình luôn sáng và mở trang này ở phía trước. Trên điện thoại, khóa màn hình hoặc chuyển sang ứng dụng khác sẽ làm trình duyệt dừng đọc.</li>
       <li>Bấm 🌑 để màn hình đen hoàn toàn. Chạm vào màn hình đen để quay lại.</li>
-      <li>Giảm độ sáng và cắm sạc. Khi gần hết giờ hẹn, giọng đọc nhỏ dần rồi tự dừng.</li>
+      <li>Giảm độ sáng và cắm sạc. Mặc định chạy liên tục không dừng. Nếu đặt hẹn giờ, giọng sẽ nhỏ dần ở 3 phút cuối rồi tự tắt.</li>
       <li>Vị trí đang nghe được lưu lại, lần sau bấm ▶ sẽ nghe tiếp.</li>
     </ul>
   </div>
@@ -132,8 +132,8 @@ function phrase(q,a,ok){var head=ok?["Chính xác!","Đúng rồi!","Giỏi lắ
 
 var CH=["","Nhập môn","Sứ mệnh GCCN","CNXH & quá độ","Dân chủ & Nhà nước","Cơ cấu XH-GC","Dân tộc & Tôn giáo","Gia đình"];
 var $=function(i){return document.getElementById(i)},Q=[];
-var S={sel:[1,2,3,4,5,6,7],pos:0,mode:"quiz",order:"seq",think:"5",rate:"0.95",rep:"1",sleep:"30",seed:1};
-try{var r0=localStorage.getItem("cnxh-night");if(r0)S=Object.assign(S,JSON.parse(r0))}catch(e){}
+var S={v:2,round:1,sel:[1,2,3,4,5,6,7],pos:0,mode:"quiz",order:"seq",think:"3",rate:"0.95",rep:"1",sleep:"0",seed:1};
+try{var r0=localStorage.getItem("cnxh-night");if(r0){var o0=JSON.parse(r0);if(!o0.v){o0.sleep="0";o0.think="3";o0.v=2}S=Object.assign(S,o0)}}catch(e){}
 function save(){try{localStorage.setItem("cnxh-night",JSON.stringify(S))}catch(e){}}
 
 /* ---------- giọng đọc ---------- */
@@ -174,7 +174,7 @@ function build(){var ids=[];Q.forEach(function(q,i){if(S.sel.indexOf(q[0])>=0)id
   if(S.order==="rnd"){var r=rand(S.seed);for(var i=ids.length-1;i>0;i--){var j=Math.floor(r()*(i+1)),t=ids[i];ids[i]=ids[j];ids[j]=t}}
   else ids.sort(function(a,b){return Q[a][0]-Q[b][0]||a-b});
   LIST=ids;if(S.pos>=LIST.length)S.pos=0;pos()}
-function pos(){$("sPos").textContent="Câu "+(LIST.length?S.pos+1:0)+"/"+LIST.length}
+function pos(){$("sPos").textContent="Vòng "+(S.round||1)+" · Câu "+(LIST.length?S.pos+1:0)+"/"+LIST.length}
 function fact(i,quiz){var q=Q[i],p=phrase(q[1],q[2],true).slice(1);if(p.length>1&&quiz)return q[2]+".";return p.join(" ")}
 function mkOpts(i){var q=Q[i],o=q.slice(2).map(function(t,k){return{t:t,c:k===0}}),r=rand(S.seed*7+i+1);r();for(var a=3;a>0;a--){var b=Math.floor(r()*(a+1)),t=o[a];o[a]=o[b];o[b]=t}return o}
 
@@ -192,14 +192,12 @@ async function loop(token){
     if(!LIST.length){phase("Chưa chọn chương nào");stop();return}
     var i=LIST[S.pos],q=Q[i];
     if(S.mode==="quiz"){
-      OPT=mkOpts(i);
-      showCard(i,false,-1);phase("🔈 Câu hỏi");
+      OPT=[];showCard(i,false);phase("🔈 Câu hỏi");
       await speak("Câu "+(S.pos+1)+", "+q[1]);if(RUN!==token)return;
-      for(var k=0;k<4;k++){showCard(i,false,k);await speak("ABCD"[k]+", "+OPT[k].t);if(RUN!==token)return;await wait(250)}
-      showCard(i,false,-1);var th=+S.think;
-      for(var s=th;s>0;s--){phase("🤔 Nghĩ trong đầu… "+s);await wait(1000);if(RUN!==token)return}
-      var ci=OPT.findIndex(function(o){return o.c});showCard(i,true);phase("✔ Đáp án "+"ABCD"[ci]);
-      await speak("Đáp án "+"ABCD"[ci]+", "+fact(i,true));if(RUN!==token)return;await wait(1800);
+      var th=+S.think;
+      for(var s=th;s>0;s--){phase("🤔 Nhớ lại đáp án… "+s);await wait(1000);if(RUN!==token)return}
+      OPT=[{t:q[2],c:true}];showCard(i,true);phase("✔ Đáp án");
+      await speak("Đáp án, "+fact(i,true));if(RUN!==token)return;await wait(1500);
     }else{
       OPT=q.slice(2,3).map(function(t){return{t:t,c:true}});showCard(i,true);phase("🔈 Kiến thức");
       await speak(fact(i));if(RUN!==token)return;await wait(1200);
@@ -207,7 +205,9 @@ async function loop(token){
     /* nhắc lại xen kẽ: câu cách đây 3 câu và 10 câu, chỉ đọc câu kiến thức ngắn */
     if(S.rep==="1"){var back=[3,10];for(var m=0;m<back.length;m++){var p=S.pos-back[m];if(p<0)continue;var j=LIST[p];
       OPT=[{t:Q[j][2],c:true}];showCard(j,true);phase("🔁 Nhắc lại câu "+(p+1));await speak("Nhắc lại, "+fact(j));if(RUN!==token)return;await wait(1200)}}
-    S.pos=(S.pos+1)%LIST.length;save();pos();
+    S.pos++;if(S.pos>=LIST.length){S.pos=0;S.round=(S.round||1)+1;if(S.order==="rnd"){S.seed=1+Math.floor(Math.random()*1e6);build()}
+      phase("🔄 Hết một vòng, bắt đầu lại");save();pos();await speak("Đã hết một vòng "+LIST.length+" câu. Bắt đầu vòng "+S.round+".");if(RUN!==token)return;await wait(1500)}
+    save();pos();
     if(END){var left=END-Date.now();if(left<=0){phase("😴 Hết giờ hẹn. Ngủ ngon!");stop();return}VOL=left<180000?Math.max(0.15,left/180000):1}
   }
 }
