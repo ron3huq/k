@@ -192,13 +192,13 @@ async function loop(token){
     if(!LIST.length){phase("Chưa chọn chương nào");stop();return}
     var i=LIST[S.pos],q=Q[i];
     if(S.mode==="quiz"){
-      OPT=[];showCard(i,false);phase("🔈 Câu hỏi");
-      await speak("Câu "+(S.pos+1)+", "+q[1]);if(RUN!==token)return;
-      var th=+S.think;
-      for(var s=th;s>0;s--){phase("🤔 Nhớ lại đáp án… "+s);await wait(1000);if(RUN!==token)return}
-      OPT=[{t:q[2],c:true}];showCard(i,true);phase("✔ Đáp án");
-      await speak("Đáp án, "+fact(i,true));if(RUN!==token)return;await wait(900);
-      phase("✔ Đáp án · đọc lần 2");await speak("Một lần nữa, "+fact(i));if(RUN!==token)return;await wait(1500);
+      for(var pass=1;pass<=2;pass++){var tg=pass===2?" · lần 2":"";
+        OPT=[];showCard(i,false);phase("🔈 Câu hỏi"+tg);
+        await speak((pass===1?"Câu ":"Nhắc lại câu ")+(S.pos+1)+", "+q[1]);if(RUN!==token)return;
+        var th=+S.think;
+        for(var s=th;s>0;s--){phase("🤔 Nhớ lại đáp án… "+s+tg);await wait(1000);if(RUN!==token)return}
+        OPT=[{t:q[2],c:true}];showCard(i,true);phase("✔ Đáp án"+tg);
+        await speak("Đáp án, "+fact(i,true));if(RUN!==token)return;await wait(pass===1?1200:1500)}
     }else{
       OPT=q.slice(2,3).map(function(t){return{t:t,c:true}});showCard(i,true);phase("🔈 Kiến thức");
       await speak(fact(i));if(RUN!==token)return;await wait(900);
