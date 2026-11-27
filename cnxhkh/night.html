@@ -54,11 +54,11 @@ button:focus-visible,select:focus-visible{outline:2px solid var(--moon);outline-
 
 <div class="w">
   <h1>🌙 Ôn Thi Trong Đêm</h1>
-  <p class="mu" style="margin:0">Nhắm mắt nghe. Máy đọc câu hỏi, chờ vài giây để bạn tự nhớ, rồi đọc đáp án đúng thành một câu trọn ý. Chạy liên tục hết 442 câu rồi tự lặp lại vòng mới. Câu cũ được nhắc lại xen kẽ để nhớ lâu.</p>
+  <p class="mu" style="margin:0">Nhắm mắt nghe. Máy đọc câu hỏi, chờ vài giây để bạn tự nhớ, rồi đọc đáp án đúng thành một câu trọn ý. Chạy liên tục hết 442 câu rồi tự lặp lại vòng mới.</p>
 
   <section class="pod" aria-label="Nghe bằng giọng mới">
     <h2>🎧 Giọng mới · chạy nền được khi khóa màn hình</h2>
-    <div class="mu" style="font-size:13px">Nội dung giống hệt chế độ bên dưới (câu hỏi → nghỉ 1 giây → đáp án, đọc 2 lượt, có nhắc lại câu cũ), đã thu sẵn thành file âm thanh. Hết chương này tự sang chương sau, hết chương 7 quay lại chương 1.</div>
+    <div class="mu" style="font-size:13px">Nội dung giống hệt chế độ bên dưới (câu hỏi → nghỉ 1 giây → đáp án, mỗi câu đọc 2 lượt liền nhau), đã thu sẵn thành file âm thanh. Hết chương này tự sang chương sau, hết chương 7 quay lại chương 1.</div>
     <div class="trk" id="trk"></div>
     <div class="pbar" id="pbar"><i id="pfill"></i></div>
     <div class="prow">
@@ -111,7 +111,7 @@ button:focus-visible,select:focus-visible{outline:2px solid var(--moon);outline-
       </select></label>
     <label>Nhắc lại câu cũ
       <select id="rep">
-        <option value="1" selected>Bật (nhớ lâu hơn)</option><option value="0">Tắt</option>
+        <option value="0" selected>Tắt</option><option value="1">Bật</option>
       </select></label>
     <label>Hẹn giờ tắt
       <select id="sleep">
@@ -156,8 +156,8 @@ function phrase(q,a,ok){var head=ok?["Chính xác!","Đúng rồi!","Giỏi lắ
 
 var CH=["","Nhập môn","Sứ mệnh GCCN","CNXH & quá độ","Dân chủ & Nhà nước","Cơ cấu XH-GC","Dân tộc & Tôn giáo","Gia đình"];
 var $=function(i){return document.getElementById(i)},Q=[];
-var S={v:2,round:1,sel:[1,2,3,4,5,6,7],pos:0,mode:"quiz",order:"seq",think:"3",rate:"0.95",rep:"1",sleep:"0",seed:1};
-try{var r0=localStorage.getItem("cnxh-night");if(r0){var o0=JSON.parse(r0);if(!o0.v){o0.sleep="0";o0.think="3";o0.v=2}S=Object.assign(S,o0)}}catch(e){}
+var S={v:3,round:1,sel:[1,2,3,4,5,6,7],pos:0,mode:"quiz",order:"seq",think:"3",rate:"0.95",rep:"0",sleep:"0",seed:1};
+try{var r0=localStorage.getItem("cnxh-night");if(r0){var o0=JSON.parse(r0);if(!o0.v){o0.sleep="0";o0.think="3";o0.v=2}if(o0.v<3){o0.rep="0";o0.v=3}S=Object.assign(S,o0)}}catch(e){}
 function save(){try{localStorage.setItem("cnxh-night",JSON.stringify(S))}catch(e){}}
 
 /* ---------- giọng đọc ---------- */
@@ -250,7 +250,7 @@ $("bTest").onclick=function(){UNL=false;SPOK=false;unlockTTS()};
 $("bPlay").onclick=function(){if(!RUN){try{au.pause()}catch(e){}}RUN?stop():play()};
 
 /* ---------- trình phát file âm thanh (chạy nền) ---------- */
-var au=$("au"),DUR=[63.3,42.1,60.5,41.6,41.0,44.4,32.0],AT={ch:1,t:0};
+var au=$("au"),DUR=[38.5,24.8,35.1,24.4,24.2,26.3,19.0],AT={ch:1,t:0};
 try{var a0=localStorage.getItem("cnxh-audio");if(a0)AT=Object.assign(AT,JSON.parse(a0))}catch(e){}
 function asave(){try{localStorage.setItem("cnxh-audio",JSON.stringify(AT))}catch(e){}}
 function fmt(x){x=Math.max(0,Math.floor(x||0));var h=Math.floor(x/3600),m=Math.floor(x%3600/60),s=x%60;return (h?h+":"+(m<10?"0":""):"")+m+":"+(s<10?"0":"")+s}
