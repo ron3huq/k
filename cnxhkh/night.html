@@ -58,7 +58,7 @@ button:focus-visible,select:focus-visible{outline:2px solid var(--moon);outline-
 
   <section class="pod" aria-label="Nghe bằng giọng mới">
     <h2>🎧 Giọng mới · chạy nền được khi khóa màn hình</h2>
-    <div class="mu" style="font-size:13px">Nội dung giống hệt chế độ bên dưới (câu hỏi → nhớ lại 3 giây → đáp án, đọc 2 lượt, có nhắc lại câu cũ), đã thu sẵn thành file âm thanh. Hết chương này tự sang chương sau, hết chương 7 quay lại chương 1.</div>
+    <div class="mu" style="font-size:13px">Nội dung giống hệt chế độ bên dưới (câu hỏi → nghỉ 1 giây → đáp án, đọc 2 lượt, có nhắc lại câu cũ), đã thu sẵn thành file âm thanh. Hết chương này tự sang chương sau, hết chương 7 quay lại chương 1.</div>
     <div class="trk" id="trk"></div>
     <div class="pbar" id="pbar"><i id="pfill"></i></div>
     <div class="prow">
@@ -250,7 +250,7 @@ $("bTest").onclick=function(){UNL=false;SPOK=false;unlockTTS()};
 $("bPlay").onclick=function(){if(!RUN){try{au.pause()}catch(e){}}RUN?stop():play()};
 
 /* ---------- trình phát file âm thanh (chạy nền) ---------- */
-var au=$("au"),DUR=[69.5,45.9,65.7,45.4,44.5,48.4,34.9],AT={ch:1,t:0};
+var au=$("au"),DUR=[63.3,42.1,60.5,41.6,41.0,44.4,32.0],AT={ch:1,t:0};
 try{var a0=localStorage.getItem("cnxh-audio");if(a0)AT=Object.assign(AT,JSON.parse(a0))}catch(e){}
 function asave(){try{localStorage.setItem("cnxh-audio",JSON.stringify(AT))}catch(e){}}
 function fmt(x){x=Math.max(0,Math.floor(x||0));var h=Math.floor(x/3600),m=Math.floor(x%3600/60),s=x%60;return (h?h+":"+(m<10?"0":""):"")+m+":"+(s<10?"0":"")+s}

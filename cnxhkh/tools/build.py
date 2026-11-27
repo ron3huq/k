@@ -1,6 +1,6 @@
 import json,hashlib,subprocess,sys,os
 S=sys.argv[1];A=f'{S}/audio';plan=json.load(open(f'{A}/plan.json'))
-for sec in ['1.2','1.5','3']:
+for sec in ['1','1.2','1.5','3']:
     f=f'{A}/sil{sec}.mp3'
     if not os.path.exists(f):subprocess.run(['ffmpeg','-y','-loglevel','error','-f','lavfi','-i','anullsrc=r=24000:cl=mono','-t',sec,'-b:a','48k',f],check=True)
 os.makedirs(f'{A}/out',exist_ok=True)
