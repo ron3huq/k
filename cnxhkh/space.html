@@ -67,12 +67,15 @@ button:focus-visible{outline:2px solid var(--hi);outline-offset:2px}
   </div>
   <div><div class="lbl" style="margin-bottom:6px">Chinh phục thiên hà · <span id="mPct">0</span>%</div><div class="prog"><i id="mBar"></i></div></div>
   <button class="big" id="bAll" type="button">🚀 Bay toàn thiên hà</button>
+  <button class="ghost" id="bVoice" type="button">🔈 Giọng đọc</button>
+  <p class="mu" id="voiceNote" style="font-size:13px;margin:-6px 0 0"></p>
   <div class="lbl">Hoặc chọn hành tinh (chương)</div>
   <div class="galaxy" id="galaxy"></div>
   <div class="how">
     <b>Cách chơi</b>
     <ul>
       <li>Chạm vào một hàng để bay sang hàng đó. Chạm lần nữa vào chính hàng đó để lao nhanh và ăn thêm điểm.</li>
+      <li>Giọng đọc: chế độ "câu hỏi + đáp án" sẽ giữ đồng hồ đứng yên cho đến khi đọc xong. Chạm vào câu hỏi để nghe lại.</li>
       <li>Trên máy tính: phím ↑ ↓ hoặc 1–4 để đổi hàng, phím Space để lao.</li>
       <li>Đâm sai cổng: game dừng lại, bạn phải tự chạm vào đáp án đúng mới bay tiếp. Câu đó sẽ quay lại sau 3 câu nữa để bạn trả lời lại.</li>
       <li>Mỗi câu có 6 cấp ghi nhớ. Đúng thì lên cấp, sai thì về 0. Từ cấp 3 trở lên là đã thuộc. Câu chưa thuộc xuất hiện nhiều hơn hẳn.</li>
@@ -99,6 +102,7 @@ button:focus-visible{outline:2px solid var(--hi);outline-offset:2px}
   <button class="big" id="bResume" type="button">Bay tiếp</button>
   <button class="ghost" id="bQuit" type="button">Về bản đồ</button>
   <button class="ghost" id="bSnd" type="button">Âm thanh: bật</button>
+  <button class="ghost" id="bVoice2" type="button">🔈 Giọng đọc</button>
 </div>
 </div>
 
@@ -124,7 +128,7 @@ button:focus-visible{outline:2px solid var(--hi);outline-offset:2px}
 var CH=["","Nhập môn","Sứ mệnh GCCN","CNXH & quá độ","Dân chủ & Nhà nước","Cơ cấu XH-GC","Dân tộc & Tôn giáo","Gia đình"];
 var PC=["","#ff8a5b","#ffd23f","#39e29a","#4fd8ff","#a98bff","#ff6fb5","#9be15d"];
 var Q=[],$=function(i){return document.getElementById(i)};
-var P={b:{},best:0,day:"",today:0,snd:true};
+var P={b:{},best:0,day:"",today:0,snd:true,voice:1};
 try{var r0=localStorage.getItem("cnxh-space");if(r0)P=Object.assign(P,JSON.parse(r0))}catch(e){}
 function save(){try{localStorage.setItem("cnxh-space",JSON.stringify(P))}catch(e){}}
 function box(i){return P.b[i]||0}
@@ -139,6 +143,20 @@ function sfxOk(c){tone(500+c*30,.1);setTimeout(function(){tone(800+c*30,.14)},70
 function sfxBad(){tone(220,.4,"sawtooth",.07,60)}
 function sfxBoom(){tone(120,.5,"triangle",.09,40)}
 function sfxLaser(){tone(1400,.15,"square",.03,300)}
+
+/* ---------- giọng đọc (Web Speech) ---------- */
+var TTS="speechSynthesis" in window,VI=null;
+function pickVoice(){if(!TTS)return;var v=speechSynthesis.getVoices();VI=v.filter(function(x){return /^vi/i.test(x.lang)})[0]||null;voiceNote()}
+var AB=[["CNXHKH","chủ nghĩa xã hội khoa học"],["CNXH","chủ nghĩa xã hội"],["CNTB","chủ nghĩa tư bản"],["CNCS","chủ nghĩa cộng sản"],["TBCN","tư bản chủ nghĩa"],["XHCN","xã hội chủ nghĩa"],["CSCN","cộng sản chủ nghĩa"],["GCCN","giai cấp công nhân"],["TLSX","tư liệu sản xuất"],["LLSX","lực lượng sản xuất"],["QHSX","quan hệ sản xuất"],["KT-XH","kinh tế xã hội"],["CT-XH","chính trị xã hội"],["HĐH","hiện đại hóa"],["CNH","công nghiệp hóa"],["KTCT","kinh tế chính trị"],["C.Mác","Các Mác"],["Ph.Ăngghen","Ăng ghen"],["V.I.Lênin","Lê nin"],["Ph.Hêghen","Hê ghen"],["L.Phoiơbắc","Phoi ơ bắc"]];
+function clean(t){AB.forEach(function(a){t=t.split(a[0]).join(a[1])});return t.replace(/\.\.\./g,", ").replace(/'/g,"")}
+function say(t,after){if(!TTS||!P.voice)return;try{speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(clean(t));u.lang="vi-VN";if(VI)u.voice=VI;u.rate=1.1;if(after)u.onend=after;speechSynthesis.speak(u)}catch(e){}}
+function hush(){if(TTS)try{speechSynthesis.cancel()}catch(e){}}
+function readQ(){if(!G||!G.gate)return;var q=Q[G.gate.i],t=q[1];if(P.voice===2)G.gate.opts.forEach(function(o,k){t+=". "+"ABCD"[k]+": "+o.t});say(t)}
+var VN=["Tắt","Đọc câu hỏi","Đọc câu hỏi + đáp án"];
+function voiceNote(){var b1=$("bVoice"),b2=$("bVoice2");var t="🔈 Giọng đọc: "+VN[P.voice||0];if(b1)b1.textContent=t;if(b2)b2.textContent=t;
+  var n=$("voiceNote");if(n)n.textContent=!TTS?"Trình duyệt này không hỗ trợ giọng đọc.":(!VI&&P.voice?"Máy chưa có giọng tiếng Việt nên có thể đọc sai dấu. Hãy cài giọng tiếng Việt trong phần Cài đặt > Chuyển văn bản thành giọng nói.":"Chạm vào câu hỏi khi đang chơi để nghe lại.")}
+if(TTS){pickVoice();speechSynthesis.onvoiceschanged=pickVoice}
+function cycleVoice(){P.voice=((P.voice||0)+1)%3;save();voiceNote();if(P.voice)say(P.voice===2?"Đọc cả câu hỏi và đáp án":"Đọc câu hỏi");else hush()}
 
 /* ---------- canvas ---------- */
 var cv=$("cv"),cx=cv.getContext("2d"),W=0,H=0,DPR=1;
@@ -170,14 +188,14 @@ function start(ch){
   if(!Q.length)return;
   G={shipX:0,ch:ch,score:0,shield:3,combo:0,n:0,wave:1,pend:[],recent:[],right:0,up:0,boss:null,bossKills:0,miss:[],shipRow:1,shipY:0,parts:[],texts:[],shake:0,lasers:[],gate:null,wait:0.6};
   state="play";["menu","over","pause","rescue"].forEach(function(id){$(id).hidden=true});$("hud").hidden=false;hudUp();layout();G.shipY=TOP+RH*1.5;G.shipX=SX;
-  tone(300,.25,"triangle",.06,900);
+  tone(300,.25,"triangle",.06,900);if(TTS&&P.voice)say(" ");
 }
 function spawn(){
   var i=nextQ(),q=Q[i];G.recent.push(i);if(G.recent.length>25)G.recent.shift();
   var opts=sh(q.slice(2).map(function(t,k){return{t:t,c:k===0}}));
   $("qtag").textContent="Hành tinh "+q[0]+" · "+CH[q[0]]+(G.boss?" · TRÙM":"");$("qtext").textContent=q[1];layout();
   var chars=q[1].length+q.slice(2).join("").length,T=Math.min(16,Math.max(5,4+chars/19-(G.wave-1)*0.5));
-  var g={i:i,opts:opts,x:W+10,T:T,boost:false,t:0};fitGate(g);G.gate=g;
+  var g={i:i,opts:opts,x:W+10,T:T,boost:false,t:0};fitGate(g);G.gate=g;readQ();
 }
 function hudUp(){$("score").textContent=G.score;$("shield").textContent="◆".repeat(Math.max(0,G.shield))+"◇".repeat(Math.max(0,5-G.shield));$("wave").textContent=G.boss?"TRÙM "+"■".repeat(G.boss.hp)+"□".repeat(G.boss.max-G.boss.hp):"Đợt "+G.wave}
 function mult(){return G.combo>=12?4:G.combo>=7?3:G.combo>=3?2:1}
@@ -209,16 +227,16 @@ function killBoss(){var bx=W*0.6,by=TOP+RH*2;for(var k=0;k<4;k++)burst(bx+(Math.
   G.texts.push({x:W/2,y:TOP+RH*2,t:"HẠ TRÙM! +500",c:"#ffd23f",l:1.8,big:1});hudUp()}
 
 function openRescue(g,row){
-  state="rescue";var q=Q[g.i];$("rQ").textContent=q[1];
+  state="rescue";var q=Q[g.i];say("Sai rồi. Đáp án đúng là: "+q[2]);$("rQ").textContent=q[1];
   $("rOpts").innerHTML="";g.opts.forEach(function(o,k){var b=document.createElement("button");b.type="button";b.className="opt"+(o.c?" ok":k===row?" bad":"");
     b.innerHTML="<b>"+"ABCD"[k]+"</b><span></span>";b.querySelector("span").textContent=o.t;b.onclick=function(){
       if(!o.c){$("rMsg").textContent="Chưa đúng. Đáp án đúng là ô màu xanh.";tone(200,.1);return}
-      $("rescue").hidden=true;if(G.shield<=0)return gameOver();state="play";G.wait=0.5;tone(600,.1,"triangle")};$("rOpts").appendChild(b)});
+      hush();$("rescue").hidden=true;if(G.shield<=0)return gameOver();state="play";G.wait=0.5;tone(600,.1,"triangle")};$("rOpts").appendChild(b)});
   $("rMsg").textContent="Đọc đáp án xanh, rồi chạm vào nó để bay tiếp. Câu này sẽ quay lại sau 3 câu nữa.";
   setTimeout(function(){$("rescue").hidden=false},380);
 }
 function gameOver(){
-  state="over";$("hud").hidden=true;if(G.score>P.best)P.best=G.score;save();
+  state="over";hush();$("hud").hidden=true;if(G.score>P.best)P.best=G.score;save();
   $("oScore").textContent=G.score;$("oSub").textContent=(G.score>=P.best&&G.score>0?"🏆 Kỷ lục! · ":"")+"Đợt "+G.wave+" · "+G.n+" cổng";
   $("oRight").textContent=G.right;$("oUp").textContent=G.up;$("oBoss").textContent=G.bossKills;
   $("oMiss").innerHTML=G.miss.length?'<div class="lbl">Ôn lại câu đã đâm sai</div>':"";
@@ -228,13 +246,13 @@ function gameOver(){
 function burst(x,y,c,n){for(var k=0;k<n;k++){var a=Math.random()*6.283,s=60+Math.random()*260;G.parts.push({x:x,y:y,vx:Math.cos(a)*s,vy:Math.sin(a)*s,l:0.6+Math.random()*0.5,c:c})}}
 
 /* ---------- điều khiển ---------- */
-function goRow(r){if(state!=="play"||!G)return;if(r===G.shipRow&&G.gate){G.gate.boost=true;return}G.shipRow=r;tone(700,.04,"sine",.03)}
+function goRow(r){if(state!=="play"||!G)return;if(r===G.shipRow&&G.gate){G.gate.boost=true;hush();return}G.shipRow=r;tone(700,.04,"sine",.03)}
 cv.addEventListener("pointerdown",function(e){if(state!=="play")return;if(e.clientY<TOP)return;goRow(rowAt(e.clientY))});
 addEventListener("keydown",function(e){if(state!=="play")return;var k=e.key;
   if(k==="ArrowUp"||k==="w")goRow(Math.max(0,G.shipRow-1));else if(k==="ArrowDown"||k==="s")goRow(Math.min(3,G.shipRow+1));
-  else if(k>="1"&&k<="4")goRow(+k-1);else if("abcdABCD".indexOf(k)>=0)goRow("abcd".indexOf(k.toLowerCase()));else if(k===" "){if(G.gate)G.gate.boost=true;e.preventDefault()}else if(k==="Escape")pause()});
-function pause(){if(state!=="play")return;state="pause";$("pause").hidden=false}
-$("bPause").onclick=pause;$("bResume").onclick=function(){$("pause").hidden=true;state="play"};
+  else if(k>="1"&&k<="4")goRow(+k-1);else if("abcdABCD".indexOf(k)>=0)goRow("abcd".indexOf(k.toLowerCase()));else if(k===" "){if(G.gate){G.gate.boost=true;hush()}e.preventDefault()}else if(k==="Escape")pause()});
+function pause(){if(state!=="play")return;state="pause";hush();$("pause").hidden=false}
+$("bPause").onclick=pause;$("bResume").onclick=function(){$("pause").hidden=true;state="play";readQ()};
 $("bQuit").onclick=function(){$("pause").hidden=true;menu()};
 $("bSnd").onclick=function(){P.snd=!P.snd;save();$("bSnd").textContent="Âm thanh: "+(P.snd?"bật":"tắt")};
 $("bAgain").onclick=function(){start(G.ch)};$("bMap").onclick=menu;$("bAll").onclick=function(){start(0)};
@@ -254,7 +272,7 @@ function update(dt){
   var ty=TOP+RH*G.shipRow+RH/2;G.shipY+=(ty-G.shipY)*Math.min(1,dt*14);if(!G.gate)G.shipX+=(SX-G.shipX)*Math.min(1,dt*8);
   if(!G.gate){G.wait-=dt;if(G.wait<=0)spawn();return}
   var g=G.gate;g.x+=(g.tx-g.x)*Math.min(1,dt*10);if(g.x-g.tx>4)return;
-  g.t+=dt*(g.boost?4:1);var pr=Math.min(1,g.t/g.T);G.shipX=SX+(g.tx-SX-26)*pr*pr;if(pr>=1)resolve();
+  if(P.voice===2&&TTS&&speechSynthesis.speaking&&!g.boost)return;g.t+=dt*(g.boost?4:1);var pr=Math.min(1,g.t/g.T);G.shipX=SX+(g.tx-SX-26)*pr*pr;if(pr>=1)resolve();
 }
 function rr(x,y,w,h,r){cx.beginPath();cx.moveTo(x+r,y);cx.arcTo(x+w,y,x+w,y+h,r);cx.arcTo(x+w,y+h,x,y+h,r);cx.arcTo(x,y+h,x,y,r);cx.arcTo(x,y,x+w,y,r);cx.closePath()}
 function draw(){
@@ -297,8 +315,10 @@ function menu(){
   var pct=m[1]?Math.round(m[0]*100/m[1]):0;$("mPct").textContent=pct;$("mBar").style.width=pct+"%";
   var h="";for(var c=1;c<=7;c++){var mm=mastered(c),pc=mm[1]?Math.round(mm[0]*100/mm[1]):0;
     h+='<button type="button" class="planet" data-c="'+c+'"><span class="ring" style="background:conic-gradient('+PC[c]+' '+pc*3.6+'deg,#2c2860 0)"><i>'+pc+'%</i></span><span><b>Hành tinh '+c+'</b><small>'+CH[c]+' · '+mm[0]+'/'+mm[1]+'</small></span></button>'}
-  $("galaxy").innerHTML=h;$("bSnd").textContent="Âm thanh: "+(P.snd?"bật":"tắt");
+  $("galaxy").innerHTML=h;voiceNote();$("bSnd").textContent="Âm thanh: "+(P.snd?"bật":"tắt");
 }
+$("bVoice").onclick=cycleVoice;$("bVoice2").onclick=cycleVoice;
+$("qtext").onclick=readQ;$("qtext").style.cursor="pointer";
 $("galaxy").onclick=function(e){var b=e.target.closest(".planet");if(b)start(+b.dataset.c)};
 
 resize();menu();requestAnimationFrame(loop);
