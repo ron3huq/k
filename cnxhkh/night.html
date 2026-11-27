@@ -198,7 +198,7 @@ async function loop(token){
         var th=+S.think;
         for(var s=th;s>0;s--){phase("🤔 Nhớ lại đáp án… "+s+tg);await wait(1000);if(RUN!==token)return}
         OPT=[{t:q[2],c:true}];showCard(i,true);phase("✔ Đáp án"+tg);
-        await speak("Đáp án, "+fact(i,true));if(RUN!==token)return;await wait(pass===1?1200:1500)}
+        await speak("Đáp án, "+q[2]+".");if(RUN!==token)return;await wait(pass===1?1200:1500)}
     }else{
       OPT=q.slice(2,3).map(function(t){return{t:t,c:true}});showCard(i,true);phase("🔈 Kiến thức");
       await speak(fact(i));if(RUN!==token)return;await wait(900);
