@@ -1,0 +1,221 @@
+<title>Ôn Thi Trong Đêm</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;800&display=swap">
+<style>
+/* Màn hình đêm: tối, chữ dịu, một thẻ câu hỏi ở giữa, nút phát to dễ bấm khi buồn ngủ */
+:root{--bg:#0b0d14;--panel:#141826;--line:#232a3d;--tx:#d9dcea;--mu:#7d8399;--moon:#e8c87a;--ok:#7fd1a8;
+--body:"Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--tx);font:15px/1.5 var(--body);-webkit-tap-highlight-color:transparent}
+.w{max-width:600px;margin:0 auto;display:flex;flex-direction:column;gap:14px;padding-block:18px 40px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1{margin:0;font-size:22px;font-weight:800;color:var(--moon)}
+.mu{color:var(--mu)}
+button,select{font:inherit;color:inherit}
+button{cursor:pointer}
+button:focus-visible,select:focus-visible{outline:2px solid var(--moon);outline-offset:2px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:10px;min-height:220px}
+.tag{font-size:12px;color:var(--mu);letter-spacing:.06em;text-transform:uppercase}
+.q{font-size:18px;font-weight:800;line-height:1.4}
+.opts{display:flex;flex-direction:column;gap:6px}
+.op{padding:8px 10px;border-radius:10px;border:1px solid var(--line);font-size:15px;transition:opacity .3s}
+.op b{color:var(--mu);margin-right:6px}
+.op.now{border-color:var(--moon)}
+.op.ok{border-color:var(--ok);background:#163327;color:var(--ok);font-weight:600}
+.op.dim{opacity:.35}
+.phase{font-size:13px;color:var(--moon);min-height:20px}
+.ctrl{display:flex;gap:10px;align-items:center;justify-content:center}
+.play{width:76px;height:76px;border-radius:50%;border:0;background:var(--moon);color:#1a1408;font-size:30px;font-weight:800}
+.sm{width:52px;height:52px;border-radius:50%;border:1px solid var(--line);background:var(--panel);font-size:18px}
+.set{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.set label{display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--mu);min-width:0}
+.set select{background:#0f1320;border:1px solid var(--line);border-radius:10px;padding:8px;width:100%}
+.full{grid-column:1/-1}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid var(--line);background:#0f1320;border-radius:99px;padding:5px 10px;font-size:13px}
+.chip.on{background:var(--moon);color:#1a1408;border-color:var(--moon);font-weight:600}
+.stat{display:flex;justify-content:space-between;font-size:13px;color:var(--mu);font-variant-numeric:tabular-nums}
+.note{font-size:13px;color:var(--mu);background:var(--panel);border:1px dashed var(--line);border-radius:12px;padding:10px 12px}
+.note ul{margin:4px 0 0;padding-left:18px}
+#dark{position:fixed;inset:0;background:#000;z-index:9;display:flex;align-items:flex-end;justify-content:center;padding-bottom:calc(env(safe-area-inset-bottom,0px) + 40px)}
+#dark[hidden]{display:none}
+#dark p{color:#2b2f3c;font-size:13px;text-align:center;margin:0}
+@media (max-width:380px){.set{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.op{transition:none}}
+</style>
+
+<div class="w">
+  <h1>🌙 Ôn Thi Trong Đêm</h1>
+  <p class="mu" style="margin:0">Nhắm mắt nghe. Máy đọc câu hỏi, đọc 4 đáp án, chờ bạn nghĩ trong đầu, rồi đọc đáp án đúng thành một câu trọn ý. Câu cũ được nhắc lại xen kẽ để nhớ lâu.</p>
+
+  <div class="card" id="card">
+    <div class="tag" id="tag">Bấm ▶ để bắt đầu</div>
+    <div class="q" id="qt">Ví dụ: Tác phẩm đánh dấu sự ra đời của chủ nghĩa xã hội khoa học là:</div>
+    <div class="opts" id="opts"></div>
+    <div class="phase" id="phase"></div>
+  </div>
+
+  <div class="ctrl">
+    <button class="sm" id="bPrev" type="button" aria-label="Câu trước">⏮</button>
+    <button class="play" id="bPlay" type="button" aria-label="Phát">▶</button>
+    <button class="sm" id="bNext" type="button" aria-label="Câu sau">⏭</button>
+    <button class="sm" id="bDark" type="button" aria-label="Tắt màn hình">🌑</button>
+  </div>
+  <div class="stat"><span id="sPos">Câu 0/0</span><span id="sTimer">Hẹn giờ: tắt</span></div>
+
+  <div class="set">
+    <label class="full">Chương
+      <div class="chips" id="chips"></div>
+    </label>
+    <label>Kiểu nghe
+      <select id="mode">
+        <option value="quiz">Hỏi → chờ nghĩ → đáp án</option>
+        <option value="fact">Chỉ nghe kiến thức (nhanh)</option>
+      </select></label>
+    <label>Thứ tự
+      <select id="order">
+        <option value="seq">Lần lượt theo chương</option>
+        <option value="rnd">Xáo trộn</option>
+      </select></label>
+    <label>Thời gian nghĩ
+      <select id="think">
+        <option value="3">3 giây</option><option value="5" selected>5 giây</option><option value="8">8 giây</option><option value="12">12 giây</option>
+      </select></label>
+    <label>Tốc độ đọc
+      <select id="rate">
+        <option value="0.8">Chậm</option><option value="0.95" selected>Vừa</option><option value="1.1">Nhanh</option>
+      </select></label>
+    <label>Nhắc lại câu cũ
+      <select id="rep">
+        <option value="1" selected>Bật (nhớ lâu hơn)</option><option value="0">Tắt</option>
+      </select></label>
+    <label>Hẹn giờ tắt
+      <select id="sleep">
+        <option value="0">Không</option><option value="15">15 phút</option><option value="30" selected>30 phút</option><option value="45">45 phút</option><option value="60">60 phút</option>
+      </select></label>
+  </div>
+
+  <div class="note">
+    <b>Trước khi ngủ</b>
+    <ul>
+      <li>Để màn hình luôn sáng và mở trang này ở phía trước. Trên điện thoại, khóa màn hình hoặc chuyển sang ứng dụng khác sẽ làm trình duyệt dừng đọc.</li>
+      <li>Bấm 🌑 để màn hình đen hoàn toàn. Chạm vào màn hình đen để quay lại.</li>
+      <li>Giảm độ sáng và cắm sạc. Khi gần hết giờ hẹn, giọng đọc nhỏ dần rồi tự dừng.</li>
+      <li>Vị trí đang nghe được lưu lại, lần sau bấm ▶ sẽ nghe tiếp.</li>
+    </ul>
+  </div>
+  <p class="mu" id="vNote" style="font-size:13px;margin:0"></p>
+</div>
+
+<div id="dark" hidden><p>Đang đọc… chạm để mở lại</p></div>
+
+<script>
+var AB=[["CNXHKH","chủ nghĩa xã hội khoa học"],["CNXH","chủ nghĩa xã hội"],["CNTB","chủ nghĩa tư bản"],["CNCS","chủ nghĩa cộng sản"],["TBCN","tư bản chủ nghĩa"],["XHCN","xã hội chủ nghĩa"],["CSCN","cộng sản chủ nghĩa"],["GCCN","giai cấp công nhân"],["TLSX","tư liệu sản xuất"],["LLSX","lực lượng sản xuất"],["QHSX","quan hệ sản xuất"],["KT-XH","kinh tế xã hội"],["CT-XH","chính trị xã hội"],["HĐH","hiện đại hóa"],["CNH","công nghiệp hóa"],["KTCT","kinh tế chính trị"],["C.Mác","Các Mác"],["Ph.Ăngghen","Ăng ghen"],["V.I.Lênin","Lê nin"],["Ph.Hêghen","Hê ghen"],["L.Phoiơbắc","Phoi ơ bắc"]];
+var AB2=[["PTSX","phương thức sản xuất"],["TP.HCM","Thành phố Hồ Chí Minh"],["NQ/TW","nghị quyết của Bộ Chính trị"],["NEP","chính sách kinh tế mới"],["J.Xtalin","Xta lin"],["A.Xmít","A đam Xmít"],["D.Ricácđô","Ri các đô"],["S.Phuriê","Phu ri ê"],["R.Oen","Ô oen"],["H.Xanh Ximông","Xanh Xi mông"],["Xanh Ximông","Xanh Xi mông"],["G.Đi-mi-trốp","Đi mi trốp"],["T.Morơ","Tô mát Mo rơ"],["Ph.Hêghen","Hê ghen"]];
+var ROM={I:1,II:2,III:3,IV:4,V:5,VI:6,VII:7,VIII:8,IX:9,X:10,XI:11,XII:12,XIII:13,XIV:14,XV:15,XVI:16,XVII:17,XVIII:18,XIX:19,XX:20,XXI:21};
+function clean(t){t=t.replace(/Mác\s*[-–]\s*Lênin/g,"Mác Lê nin").replace(/vợ\s*[-–]\s*chồng/g,"vợ chồng");AB2.concat(AB).forEach(function(a){t=t.split(a[0]).join(a[1])});
+  t=t.replace(/\((\d{1,2})\/(\d{4})\)/g,", tháng $1 năm $2,").replace(/(\d{1,2})\/(\d{4})/g,"tháng $1 năm $2").replace(/\((\d{4})\)/g,", năm $1,")
+   .replace(/(^|[^\p{L}])([IVX]{1,5})(?=[^\p{L}]|$)/gu,function(m,a,r){return ROM[r]?a+ROM[r]:m})
+   .replace(/(^|[^\p{L}])(\p{Lu}{2,})(?=[^\p{L}]|$)/gu,function(m,a,w){return a+w.toLowerCase()})
+   .replace(/\(([^)]*)\)/g,", $1,").replace(/\s[-–]\s/g," ").replace(/→/g," dẫn đến ").replace(/&/g," và ").replace(/%/g," phần trăm")
+   .replace(/\.\.\./g,", ").replace(/['"“”]/g,"").replace(/\s*,\s*,/g,",").replace(/,\s*([.?!:])/g,"$1").replace(/\s+,/g,",").replace(/\s+/g," ").trim();
+  return t}
+function phrase(q,a,ok){var head=ok?["Chính xác!","Đúng rồi!","Giỏi lắm!"][Math.floor(Math.random()*3)]:"Chưa đúng rồi.";q=q.trim();a=a.trim();
+  var low=a.charAt(0).toLowerCase()+a.slice(1),m;
+  if(/:$/.test(q)){var st=q.slice(0,-1).trim();return[head,st+" "+low+"."]}
+  if((m=q.match(/^(.*)\slà gì\?$/)))return[head,m[1]+" là "+low+"."];
+  var neg=/không/i.test(q);
+  if(!neg&&(m=q.match(/^(.+?) nào là (.+)\?$/)))return[head,m[2].charAt(0).toUpperCase()+m[2].slice(1)+" là "+low+"."];
+  if(!neg&&(m=q.match(/^Đâu là (.+)\?$/)))return[head,m[1].charAt(0).toUpperCase()+m[1].slice(1)+" là "+low+"."];
+  if(/\?$/.test(q))return[head,q,"Đáp án là: "+a+"."];
+  return[head,q+", "+low+"."]}
+
+var CH=["","Nhập môn","Sứ mệnh GCCN","CNXH & quá độ","Dân chủ & Nhà nước","Cơ cấu XH-GC","Dân tộc & Tôn giáo","Gia đình"];
+var $=function(i){return document.getElementById(i)},Q=[];
+var S={sel:[1,2,3,4,5,6,7],pos:0,mode:"quiz",order:"seq",think:"5",rate:"0.95",rep:"1",sleep:"30",seed:1};
+try{var r0=localStorage.getItem("cnxh-night");if(r0)S=Object.assign(S,JSON.parse(r0))}catch(e){}
+function save(){try{localStorage.setItem("cnxh-night",JSON.stringify(S))}catch(e){}}
+
+/* ---------- giọng đọc ---------- */
+var TTS="speechSynthesis" in window,VI=null,VOL=1;
+function pickVoice(){if(!TTS)return;var v=speechSynthesis.getVoices();VI=v.filter(function(x){return /^vi/i.test(x.lang)})[0]||null;
+  $("vNote").textContent=!TTS?"Trình duyệt này không hỗ trợ giọng đọc.":VI?"Giọng đọc: "+VI.name:"Chưa thấy giọng tiếng Việt trên máy. Vào Cài đặt > Chuyển văn bản thành giọng nói để tải giọng Tiếng Việt."}
+if(TTS){pickVoice();speechSynthesis.onvoiceschanged=pickVoice}
+/* đọc từng câu ngắn một để trình duyệt không cắt giữa chừng; trả về Promise khi đọc xong */
+function speak(text){return new Promise(function(res){
+  if(!TTS){setTimeout(res,600);return}
+  var parts=clean(text).replace(/([.?!:;])\s+/g,"$1\n").split("\n").filter(function(x){return x.trim()}),k=0;
+  function one(){if(!RUN||k>=parts.length)return res();var t=parts[k++],done=false,u=new SpeechSynthesisUtterance(t);
+    u.lang="vi-VN";if(VI)u.voice=VI;u.rate=+S.rate*(VOL<1?0.92:1);u.volume=VOL;
+    var fin=function(){if(done)return;done=true;clearTimeout(to);one()};u.onend=fin;u.onerror=fin;
+    var to=setTimeout(fin,(2+t.length/(9*+S.rate))*1000);speechSynthesis.speak(u)}
+  one()})}
+function wait(ms){return new Promise(function(res){var t0=Date.now();(function chk(){if(!RUN||Date.now()-t0>=ms)return res();setTimeout(chk,150)})()})}
+var NUM=["một","hai","ba","bốn","năm","sáu","bảy"];
+
+/* ---------- danh sách nghe ---------- */
+var LIST=[];
+function rand(seed){return function(){seed=(seed*16807)%2147483647;return seed/2147483647}}
+function build(){var ids=[];Q.forEach(function(q,i){if(S.sel.indexOf(q[0])>=0)ids.push(i)});
+  if(S.order==="rnd"){var r=rand(S.seed);for(var i=ids.length-1;i>0;i--){var j=Math.floor(r()*(i+1)),t=ids[i];ids[i]=ids[j];ids[j]=t}}
+  else ids.sort(function(a,b){return Q[a][0]-Q[b][0]||a-b});
+  LIST=ids;if(S.pos>=LIST.length)S.pos=0;pos()}
+function pos(){$("sPos").textContent="Câu "+(LIST.length?S.pos+1:0)+"/"+LIST.length}
+function fact(i,quiz){var q=Q[i],p=phrase(q[1],q[2],true).slice(1);if(p.length>1&&quiz)return q[2]+".";return p.join(" ")}
+function mkOpts(i){var q=Q[i],o=q.slice(2).map(function(t,k){return{t:t,c:k===0}}),r=rand(S.seed*7+i+1);r();for(var a=3;a>0;a--){var b=Math.floor(r()*(a+1)),t=o[a];o[a]=o[b];o[b]=t}return o}
+
+/* ---------- hiển thị ---------- */
+var OPT=[];
+function showCard(i,reveal,now){var q=Q[i];$("tag").textContent="Chương "+q[0]+" · "+CH[q[0]];$("qt").textContent=q[1];
+  $("opts").innerHTML="";OPT.forEach(function(o,k){var d=document.createElement("div");d.className="op"+(reveal?(o.c?" ok":" dim"):(k===now?" now":""));
+    d.innerHTML="<b>"+"ABCD"[k]+"</b><span></span>";d.querySelector("span").textContent=o.t;$("opts").appendChild(d)})}
+function phase(t){$("phase").textContent=t}
+
+/* ---------- vòng phát ---------- */
+var RUN=0,END=0,LOCK=null,lastNew=-1;
+async function loop(token){
+  while(RUN===token){
+    if(!LIST.length){phase("Chưa chọn chương nào");stop();return}
+    var i=LIST[S.pos],q=Q[i];
+    if(S.mode==="quiz"){
+      OPT=mkOpts(i);
+      showCard(i,false,-1);phase("🔈 Câu hỏi");
+      await speak("Câu "+(S.pos+1)+", "+q[1]);if(RUN!==token)return;
+      for(var k=0;k<4;k++){showCard(i,false,k);await speak("ABCD"[k]+", "+OPT[k].t);if(RUN!==token)return;await wait(250)}
+      showCard(i,false,-1);var th=+S.think;
+      for(var s=th;s>0;s--){phase("🤔 Nghĩ trong đầu… "+s);await wait(1000);if(RUN!==token)return}
+      var ci=OPT.findIndex(function(o){return o.c});showCard(i,true);phase("✔ Đáp án "+"ABCD"[ci]);
+      await speak("Đáp án "+"ABCD"[ci]+", "+fact(i,true));if(RUN!==token)return;await wait(1800);
+    }else{
+      OPT=q.slice(2,3).map(function(t){return{t:t,c:true}});showCard(i,true);phase("🔈 Kiến thức");
+      await speak(fact(i));if(RUN!==token)return;await wait(1200);
+    }
+    /* nhắc lại xen kẽ: câu cách đây 3 câu và 10 câu, chỉ đọc câu kiến thức ngắn */
+    if(S.rep==="1"){var back=[3,10];for(var m=0;m<back.length;m++){var p=S.pos-back[m];if(p<0)continue;var j=LIST[p];
+      OPT=[{t:Q[j][2],c:true}];showCard(j,true);phase("🔁 Nhắc lại câu "+(p+1));await speak("Nhắc lại, "+fact(j));if(RUN!==token)return;await wait(1200)}}
+    S.pos=(S.pos+1)%LIST.length;save();pos();
+    if(END){var left=END-Date.now();if(left<=0){phase("😴 Hết giờ hẹn. Ngủ ngon!");stop();return}VOL=left<180000?Math.max(0.15,left/180000):1}
+  }
+}
+function play(){if(RUN||!Q.length)return;RUN=Date.now();VOL=1;$("bPlay").textContent="❚❚";$("bPlay").setAttribute("aria-label","Tạm dừng");
+  var m=+S.sleep;END=m?Date.now()+m*60000:0;tick();if(TTS)try{speechSynthesis.cancel();speechSynthesis.resume()}catch(e){}
+  try{navigator.wakeLock&&navigator.wakeLock.request("screen").then(function(l){LOCK=l}).catch(function(){})}catch(e){}
+  loop(RUN)}
+function stop(){RUN=0;END=0;if(TTS)try{speechSynthesis.cancel()}catch(e){}$("bPlay").textContent="▶";$("bPlay").setAttribute("aria-label","Phát");
+  try{LOCK&&LOCK.release()}catch(e){}LOCK=null;tick()}
+function tick(){$("sTimer").textContent=END?"Tắt sau "+Math.max(0,Math.ceil((END-Date.now())/60000))+" phút":"Hẹn giờ: tắt"}
+setInterval(function(){if(RUN)tick()},20000);
+document.addEventListener("visibilitychange",function(){if(!document.hidden&&RUN&&!LOCK)try{navigator.wakeLock.request("screen").then(function(l){LOCK=l}).catch(function(){})}catch(e){}});
+$("bPlay").onclick=function(){RUN?stop():play()};
+function jump(d){var was=!!RUN;stop();S.pos=(S.pos+d+LIST.length)%LIST.length;save();pos();if(LIST.length){OPT=mkOpts(LIST[S.pos]);showCard(LIST[S.pos],false);phase("")}if(was)play()}
+$("bNext").onclick=function(){jump(1)};$("bPrev").onclick=function(){jump(-1)};
+$("bDark").onclick=function(){$("dark").hidden=false;if(!RUN)play()};$("dark").onclick=function(){$("dark").hidden=true};
+
+/* ---------- cài đặt ---------- */
+function chips(){var h="";for(var c=1;c<=7;c++)h+='<button type="button" class="chip'+(S.sel.indexOf(c)>=0?" on":"")+'" data-c="'+c+'">C'+c+" · "+CH[c]+"</button>";$("chips").innerHTML=h}
+$("chips").onclick=function(e){var c=+(e.target.dataset||{}).c;if(!c)return;var i=S.sel.indexOf(c);if(i>=0){if(S.sel.length>1)S.sel.splice(i,1)}else S.sel.push(c);S.sel.sort();S.pos=0;save();chips();var was=!!RUN;stop();build();if(was)play()};
+["mode","order","think","rate","rep","sleep"].forEach(function(id){var el=$(id);el.value=S[id];el.onchange=function(){S[id]=el.value;
+  if(id==="order"){S.seed=1+Math.floor(Math.random()*1e6);S.pos=0;build()}if(id==="sleep"&&RUN){var m=+S.sleep;END=m?Date.now()+m*60000:0;tick()}save()}});
+chips();tick();
+fetch("q.json").then(function(r){return r.json()}).then(function(d){Q=d;build();if(LIST.length){var i=LIST[S.pos];OPT=mkOpts(i);showCard(i,false);$("tag").textContent+=" · bấm ▶ để nghe"}})
+.catch(function(){phase("Không tải được câu hỏi. Hãy tải lại trang.")});
+</script>
