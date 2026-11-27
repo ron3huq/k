@@ -197,10 +197,12 @@ async function loop(token){
       var th=+S.think;
       for(var s=th;s>0;s--){phase("🤔 Nhớ lại đáp án… "+s);await wait(1000);if(RUN!==token)return}
       OPT=[{t:q[2],c:true}];showCard(i,true);phase("✔ Đáp án");
-      await speak("Đáp án, "+fact(i,true));if(RUN!==token)return;await wait(1500);
+      await speak("Đáp án, "+fact(i,true));if(RUN!==token)return;await wait(900);
+      phase("✔ Đáp án · đọc lần 2");await speak("Một lần nữa, "+fact(i));if(RUN!==token)return;await wait(1500);
     }else{
       OPT=q.slice(2,3).map(function(t){return{t:t,c:true}});showCard(i,true);phase("🔈 Kiến thức");
-      await speak(fact(i));if(RUN!==token)return;await wait(1200);
+      await speak(fact(i));if(RUN!==token)return;await wait(900);
+      phase("🔈 Kiến thức · đọc lần 2");await speak("Một lần nữa, "+fact(i));if(RUN!==token)return;await wait(1200);
     }
     /* nhắc lại xen kẽ: câu cách đây 3 câu và 10 câu, chỉ đọc câu kiến thức ngắn */
     if(S.rep==="1"){var back=[3,10];for(var m=0;m<back.length;m++){var p=S.pos-back[m];if(p<0)continue;var j=LIST[p];
