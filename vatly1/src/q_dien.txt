@@ -1,0 +1,970 @@
+@@ C7 | new
+Q: Hai điện tích điểm $q_1 = 2\cdot10^{-8}$ C và $q_2 = -4\cdot10^{-8}$ C đặt cách nhau 3 cm trong không khí. Lực tương tác giữa chúng là:
+A: $8\cdot10^{-3}$ N, lực đẩy
+B: $8\cdot10^{-3}$ N, lực hút
+C: $2,4\cdot10^{-4}$ N, lực hút
+D: $8\cdot10^{-5}$ N, lực hút
+ANS: B
+SOL:
+**Định luật Coulomb:**
+$$F = k\frac{|q_1q_2|}{\varepsilon r^2} = 9\cdot10^{9}\times\frac{2\cdot10^{-8}\times 4\cdot10^{-8}}{(0,03)^2} = 9\cdot10^{9}\times\frac{8\cdot10^{-16}}{9\cdot10^{-4}} = 8\cdot10^{-3}\ \text{N}$$
+Hai điện tích **trái dấu** ⇒ lực **hút**.
+**Kết luận:** chọn **B**.
+
+@@ C7 | new
+Q: Hai điện tích điểm đặt trong chân không hút nhau một lực F. Đưa chúng vào dầu có hằng số điện môi ε = 2 và giữ nguyên khoảng cách thì lực tương tác:
+A: Tăng 2 lần
+B: Giảm 2 lần
+C: Giảm 4 lần
+D: Không đổi
+ANS: B
+SOL:
+Trong môi trường điện môi đồng chất, đẳng hướng:
+$$F = \frac{F_{ck}}{\varepsilon} = k\frac{|q_1q_2|}{\varepsilon r^2}$$
+ε = 2 ⇒ lực **giảm 2 lần**.
+**Kết luận:** chọn **B**.
+
+@@ C7 | new
+Q: Hai điện tích $q_1 = 4\cdot10^{-9}$ C và $q_2 = -4\cdot10^{-9}$ C đặt tại A, B cách nhau 10 cm trong không khí. Cường độ điện trường tại trung điểm M của AB là:
+A: 0
+B: $1,44\cdot10^{4}$ V/m
+C: $2,88\cdot10^{4}$ V/m
+D: $7,2\cdot10^{3}$ V/m
+ANS: C
+SOL:
+**Bước 1 – Từng điện tích** ($r = 5$ cm $= 0,05$ m):
+$$E_1 = E_2 = \frac{k|q|}{r^2} = \frac{9\cdot10^{9}\times 4\cdot10^{-9}}{0,0025} = 1,44\cdot10^{4}\ \text{V/m}$$
+**Bước 2 – Chiều:** $\vec E_1$ hướng ra xa $q_1$ (về phía B), $\vec E_2$ hướng về $q_2$ (cũng về phía B) ⇒ **cùng chiều**.
+**Bước 3 – Chồng chất:** $E = E_1 + E_2 = 2,88\cdot10^{4}$ V/m.
+**Kết luận:** chọn **C**. (Nếu hai điện tích **cùng dấu** bằng nhau thì E tại trung điểm = 0.)
+
+@@ C7 | new
+Q: Hai điện tích điểm cùng dấu $q_1 = q_2 = q$ đặt tại A, B cách nhau 2a. Trên đường trung trực của AB, điểm M cách AB một đoạn x. Cường độ điện trường tại M **đạt cực đại** khi:
+A: $x = 0$
+B: $x = a$
+C: $x = \dfrac{a}{\sqrt2}$
+D: $x = a\sqrt2$
+ANS: C
+SOL:
+**Bước 1 – Biểu thức E** (ví dụ 1 slide Chương 7): hai thành phần vuông góc AB triệt tiêu, chỉ còn thành phần dọc trung trực:
+$$E = 2E_1\cos\alpha = \frac{2kqx}{(a^2 + x^2)^{3/2}}$$
+**Bước 2 – Tìm cực đại:** $E'(x) = 0 \Leftrightarrow a^2 + x^2 - 3x^2 = 0 \Leftrightarrow x = \dfrac{a}{\sqrt2}$.
+Khi đó $E_{max} = \dfrac{4kq}{3\sqrt3\, a^2}$.
+**Kết luận:** chọn **C**.
+
+@@ C7 | new
+Q: Điện thế do điện tích điểm $q = 10^{-9}$ C gây ra tại điểm cách nó 9 cm trong không khí (gốc điện thế ở vô cùng) là:
+A: 10 V
+B: 100 V
+C: 1000 V
+D: 1111 V
+ANS: B
+SOL:
+$$V = \frac{kq}{\varepsilon r} = \frac{9\cdot10^{9}\times 10^{-9}}{0,09} = \frac{9}{0,09} = 100\ \text{V}$$
+D là kết quả khi dùng nhầm $r^2$ (đó là công thức E).
+**Kết luận:** chọn **B**.
+
+@@ C7 | new
+Q: Khi độ lớn điện tích **thử** đặt tại một điểm tăng gấp đôi thì điện thế tại điểm đó:
+A: Tăng gấp đôi
+B: Giảm một nửa
+C: Không đổi
+D: Tăng gấp 4
+ANS: C
+SOL:
+Điện thế $V = \dfrac{W_t}{q_0}$ là đại lượng đặc trưng cho **điện trường tại điểm đó** (do điện tích nguồn Q gây ra: $V = \dfrac{kQ}{\varepsilon r}$), không phụ thuộc điện tích thử $q_0$.
+Tăng $q_0$ thì thế năng $W_t = q_0V$ tăng, nhưng tỉ số $V$ không đổi.
+**Kết luận:** chọn **C**. (Câu 2 đề giữa kỳ.)
+
+@@ C7 | new
+Q: Một điện tích $q_0 = 2\cdot10^{-9}$ C dịch chuyển trong điện trường từ điểm M có điện thế 300 V đến điểm N có điện thế 100 V. Công của lực điện trường là:
+A: $4\cdot10^{-7}$ J
+B: $-4\cdot10^{-7}$ J
+C: $6\cdot10^{-7}$ J
+D: $8\cdot10^{-7}$ J
+ANS: A
+SOL:
+**Công lực tĩnh điện** (không phụ thuộc đường đi):
+$$A_{MN} = q_0(V_M - V_N) = 2\cdot10^{-9}\times(300 - 100) = 4\cdot10^{-7}\ \text{J}$$
+Công dương: điện tích dương đi từ nơi điện thế cao về nơi điện thế thấp, lực điện sinh công phát động.
+**Kết luận:** chọn **A**.
+
+@@ C7 | new
+Q: Hệ thức liên hệ giữa cường độ điện trường và điện thế là:
+A: $\vec E = \text{grad}\,V$
+B: $\vec E = -\text{grad}\,V$
+C: $V = -\text{grad}\,\vec E$
+D: $\vec E = V\cdot d$
+ANS: B
+SOL:
+$$\vec E = -\text{grad}\,V = -\left(\frac{\partial V}{\partial x}\vec i + \frac{\partial V}{\partial y}\vec j + \frac{\partial V}{\partial z}\vec k\right)$$
+Ý nghĩa dấu "−": vectơ $\vec E$ hướng theo chiều **giảm** của điện thế.
+Trường hợp điện trường đều giữa hai bản phẳng: $E = \dfrac{U}{d}$.
+**Kết luận:** chọn **B**.
+
+@@ C7 | new
+Q: Hai bản kim loại phẳng song song cách nhau 4 cm, hiệu điện thế giữa chúng là 200 V. Cường độ điện trường giữa hai bản là:
+A: 50 V/m
+B: 800 V/m
+C: 5000 V/m
+D: 8000 V/m
+ANS: C
+SOL:
+Điện trường giữa hai bản phẳng song song là **điện trường đều**:
+$$E = \frac{U}{d} = \frac{200}{0,04} = 5000\ \text{V/m}$$
+**Kết luận:** chọn **C**.
+
+@@ C7 | new
+Q: Ba điện tích $q_1 = 3\ \mu\text{C}$, $q_2 = -5\ \mu\text{C}$, $q_3 = 4\ \mu\text{C}$ nằm trong một mặt kín S. Thông lượng cảm ứng điện (điện thông) gửi qua S là:
+A: 12 μC
+B: 2 μC
+C: −2 μC
+D: 0
+ANS: B
+SOL:
+**Định lý Ostrogradski–Gauss:**
+$$\Phi_e = \oint_S\vec D\cdot d\vec S = \sum q_{trong}$$
+$$\Phi_e = 3 + (-5) + 4 = 2\ \mu\text{C}$$
+(Tổng **đại số**, phải giữ dấu.)
+**Kết luận:** chọn **B**.
+TIP: Câu 11 giữa kỳ: $q_1 = 6\ \mu$C, $q_2 = -2\ \mu$C ⇒ $\Phi_D = 4\ \mu$C. Đơn vị của $\Phi_D$ là C (culông).
+
+@@ C7 | new
+Q: Một điện tích điểm $q = 8,86\cdot10^{-9}$ C nằm trong mặt cầu kín, đặt trong không khí. Thông lượng **điện trường** $\vec E$ gửi qua mặt cầu là:
+A: 1000 V·m
+B: $8,86\cdot10^{-9}$ V·m
+C: 100 V·m
+D: Phụ thuộc bán kính mặt cầu
+ANS: A
+SOL:
+$$\Phi_E = \oint\vec E\cdot d\vec S = \frac{1}{\varepsilon_0\varepsilon}\oint\vec D\cdot d\vec S = \frac{q}{\varepsilon_0\varepsilon} = \frac{8,86\cdot10^{-9}}{8,86\cdot10^{-12}} = 1000\ \text{V·m}$$
+Không phụ thuộc hình dạng, kích thước mặt kín (D sai).
+**Kết luận:** chọn **A**.
+
+@@ C7 | new
+Q: Phát biểu nào sau đây về đường sức điện trường **tĩnh** là **sai**?
+A: Tiếp tuyến tại mỗi điểm của đường sức trùng với phương của vectơ cường độ điện trường tại điểm đó.
+B: Các đường sức không cắt nhau.
+C: Đường sức là những đường cong khép kín.
+D: Đường sức đi ra từ điện tích dương và kết thúc ở điện tích âm (hoặc vô cùng).
+ANS: C
+SOL:
+Theo slide Chương 7 (mục III.1), đường sức điện trường tĩnh:
+- Tiếp tuyến trùng phương $\vec E$ (A đúng).
+- **Không khép kín** (D đúng) và **không cắt nhau** (B đúng).
+⇒ C sai. (Đường sức khép kín là của **từ trường** và **điện trường xoáy**.)
+**Kết luận:** chọn **C**.
+
+@@ C7 | new
+Q: Vectơ cảm ứng điện $\vec D$ trong môi trường đồng nhất, đẳng hướng được xác định bởi:
+A: $\vec D = \dfrac{\vec E}{\varepsilon_0\varepsilon}$
+B: $\vec D = \varepsilon_0\varepsilon\vec E$
+C: $\vec D = \varepsilon\vec E$
+D: $\vec D = \mu_0\mu\vec E$
+ANS: B
+SOL:
+$$\vec D = \varepsilon_0\varepsilon\vec E;\qquad D = \frac{|Q|}{4\pi r^2}\ \text{(điện tích điểm)}$$
+Đơn vị: C/m². Với điện tích điểm, $D$ **không phụ thuộc** môi trường (ε bị triệt tiêu), còn $E$ thì giảm ε lần.
+**Kết luận:** chọn **B**.
+
+@@ C7 | new
+Q: Một mặt cầu bán kính R tích điện đều điện tích q đặt trong không khí. Cường độ điện trường tại điểm cách tâm r với $r < R$ và $r > R$ lần lượt là:
+A: $0$ và $\dfrac{kq}{r^2}$
+B: $\dfrac{kq}{R^2}$ và $\dfrac{kq}{r^2}$
+C: $\dfrac{kqr}{R^3}$ và $\dfrac{kq}{r^2}$
+D: $0$ và $0$
+ANS: A
+SOL:
+**Định lý O–G** với mặt Gauss là mặt cầu đồng tâm bán kính r: $D\cdot 4\pi r^2 = \sum q_{trong}$.
+- $r < R$: mặt Gauss **không chứa** điện tích (điện tích nằm trên mặt cầu) ⇒ $E = 0$.
+- $r > R$: $\sum q_{trong} = q$ ⇒ $E = \dfrac{q}{4\pi\varepsilon_0 r^2} = \dfrac{kq}{r^2}$.
+C là kết quả của **khối cầu** (điện môi) tích điện đều theo thể tích.
+**Kết luận:** chọn **A**. (Ví dụ 1 phần O–G slide Chương 7.)
+
+@@ C7 | new
+Q: Hai mặt phẳng song song vô hạn tích điện đều trái dấu với mật độ $\pm\sigma$, $\sigma = 8,86\cdot10^{-8}\ \text{C/m}^2$, đặt trong không khí. Cường độ điện trường ở khoảng giữa và ở bên ngoài hai mặt phẳng lần lượt là:
+A: $10^{4}$ V/m và 0
+B: $5\cdot10^{3}$ V/m và $5\cdot10^{3}$ V/m
+C: $10^{4}$ V/m và $10^{4}$ V/m
+D: 0 và $10^{4}$ V/m
+ANS: A
+SOL:
+Mỗi mặt gây ra $E_1 = \dfrac{\sigma}{2\varepsilon_0}$.
+- **Ở giữa:** hai vectơ cùng chiều ⇒ $E = 2E_1 = \dfrac{\sigma}{\varepsilon_0} = \dfrac{8,86\cdot10^{-8}}{8,86\cdot10^{-12}} = 10^{4}$ V/m.
+- **Bên ngoài:** hai vectơ ngược chiều, cùng độ lớn ⇒ $E = 0$.
+Hiệu điện thế giữa hai mặt: $U = Ed = \dfrac{\sigma d}{\varepsilon_0}$.
+**Kết luận:** chọn **A**.
+
+@@ C7 | new
+Q: Một electron (ban đầu đứng yên) được tăng tốc qua hiệu điện thế 100 V. Động năng electron thu được là:
+A: $1,6\cdot10^{-19}$ J
+B: $1,6\cdot10^{-17}$ J
+C: $1,6\cdot10^{-21}$ J
+D: $6,25\cdot10^{20}$ J
+ANS: B
+SOL:
+**Định lý động năng:** công lực điện bằng độ tăng động năng
+$$W_đ = |e|U = 1,6\cdot10^{-19}\times 100 = 1,6\cdot10^{-17}\ \text{J} = 100\ \text{eV}$$
+**Kết luận:** chọn **B**.
+
+@@ C7 | new
+Q: Mặt đẳng thế là:
+A: Quỹ tích những điểm có cùng cường độ điện trường.
+B: Quỹ tích những điểm có cùng điện thế; vectơ $\vec E$ tại mỗi điểm luôn vuông góc với mặt đẳng thế.
+C: Mặt mà đường sức điện song song với nó.
+D: Mặt mà điện tích dịch chuyển trên đó thì lực điện sinh công khác 0.
+ANS: B
+SOL:
+- Mặt đẳng thế: quỹ tích các điểm có **cùng điện thế** V = const.
+- Dịch chuyển trên mặt đẳng thế: $A = q(V_M - V_N) = 0$ (D sai).
+- Vì $dA = q\vec E\cdot d\vec l = 0$ với mọi $d\vec l$ nằm trên mặt ⇒ $\vec E \perp$ mặt đẳng thế (C sai).
+**Kết luận:** chọn **B**.
+
+@@ C7 | new
+Q: Ba điện tích $q_1 = -10^{-8}$ C, $q_2 = q_3 = 2,4\cdot10^{-8}$ C đặt tại ba đỉnh A, B, C của tam giác đều cạnh a = 10 cm trong không khí. Điện thế tại trung điểm M của AB là (k = 9·10⁹):
+A: $2,52\cdot10^{3}$ V
+B: $5\cdot10^{3}$ V
+C: $7,5\cdot10^{3}$ V
+D: $4,5\cdot10^{3}$ V
+ANS: B
+SOL:
+**Bước 1 – Khoảng cách:** $r_{AM} = r_{BM} = \dfrac a2 = 0,05$ m; $r_{CM} = \dfrac{a\sqrt3}{2} \approx 0,0866$ m.
+**Bước 2 – Điện thế là đại lượng vô hướng, cộng đại số:**
+$$V_M = k\left(\frac{q_1 + q_2}{0,05} + \frac{q_3}{0,0866}\right) = 9\cdot10^{9}\left(\frac{1,4\cdot10^{-8}}{0,05} + \frac{2,4\cdot10^{-8}}{0,0866}\right)$$
+$$V_M = 9\cdot10^{9}\times(2,8\cdot10^{-7} + 2,77\cdot10^{-7}) \approx 5,01\cdot10^{3}\ \text{V}$$
+**Kết luận:** chọn **B**.
+WARN: Đây là câu 18 đề giữa kỳ 0424. Bộ lời giải cũ chọn 4,5·10³ V là chưa chính xác; tính đúng ra ≈ 5·10³ V.
+
+@@ C7 | new
+Q: Một vòng dây tròn bán kính R tích điện đều điện tích Q. Cường độ điện trường tại **tâm** vòng dây là:
+A: $\dfrac{kQ}{R^2}$
+B: $0$
+C: $\dfrac{kQ}{2R^2}$
+D: $\dfrac{2kQ}{\pi R^2}$
+ANS: B
+SOL:
+Công thức trên trục: $E = \dfrac{kQh}{(R^2 + h^2)^{3/2}}$. Tại tâm $h = 0$ ⇒ $E = 0$.
+Giải thích: các phần tử đối xứng qua tâm gây ra các vectơ $d\vec E$ ngược chiều, triệt tiêu từng đôi.
+D là công thức cho **nửa** vòng dây (đối xứng bị phá vỡ).
+**Kết luận:** chọn **B**.
+
+@@ C8 | new
+Q: Quả cầu kim loại bán kính R, tích điện q, đặt trong chân không. Cường độ điện trường và điện thế tại **tâm** quả cầu là:
+A: $E = 0$; $V = 0$
+B: $E = \dfrac{kq}{R^2}$; $V = 0$
+C: $E = 0$; $V = \dfrac{kq}{R}$
+D: $E = \dfrac{kq}{R^2}$; $V = \dfrac{kq}{R}$
+ANS: C
+SOL:
+**Vật dẫn cân bằng tĩnh điện:**
+- Điện tích chỉ phân bố ở **mặt ngoài** ⇒ bên trong $\vec E = 0$.
+- Toàn vật dẫn là **khối đẳng thế** ⇒ điện thế tại tâm bằng điện thế mặt ngoài: $V = \dfrac{kq}{R}$.
+**Kết luận:** chọn **C**. (Câu 8 đề giữa kỳ.)
+
+@@ C8 | new
+Q: Điện dung của một quả cầu kim loại cô lập bán kính R = 9 cm đặt trong không khí là:
+A: 1 pF
+B: 10 pF
+C: 100 pF
+D: 9 pF
+ANS: B
+SOL:
+Quả cầu tích điện Q có $V = \dfrac{kQ}{\varepsilon R}$ ⇒
+$$C = \frac{Q}{V} = 4\pi\varepsilon_0\varepsilon R = \frac{\varepsilon R}{k} = \frac{0,09}{9\cdot10^{9}} = 10^{-11}\ \text{F} = 10\ \text{pF}$$
+Nhận xét từ slide: muốn C = 1 F thì R = 9·10⁹ m (≈ 1400 lần bán kính Trái Đất) ⇒ Fara là đơn vị **rất lớn**.
+**Kết luận:** chọn **B**.
+
+@@ C8 | new
+Q: Tụ điện phẳng không khí có diện tích mỗi bản $S = 100\ \text{cm}^2$, khoảng cách hai bản d = 1 mm. Điện dung của tụ là ($\varepsilon_0 = 8,86\cdot10^{-12}$):
+A: 8,86 pF
+B: 88,6 pF
+C: 886 pF
+D: 0,886 pF
+ANS: B
+SOL:
+$$C = \frac{\varepsilon_0\varepsilon S}{d} = \frac{8,86\cdot10^{-12}\times 10^{-2}}{10^{-3}} = 8,86\cdot10^{-11}\ \text{F} = 88,6\ \text{pF}$$
+Đổi: $S = 100\ \text{cm}^2 = 10^{-2}\ \text{m}^2$; $d = 10^{-3}$ m.
+**Kết luận:** chọn **B**.
+
+@@ C8 | new
+Q: Hai tụ điện $C_1 = 2\ \mu\text{F}$ và $C_2 = 3\ \mu\text{F}$. Điện dung tương đương khi mắc **nối tiếp** và **song song** lần lượt là:
+A: 5 μF và 1,2 μF
+B: 1,2 μF và 5 μF
+C: 6 μF và 1,2 μF
+D: 1,2 μF và 6 μF
+ANS: B
+SOL:
+- **Nối tiếp:** $\dfrac{1}{C} = \dfrac{1}{C_1} + \dfrac{1}{C_2}$ ⇒ $C = \dfrac{C_1C_2}{C_1 + C_2} = \dfrac{6}{5} = 1,2\ \mu$F.
+- **Song song:** $C = C_1 + C_2 = 5\ \mu$F.
+(Ngược với điện trở!)
+**Kết luận:** chọn **B**.
+
+@@ C8 | new
+Q: Năng lượng của tụ điện có điện dung C, tích điện q, hiệu điện thế U **không** được tính bằng biểu thức nào?
+A: $W = \dfrac12 CU^2$
+B: $W = \dfrac12 qU$
+C: $W = \dfrac{q^2}{2C}$
+D: $W = \dfrac12 qU^2$
+ANS: D
+SOL:
+Ba dạng tương đương của năng lượng tụ điện:
+$$W = \frac12 CU^2 = \frac12 qU = \frac{q^2}{2C}$$
+D sai thứ nguyên.
+**Kết luận:** chọn **D**. (Câu 19 đề giữa kỳ hỏi dạng "đúng": $W = \frac{q^2}{2C}$.)
+
+@@ C8 | new
+Q: Tụ điện $C = 5\ \mu\text{F}$ được tích điện đến hiệu điện thế 100 V. Năng lượng của tụ là:
+A: 0,25 J
+B: 0,025 J
+C: 0,05 J
+D: 250 J
+ANS: B
+SOL:
+$$W = \frac12 CU^2 = \frac12\times 5\cdot10^{-6}\times 100^2 = 0,025\ \text{J}$$
+**Kết luận:** chọn **B**.
+
+@@ C8 | new
+Q: Một tụ phẳng không khí $C_0 = 20\ \mu\text{F}$ được tích điện đến $U_0 = 100$ V rồi ngắt khỏi nguồn. Sau đó lấp đầy tụ bằng điện môi ε = 4. Hiệu điện thế và năng lượng của tụ lúc sau là:
+A: 400 V; 0,4 J
+B: 25 V; 0,025 J
+C: 100 V; 0,4 J
+D: 25 V; 0,1 J
+ANS: B
+SOL:
+**Bước 1 – Ngắt nguồn ⇒ Q bảo toàn:** $Q = C_0U_0 = 20\cdot10^{-6}\times 100 = 2\cdot10^{-3}$ C.
+**Bước 2 – Điện dung mới:** $C = \varepsilon C_0 = 80\ \mu$F.
+**Bước 3:** $U = \dfrac{Q}{C} = \dfrac{2\cdot10^{-3}}{80\cdot10^{-6}} = 25$ V (giảm 4 lần).
+**Bước 4:** $W = \dfrac12 CU^2 = \dfrac12\times 80\cdot10^{-6}\times 625 = 0,025$ J (giảm 4 lần so với $W_0 = 0,1$ J).
+**Kết luận:** chọn **B**.
+
+@@ C8 | new
+Q: Một tụ phẳng đã ngắt khỏi nguồn. Kéo hai bản ra xa để khoảng cách tăng gấp đôi. Khi đó:
+A: Điện tích giảm 2 lần, hiệu điện thế không đổi.
+B: Điện dung giảm 2 lần, hiệu điện thế tăng 2 lần, năng lượng tăng 2 lần.
+C: Điện dung tăng 2 lần, năng lượng giảm 2 lần.
+D: Cường độ điện trường giữa hai bản tăng 2 lần.
+ANS: B
+SOL:
+Ngắt nguồn ⇒ **Q = const** ⇒ $\sigma$ không đổi ⇒ $E = \dfrac{\sigma}{\varepsilon_0\varepsilon}$ **không đổi** (D sai).
+- $C = \dfrac{\varepsilon_0\varepsilon S}{d}$: d tăng 2 ⇒ C giảm 2.
+- $U = \dfrac QC$ tăng 2 (hoặc $U = Ed$).
+- $W = \dfrac{Q^2}{2C}$ tăng 2 (năng lượng tăng do công ta bỏ ra để kéo hai bản).
+**Kết luận:** chọn **B**.
+
+@@ C8 | new
+Q: Mật độ năng lượng điện trường trong không khí tại nơi có cường độ điện trường $E = 10^{5}$ V/m là:
+A: 0,0443 J/m³
+B: 0,0886 J/m³
+C: 443 J/m³
+D: $4,43\cdot10^{-7}$ J/m³
+ANS: A
+SOL:
+$$w = \frac12\varepsilon_0\varepsilon E^2 = \frac12\times 8,86\cdot10^{-12}\times(10^{5})^2 = \frac12\times 8,86\cdot10^{-2} \approx 0,0443\ \text{J/m}^3$$
+Năng lượng trong tụ phẳng: $W = w\cdot V_{thể\,tích} = \dfrac12\varepsilon_0\varepsilon E^2\cdot Sd$ (câu 14 giữa kỳ).
+**Kết luận:** chọn **A**.
+
+@@ C8 | new
+Q: Điều kiện cân bằng tĩnh điện của vật dẫn là:
+A: Bên trong vật dẫn $\vec E = 0$; trên mặt vật dẫn $\vec E$ vuông góc với bề mặt.
+B: Bên trong vật dẫn $\vec E \neq 0$; trên mặt vật dẫn $\vec E$ tiếp tuyến với bề mặt.
+C: Điện tích phân bố đều trong toàn thể tích vật dẫn.
+D: Điện thế tại mọi điểm trong vật dẫn bằng 0.
+ANS: A
+SOL:
+**Điều kiện cân bằng tĩnh điện** (slide Chương 8):
+- Bên trong: $\vec E_{tr} = 0$.
+- Trên bề mặt: $\vec E = \vec E_n$ ($E_t = 0$, vuông góc bề mặt).
+**Hệ quả:** vật dẫn là khối đẳng thế (V = const nhưng **không nhất thiết bằng 0** → D sai); điện tích chỉ phân bố ở **mặt ngoài** (C sai).
+**Kết luận:** chọn **A**.
+
+@@ C8 | new
+Q: Hiện tượng **mũi nhọn** ở vật dẫn được ứng dụng để:
+A: Chế tạo tụ điện có điện dung lớn.
+B: Làm cột thu lôi, phóng điện trên thân máy bay, xe chở nhiên liệu.
+C: Làm lồng Faraday.
+D: Tôi bề mặt kim loại.
+ANS: B
+SOL:
+Điện tích tập trung nhiều ở mũi nhọn (bán kính cong nhỏ) ⇒ điện trường quanh mũi nhọn rất lớn ⇒ ion hóa không khí, mũi nhọn mất dần điện tích, tạo **gió điện**.
+**Ứng dụng:** phóng nhanh điện tích ra khí quyển: **cột thu lôi**, giải phóng điện trên thân máy bay, xe chở nhiên liệu.
+Ngược lại, thiết bị cao áp phải **tránh** chỗ lồi nhọn (làm mặt cầu, bán kính cong lớn).
+**Kết luận:** chọn **B**.
+
+@@ C8 | new
+Q: Một vật dẫn rỗng ở trạng thái cân bằng tĩnh điện. Phát biểu nào đúng?
+A: Ở phần rỗng có điện trường mạnh nhất.
+B: Ở phần rỗng và thành trong của vật không có điện trường và điện tích; vật dẫn rỗng có tác dụng màn chắn tĩnh điện (lồng Faraday).
+C: Điện tích tập trung ở thành trong.
+D: Điện thế ở phần rỗng bằng 0.
+ANS: B
+SOL:
+Áp dụng O–G cho mặt Gauss nằm trong thành vật dẫn: $\vec E = 0$ ⇒ $\sum q = 0$ ⇒ thành trong **không có điện tích**, phần rỗng **không có điện trường**.
+⇒ Vật đặt trong phần rỗng không bị ảnh hưởng bởi điện trường ngoài: thí nghiệm **lồng Faraday** (màn chắn tĩnh điện).
+**Kết luận:** chọn **B**.
+
+@@ C8 | new
+Q: Khi một vật dẫn được bao bọc hoàn toàn bởi vật dẫn khác (**điện hưởng toàn phần**), điện tích cảm ứng Q′ và điện tích gây cảm ứng Q liên hệ:
+A: $|Q'| < |Q|$
+B: $|Q'| = |Q|$
+C: $|Q'| > |Q|$
+D: $Q' = 0$
+ANS: B
+SOL:
+- Điện hưởng **một phần**: $|Q'| < |Q|$.
+- Điện hưởng **toàn phần** (toàn bộ đường sức xuất phát từ vật A đều tận cùng trên vật B): $|Q'| = |Q|$.
+Định lý các phần tử tương ứng: điện tích cảm ứng trên các phần tử tương ứng bằng nhau về độ lớn và trái dấu.
+**Kết luận:** chọn **B**.
+
+@@ C8 | new
+Q: Hai quả cầu kim loại bán kính $R_1 = 1$ cm và $R_2 = 2$ cm ở rất xa nhau, được nối với nhau bằng một dây dẫn mảnh. Tỉ số mật độ điện mặt $\sigma_1/\sigma_2$ là:
+A: 1/2
+B: 1
+C: 2
+D: 4
+ANS: C
+SOL:
+**Bước 1 – Nối bằng dây dẫn ⇒ cùng điện thế:**
+$$\frac{kQ_1}{R_1} = \frac{kQ_2}{R_2} \Rightarrow \frac{Q_1}{Q_2} = \frac{R_1}{R_2}$$
+**Bước 2 – Mật độ điện mặt** $\sigma = \dfrac{Q}{4\pi R^2}$:
+$$\frac{\sigma_1}{\sigma_2} = \frac{Q_1}{Q_2}\cdot\frac{R_2^2}{R_1^2} = \frac{R_2}{R_1} = 2$$
+Quả cầu nhỏ (bán kính cong nhỏ) có mật độ điện tích lớn hơn — giải thích **hiệu ứng mũi nhọn**.
+**Kết luận:** chọn **C**.
+
+@@ C9 | new
+Q: Điện tích xuất hiện trên mặt giới hạn của khối điện môi khi bị phân cực là:
+A: Điện tích tự do, có thể dịch chuyển trong toàn khối.
+B: Điện tích liên kết, không thể tự do dịch chuyển.
+C: Electron tự do bị kéo ra bề mặt như kim loại.
+D: Không có điện tích nào xuất hiện.
+ANS: B
+SOL:
+Điện môi không có điện tích tự do. Khi đặt trong điện trường ngoài, trên hai mặt giới hạn xuất hiện các điện tích trái dấu gọi là **điện tích liên kết** (phân cực điện môi).
+Bề ngoài giống điện hưởng ở kim loại nhưng **bản chất khác hẳn**: điện tích liên kết không thể tách ra khỏi điện môi.
+**Kết luận:** chọn **B**.
+
+@@ C9 | new
+Q: Phân tử nào sau đây thuộc loại **tự phân cực** (có sẵn mômen lưỡng cực)?
+A: $\text{H}_2$
+B: $\text{N}_2$
+C: $\text{H}_2\text{O}$
+D: $\text{Cl}_2$
+ANS: C
+SOL:
+- **Phân tử không phân cực:** electron phân bố đối xứng, trọng tâm điện tích âm trùng trọng tâm điện tích dương: $\text{H}_2, \text{N}_2, \text{Cl}_2$…
+- **Phân tử tự phân cực:** electron phân bố không đối xứng, hai trọng tâm cách nhau đoạn l ⇒ là lưỡng cực điện: $\text{H}_2\text{O}, \text{HCl}, \text{NH}_3$…
+- Điện môi tinh thể (NaCl, CsCl): mạng ion dương và âm lồng vào nhau.
+**Kết luận:** chọn **C**.
+
+@@ C9 | new
+Q: Một chất điện môi có hằng số điện môi ε = 3. Độ cảm điện môi (hệ số phân cực) $\chi_e$ của nó là:
+A: 3
+B: 2
+C: 4
+D: 1/3
+ANS: B
+SOL:
+Vectơ phân cực: $\vec P_e = \chi_e\varepsilon_0\vec E$; và
+$$\varepsilon = 1 + \chi_e \Rightarrow \chi_e = \varepsilon - 1 = 2$$
+**Kết luận:** chọn **B**.
+
+@@ C9 | new
+Q: Mật độ điện tích liên kết $\sigma'$ trên mặt giới hạn của khối điện môi liên hệ với vectơ phân cực $\vec P_e$ theo hệ thức:
+A: $\sigma' = P_e$ tại mọi mặt
+B: $\sigma' = P_{en} = P_e\cos\theta$ (hình chiếu của $\vec P_e$ lên pháp tuyến mặt giới hạn)
+C: $\sigma' = \dfrac{P_e}{\varepsilon_0}$
+D: $\sigma' = \varepsilon_0 P_e$
+ANS: B
+SOL:
+Slide Chương 9 (II.2): "Mật độ điện tích phân cực trên mặt giới hạn bằng **hình chiếu** của vectơ phân cực điện môi trên pháp tuyến của mặt đó":
+$$\sigma' = P_{en} = P_e\cos\theta$$
+Trong tụ phẳng ($\vec P_e$ vuông góc bản tụ): $\sigma' = \chi_e\varepsilon_0 E = (\varepsilon - 1)\varepsilon_0 E$.
+**Kết luận:** chọn **B**.
+
+@@ C9 | new
+Q: Điện trường tổng hợp E bên trong khối điện môi đồng chất ε lấp đầy tụ phẳng liên hệ với điện trường $E_0$ khi tụ chứa chân không (cùng σ) theo hệ thức:
+A: $E = \varepsilon E_0$
+B: $E = \dfrac{E_0}{\varepsilon}$
+C: $E = E_0 + E'$
+D: $E = E_0$
+ANS: B
+SOL:
+Điện tích liên kết sinh ra điện trường phụ $\vec E'$ **ngược chiều** $\vec E_0$:
+$$E = E_0 - E' = E_0 - \chi_e E \Rightarrow E(1 + \chi_e) = E_0 \Rightarrow E = \frac{E_0}{\varepsilon}$$
+"Điện trường tổng hợp trong chất điện môi giảm đi ε lần so với trong chân không."
+**Kết luận:** chọn **B**.
+
+@@ C9 | new
+Q: Tụ phẳng có hai bản cách nhau d = 4 mm, giữa hai bản là điện môi ε = 2, hiệu điện thế U = 220 V. Mật độ điện tích liên kết trên mặt điện môi là ($\varepsilon_0 = 8,86\cdot10^{-12}$):
+A: $9,75\cdot10^{-7}\ \text{C/m}^2$
+B: $4,87\cdot10^{-7}\ \text{C/m}^2$
+C: $2,44\cdot10^{-7}\ \text{C/m}^2$
+D: $1,95\cdot10^{-6}\ \text{C/m}^2$
+ANS: B
+SOL:
+**Bước 1:** $E = \dfrac{U}{d} = \dfrac{220}{4\cdot10^{-3}} = 5,5\cdot10^{4}$ V/m.
+**Bước 2 – Điện tích tự do:** $\sigma = \varepsilon_0\varepsilon E = 8,86\cdot10^{-12}\times 2\times 5,5\cdot10^{4} \approx 9,75\cdot10^{-7}\ \text{C/m}^2$ (đáp án A là σ — bẫy).
+**Bước 3 – Điện tích liên kết:**
+$$\sigma' = (\varepsilon - 1)\varepsilon_0 E = 1\times 8,86\cdot10^{-12}\times 5,5\cdot10^{4} \approx 4,87\cdot10^{-7}\ \text{C/m}^2$$
+**Kết luận:** chọn **B**. (Ví dụ 1 slide Chương 9.)
+
+@@ C9 | new
+Q: Tụ phẳng không khí, d = 5 mm, được nối với nguồn U = 1000 V, sau đó **ngắt khỏi nguồn** rồi lấp đầy bằng điện môi ε = 7. Hiệu điện thế giữa hai bản lúc sau là:
+A: 7000 V
+B: 1000 V
+C: 143 V
+D: 857 V
+ANS: C
+SOL:
+Ngắt nguồn ⇒ Q bảo toàn: $C_1U_1 = C_2U_2$ với $C_2 = \varepsilon C_1$
+$$U_2 = \frac{U_1}{\varepsilon} = \frac{1000}{7} \approx 143\ \text{V}$$
+Kèm theo: $\sigma = \dfrac{\varepsilon_0U_1}{d} = 1,77\cdot10^{-6}\ \text{C/m}^2$ (không đổi), $\sigma' = \left(1 - \dfrac17\right)\sigma \approx 1,52\cdot10^{-6}\ \text{C/m}^2$.
+**Kết luận:** chọn **C**. (Ví dụ 2 slide Chương 9.)
+
+@@ C9 | new
+Q: Một tụ phẳng **vẫn nối với nguồn**, lấp đầy khoảng giữa hai bản bằng điện môi ε = 4. Năng lượng của tụ:
+A: Giảm 4 lần
+B: Tăng 4 lần
+C: Không đổi
+D: Tăng 16 lần
+ANS: B
+SOL:
+Nối nguồn ⇒ U = const; $C' = 4C$
+$$W' = \frac12 C'U^2 = 4W$$
+So sánh: nếu **ngắt nguồn** trước (Q = const) thì $W' = \dfrac{Q^2}{2C'} = \dfrac W4$ (giảm 4 lần).
+**Kết luận:** chọn **B**.
+
+@@ C10 | new
+Q: Cảm ứng từ tại điểm cách dây dẫn thẳng dài vô hạn 5 cm, dòng điện I = 10 A trong không khí là:
+A: $4\cdot10^{-5}$ T
+B: $2\cdot10^{-5}$ T
+C: $4\pi\cdot10^{-5}$ T
+D: $4\cdot10^{-7}$ T
+ANS: A
+SOL:
+Dây dài vô hạn: $\theta_1 = \theta_2 = 90°$ trong công thức đoạn dây ⇒
+$$H = \frac{I}{2\pi h},\qquad B = \mu_0\mu H = \frac{\mu_0 I}{2\pi h} = \frac{4\pi\cdot10^{-7}\times 10}{2\pi\times 0,05} = 4\cdot10^{-5}\ \text{T}$$
+**Kết luận:** chọn **A**.
+
+@@ C10 | new
+Q: Vòng dây tròn bán kính R = 10 cm có dòng điện I = 5 A. Cường độ từ trường và cảm ứng từ tại tâm vòng dây (trong không khí) là:
+A: 25 A/m; $3,14\cdot10^{-5}$ T
+B: 50 A/m; $6,28\cdot10^{-5}$ T
+C: 25 A/m; $1,57\cdot10^{-5}$ T
+D: 7,96 A/m; $10^{-5}$ T
+ANS: A
+SOL:
+**Tại tâm vòng dây tròn:**
+$$H = \frac{I}{2R} = \frac{5}{2\times 0,1} = 25\ \text{A/m}$$
+$$B = \mu_0 H = 4\pi\cdot10^{-7}\times 25 \approx 3,14\cdot10^{-5}\ \text{T}$$
+Nếu khung có N vòng: $B = N\dfrac{\mu_0 I}{2R}$.
+**Kết luận:** chọn **A**.
+
+@@ C10 | new
+Q: Ống dây thẳng dài có mật độ vòng dây n = 1000 vòng/m, dòng điện I = 2 A, lõi không khí. Cảm ứng từ trong lòng ống dây là:
+A: $2,51\cdot10^{-3}$ T
+B: $1,26\cdot10^{-3}$ T
+C: $2\cdot10^{-3}$ T
+D: $8\cdot10^{-4}$ T
+ANS: A
+SOL:
+Từ trường trong ống dây dài là từ trường đều:
+$$B = \mu_0\mu nI = 4\pi\cdot10^{-7}\times 1000\times 2 \approx 2,51\cdot10^{-3}\ \text{T};\qquad H = nI = 2000\ \text{A/m}$$
+(Suy ra từ định lý Ampère về lưu số của $\vec H$.)
+**Kết luận:** chọn **A**.
+
+@@ C10 | new
+Q: Một đoạn dây dài 20 cm mang dòng điện 4 A đặt vuông góc với đường sức của từ trường đều B = 0,5 T. Lực từ tác dụng lên đoạn dây là:
+A: 40 N
+B: 0,4 N
+C: 4 N
+D: 0
+ANS: B
+SOL:
+**Lực Ampère:** $d\vec F = I\,d\vec l\wedge\vec B$ ⇒ $F = BIl\sin\alpha$
+$$F = 0,5\times 4\times 0,2\times\sin 90° = 0,4\ \text{N}$$
+Chiều lực: quy tắc bàn tay trái (hoặc tích có hướng).
+**Kết luận:** chọn **B**.
+
+@@ C10 | new
+Q: Hai dây dẫn thẳng dài song song cách nhau 10 cm trong không khí, có dòng điện $I_1 = I_2 = 10$ A chạy **cùng chiều**. Lực tương tác trên mỗi mét chiều dài dây là:
+A: $2\cdot10^{-4}$ N, lực đẩy
+B: $2\cdot10^{-4}$ N, lực hút
+C: $2\cdot10^{-3}$ N, lực hút
+D: $4\pi\cdot10^{-4}$ N, lực hút
+ANS: B
+SOL:
+**Bước 1 – Từ trường dây 1 tại dây 2:** $B_1 = \dfrac{\mu_0 I_1}{2\pi d}$.
+**Bước 2 – Lực Ampère lên đoạn l của dây 2:**
+$$\frac{F}{l} = \frac{\mu_0 I_1 I_2}{2\pi d} = \frac{4\pi\cdot10^{-7}\times 10\times 10}{2\pi\times 0,1} = 2\cdot10^{-4}\ \text{N/m}$$
+**Chiều:** hai dòng **cùng chiều thì hút**, ngược chiều thì đẩy.
+**Kết luận:** chọn **B**.
+
+@@ C10 | new
+Q: Một electron bay với vận tốc $10^{6}$ m/s vuông góc với đường sức từ trường đều B = 0,1 T. Lực Lorentz tác dụng lên electron là:
+A: $1,6\cdot10^{-14}$ N
+B: $1,6\cdot10^{-13}$ N
+C: $1,6\cdot10^{-20}$ N
+D: $1,6\cdot10^{-12}$ N
+ANS: A
+SOL:
+**Lực Lorentz:** $\vec F_L = q\vec v\wedge\vec B$ ⇒ $F_L = |q|vB\sin\alpha$
+$$F_L = 1,6\cdot10^{-19}\times 10^{6}\times 0,1\times 1 = 1,6\cdot10^{-14}\ \text{N}$$
+**Kết luận:** chọn **A**.
+
+@@ C10 | new
+Q: Một hạt mang điện bay vào từ trường đều theo phương vuông góc với đường sức. Phát biểu nào **sai**?
+A: Hạt chuyển động tròn đều với bán kính $R = \dfrac{mv}{|q|B}$.
+B: Chu kỳ quay $T = \dfrac{2\pi m}{|q|B}$ không phụ thuộc vận tốc.
+C: Lực Lorentz sinh công làm tăng động năng của hạt.
+D: Lực Lorentz đóng vai trò lực hướng tâm.
+ANS: C
+SOL:
+$\vec F_L = q\vec v\wedge\vec B$ luôn **vuông góc** với $\vec v$ ⇒ công $dA = \vec F_L\cdot\vec v\,dt = 0$ ⇒ động năng (tốc độ) **không đổi**, lực Lorentz chỉ làm đổi phương vận tốc.
+$$|q|vB = \frac{mv^2}{R} \Rightarrow R = \frac{mv}{|q|B},\quad T = \frac{2\pi R}{v} = \frac{2\pi m}{|q|B}$$
+**Kết luận:** chọn **C**.
+
+@@ C10 | new
+Q: Proton và electron chuyển động với cùng vận tốc bay vào một từ trường đều theo phương vuông góc với đường sức. So sánh quỹ đạo của chúng:
+A: Bán kính bằng nhau, quay cùng chiều.
+B: Bán kính quỹ đạo proton lớn hơn khoảng 1836 lần, hai hạt quay ngược chiều nhau.
+C: Bán kính quỹ đạo electron lớn hơn, quay cùng chiều.
+D: Cả hai chuyển động thẳng.
+ANS: B
+SOL:
+$R = \dfrac{mv}{|q|B}$: cùng v, cùng |q| = e, cùng B ⇒ $\dfrac{R_p}{R_e} = \dfrac{m_p}{m_e} \approx 1836$.
+Điện tích trái dấu ⇒ lực Lorentz ngược chiều ⇒ hai hạt **quay ngược chiều nhau**.
+**Kết luận:** chọn **B**. (Ví dụ 3 slide Chương 10.)
+
+@@ C10 | new
+Q: Định lý Ostrogradski–Gauss đối với từ trường có dạng:
+A: $\displaystyle\oint_S\vec B\cdot d\vec S = \sum q$
+B: $\displaystyle\oint_S\vec B\cdot d\vec S = 0$
+C: $\displaystyle\oint_C\vec H\cdot d\vec l = 0$
+D: $\displaystyle\oint_S\vec H\cdot d\vec S = \sum I$
+ANS: B
+SOL:
+$$\oint_S\vec B\cdot d\vec S = 0$$
+Ý nghĩa: từ thông gửi qua một mặt kín bất kỳ bằng 0 ⇒ đường sức từ là đường **khép kín** (số đường đi vào bằng số đường đi ra), trong tự nhiên **không tồn tại từ tích** đơn lẻ.
+**Kết luận:** chọn **B**.
+
+@@ C10 | new
+Q: Ba dòng điện $I_1 = 2$ A, $I_2 = 3$ A, $I_3 = 5$ A xuyên qua diện tích giới hạn bởi đường cong kín C; trong đó $I_2$ có chiều ngược với $I_1$, $I_3$. Lưu số của vectơ cường độ từ trường dọc theo C (lấy chiều dương theo $I_1$) là:
+A: 10 A
+B: 4 A
+C: 0
+D: 6 A
+ANS: B
+SOL:
+**Định lý Ampère về dòng điện toàn phần:**
+$$\oint_C\vec H\cdot d\vec l = \sum_i I_i$$
+Tổng **đại số** (dòng nào cùng chiều với chiều dương theo quy tắc vặn nút chai thì dương):
+$$\oint\vec H\cdot d\vec l = 2 - 3 + 5 = 4\ \text{A}$$
+**Kết luận:** chọn **B**.
+
+@@ C10 | new
+Q: Từ trường đều B = 0,2 T. Một khung dây phẳng diện tích 50 cm², pháp tuyến của khung hợp với $\vec B$ góc 60°. Từ thông qua khung là:
+A: $10^{-3}$ Wb
+B: $5\cdot10^{-4}$ Wb
+C: $8,66\cdot10^{-4}$ Wb
+D: 5 Wb
+ANS: B
+SOL:
+$$\Phi = \vec B\cdot\vec S = BS\cos\alpha = 0,2\times 50\cdot10^{-4}\times\cos 60° = 0,2\times 5\cdot10^{-3}\times 0,5 = 5\cdot10^{-4}\ \text{Wb}$$
+Chú ý: α là góc giữa $\vec B$ và **pháp tuyến** $\vec n$ (không phải mặt khung).
+**Kết luận:** chọn **B**.
+
+@@ C10 | new
+Q: Một mạch điện có dòng điện không đổi I = 5 A dịch chuyển trong từ trường, từ thông qua mạch tăng thêm 0,02 Wb. Công của lực từ là:
+A: 0,1 J
+B: 0,25 J
+C: 0,004 J
+D: 250 J
+ANS: A
+SOL:
+**Công của lực từ** khi dịch chuyển mạch điện (I không đổi):
+$$A = I\,\Delta\Phi_m = I(\Phi_2 - \Phi_1) = 5\times 0,02 = 0,1\ \text{J}$$
+**Kết luận:** chọn **A**.
+
+@@ C10 | new
+Q: Đơn vị đo của cảm ứng từ B, cường độ từ trường H và từ thông Φ trong hệ SI lần lượt là:
+A: T; A/m; Wb
+B: Wb; T; A/m
+C: A/m; T; Wb
+D: T; Wb; A/m
+ANS: A
+SOL:
+- Cảm ứng từ B: **tesla (T)**.
+- Cường độ từ trường $H = \dfrac{B}{\mu_0\mu}$: **A/m** (không phụ thuộc môi trường).
+- Từ thông $\Phi = BS\cos\alpha$: **weber (Wb)** = T·m².
+**Kết luận:** chọn **A**.
+
+@@ C10 | new
+Q: Một electron được tăng tốc bởi hiệu điện thế U = 100 V rồi bay vào từ trường đều $B = 2\cdot10^{-3}$ T theo phương vuông góc với đường sức. Bán kính quỹ đạo của electron là ($e = 1,6\cdot10^{-19}$ C, $m_e = 9,1\cdot10^{-31}$ kg):
+A: 0,168 cm
+B: 1,68 cm
+C: 16,8 cm
+D: 5,93 cm
+ANS: B
+SOL:
+**Bước 1 – Vận tốc:**
+$$eU = \frac12 m_ev^2 \Rightarrow v = \sqrt{\frac{2eU}{m_e}} = \sqrt{\frac{3,2\cdot10^{-17}}{9,1\cdot10^{-31}}} \approx 5,93\cdot10^{6}\ \text{m/s}$$
+**Bước 2 – Bán kính:**
+$$R = \frac{m_ev}{eB} = \frac{9,1\cdot10^{-31}\times 5,93\cdot10^{6}}{1,6\cdot10^{-19}\times 2\cdot10^{-3}} = \frac{5,40\cdot10^{-24}}{3,2\cdot10^{-22}} \approx 1,68\cdot10^{-2}\ \text{m}$$
+**Kết luận:** chọn **B**.
+
+@@ C11 | new
+Q: Một khung dây 100 vòng, diện tích mỗi vòng 50 cm², đặt vuông góc với từ trường đều. Cảm ứng từ giảm đều từ 0,5 T về 0 trong 0,1 s. Độ lớn suất điện động cảm ứng trong khung là:
+A: 0,025 V
+B: 2,5 V
+C: 25 V
+D: 250 V
+ANS: B
+SOL:
+**Định luật Faraday:** $\mathcal{E}_c = -\dfrac{d\Phi}{dt}$; với N vòng: $|\mathcal{E}_c| = N\dfrac{|\Delta\Phi|}{\Delta t}$
+$$|\mathcal{E}_c| = N\frac{S|\Delta B|}{\Delta t} = 100\times\frac{50\cdot10^{-4}\times 0,5}{0,1} = 2,5\ \text{V}$$
+**Kết luận:** chọn **B**.
+
+@@ C11 | new
+Q: Một thanh dẫn dài 0,5 m chuyển động với vận tốc 4 m/s trong từ trường đều B = 0,2 T, thanh và vận tốc đều vuông góc với $\vec B$, vận tốc vuông góc với thanh. Suất điện động cảm ứng giữa hai đầu thanh là:
+A: 0,04 V
+B: 0,4 V
+C: 4 V
+D: 0,1 V
+ANS: B
+SOL:
+Diện tích thanh quét trong dt: $dS = lv\,dt$ ⇒ $d\Phi = Blv\,dt$
+$$|\mathcal{E}_c| = \frac{d\Phi}{dt} = Blv = 0,2\times 0,5\times 4 = 0,4\ \text{V}$$
+**Kết luận:** chọn **B**.
+
+@@ C11 | new
+Q: Máy bay bay ngang với vận tốc 900 km/h, thành phần thẳng đứng của cảm ứng từ Trái Đất là $0,5\cdot10^{-4}$ T, sải cánh l = 12,5 m. Suất điện động cảm ứng giữa hai đầu cánh là:
+A: 0,56 V
+B: 0,156 V
+C: 15,6 mV
+D: 1,56 V
+ANS: B
+SOL:
+**Bước 1:** $v = \dfrac{900}{3,6} = 250$ m/s.
+**Bước 2:**
+$$\mathcal{E}_c = Blv = 0,5\cdot10^{-4}\times 12,5\times 250 \approx 0,156\ \text{V}$$
+A là kết quả quên đổi km/h sang m/s rồi chia sai.
+**Kết luận:** chọn **B**. (Ví dụ 2 slide Chương 11.)
+
+@@ C11 | new
+Q: Định luật Lenz phát biểu:
+A: Dòng điện cảm ứng có chiều sao cho từ trường do nó sinh ra có tác dụng chống lại nguyên nhân đã sinh ra nó.
+B: Dòng điện cảm ứng luôn cùng chiều với dòng điện trong mạch sơ cấp.
+C: Suất điện động cảm ứng tỉ lệ với từ thông.
+D: Dòng điện cảm ứng có chiều sao cho từ thông qua mạch luôn tăng.
+ANS: A
+SOL:
+**Định luật Lenz:** "Dòng điện cảm ứng có chiều sao cho từ trường do nó gây ra có tác dụng **chống lại nguyên nhân** đã gây ra nó."
+Dấu "−" trong $\mathcal{E}_c = -\dfrac{d\Phi}{dt}$ thể hiện định luật Lenz. C sai: tỉ lệ với **tốc độ biến thiên** của từ thông.
+**Kết luận:** chọn **A**.
+
+@@ C11 | new
+Q: Một ống dây có hệ số tự cảm L = 0,2 H. Dòng điện qua ống giảm đều từ 5 A về 0 trong 0,05 s. Độ lớn suất điện động tự cảm là:
+A: 2 V
+B: 5 V
+C: 20 V
+D: 50 V
+ANS: C
+SOL:
+$$|\mathcal{E}_{tc}| = L\left|\frac{\Delta I}{\Delta t}\right| = 0,2\times\frac{5}{0,05} = 0,2\times 100 = 20\ \text{V}$$
+**Kết luận:** chọn **C**.
+
+@@ C11 | new
+Q: Ống dây dài l = 50 cm, có N = 1000 vòng, tiết diện S = 10 cm², lõi không khí. Hệ số tự cảm của ống dây là:
+A: 2,51 mH
+B: 25,1 mH
+C: 1,26 mH
+D: 0,251 mH
+ANS: A
+SOL:
+**Công thức** (slide Chương 11): $L = \mu_0\mu\dfrac{N^2S}{l} = \mu_0\mu n^2V$
+$$L = 4\pi\cdot10^{-7}\times\frac{1000^2\times 10\cdot10^{-4}}{0,5} = 4\pi\cdot10^{-7}\times 2000 \approx 2,51\cdot10^{-3}\ \text{H}$$
+**Kết luận:** chọn **A**.
+
+@@ C11 | new
+Q: Ống dây có hệ số tự cảm L = 0,1 H, dòng điện qua ống I = 2 A. Năng lượng từ trường trong ống dây là:
+A: 0,1 J
+B: 0,2 J
+C: 0,4 J
+D: 0,05 J
+ANS: B
+SOL:
+$$W_m = \frac12 LI^2 = \frac12\times 0,1\times 2^2 = 0,2\ \text{J}$$
+(So sánh với tụ điện: $W = \frac12 CU^2$ — cùng "hình dạng" công thức.)
+**Kết luận:** chọn **B**.
+
+@@ C11 | new
+Q: Mật độ năng lượng từ trường tại nơi có cảm ứng từ B = 0,1 T trong không khí là:
+A: $3,98\cdot10^{3}\ \text{J/m}^3$
+B: $7,96\cdot10^{3}\ \text{J/m}^3$
+C: $0,05\ \text{J/m}^3$
+D: $3,98\cdot10^{-3}\ \text{J/m}^3$
+ANS: A
+SOL:
+$$w_m = \frac12 BH = \frac{B^2}{2\mu_0\mu} = \frac{0,1^2}{2\times 4\pi\cdot10^{-7}} = \frac{0,01}{2,513\cdot10^{-6}} \approx 3,98\cdot10^{3}\ \text{J/m}^3$$
+Năng lượng từ trường trong thể tích V: $W_m = \displaystyle\int_V\frac12 BH\,dV$.
+**Kết luận:** chọn **A**.
+
+@@ C11 | new
+Q: Khung dây 100 vòng, diện tích mỗi vòng 100 cm², quay đều với tốc độ góc 100π rad/s trong từ trường đều B = 0,1 T, trục quay vuông góc với $\vec B$. Suất điện động cảm ứng cực đại là:
+A: 3,14 V
+B: 31,4 V
+C: 314 V
+D: 10 V
+ANS: B
+SOL:
+Từ thông: $\Phi = NBS\cos\omega t$ ⇒ $\mathcal{E}_c = -\dfrac{d\Phi}{dt} = NBS\omega\sin\omega t$
+$$\mathcal{E}_{max} = NBS\omega = 100\times 0,1\times 10^{-2}\times 100\pi = 10\pi \approx 31,4\ \text{V}$$
+(Nguyên lý máy phát điện xoay chiều.)
+**Kết luận:** chọn **B**.
+
+@@ C11 | new
+Q: Lõi thép của máy biến áp được ghép từ nhiều lá thép mỏng cách điện với nhau nhằm:
+A: Tăng hệ số tự cảm.
+B: Giảm dòng Foucault (dòng xoáy) và hao phí nhiệt.
+C: Tăng dòng Foucault để nung nóng lõi.
+D: Giảm từ thông qua lõi.
+ANS: B
+SOL:
+Lõi thép đặt trong từ trường biến thiên ⇒ xuất hiện **dòng Foucault** (dòng điện xoáy) gây tỏa nhiệt vô ích.
+Chia lõi thành lá mỏng cách điện ⇒ tăng điện trở mạch dòng xoáy ⇒ **giảm** dòng Foucault và hao phí.
+Ứng dụng có lợi của dòng Foucault: lò cảm ứng nấu chảy kim loại, phanh điện từ, giảm rung kim điện kế.
+**Kết luận:** chọn **B**.
+
+@@ C11 | new
+Q: Hiện tượng **hiệu ứng bề mặt** (hiệu ứng skin) là:
+A: Dòng điện cao tần chủ yếu chạy ở lớp mỏng sát bề mặt dây dẫn.
+B: Điện tích tập trung ở mũi nhọn của vật dẫn.
+C: Dòng điện một chiều chạy ở ruột dây dẫn.
+D: Bề mặt kim loại bị nóng chảy trong từ trường không đổi.
+ANS: A
+SOL:
+Với dòng **cao tần**, dòng Foucault trong chính dây dẫn đẩy dòng điện ra phía ngoài ⇒ dòng chỉ chạy ở lớp **bề mặt**.
+**Ứng dụng:** tôi bề mặt kim loại (bề mặt cứng, ruột vẫn dẻo); dây dẫn cao tần có thể làm **rỗng** hoặc mạ bạc.
+B là hiệu ứng mũi nhọn (Chương 8).
+**Kết luận:** chọn **A**.
+
+@@ C11 | new
+Q: Hai mạch điện đặt gần nhau. Dòng điện $i_1$ trong mạch 1 biến thiên gây ra suất điện động trong mạch 2. Đây là hiện tượng ... và suất điện động có dạng:
+A: Tự cảm; $\mathcal{E}_2 = -L\dfrac{di_2}{dt}$
+B: Hỗ cảm; $\mathcal{E}_2 = -M\dfrac{di_1}{dt}$
+C: Điện hưởng; $\mathcal{E}_2 = Mi_1$
+D: Hỗ cảm; $\mathcal{E}_2 = M\dfrac{di_2}{dt}$
+ANS: B
+SOL:
+**Hỗ cảm:** dòng biến thiên trong mạch này gây ra suất điện động cảm ứng trong mạch kia:
+$$\Phi_{21} = M i_1 \Rightarrow \mathcal{E}_{2} = -M\frac{di_1}{dt}$$
+M: hệ số hỗ cảm (H), phụ thuộc hình dạng, kích thước, vị trí tương đối hai mạch và môi trường. Ứng dụng: máy biến áp.
+**Kết luận:** chọn **B**.
+
+@@ C11 | new
+Q: Khi **đóng** khóa K của mạch có ống dây lõi sắt mắc song song với điện kế, kim điện kế vượt quá vị trí cân bằng a rồi mới trở về a. Nguyên nhân là:
+A: Dòng tự cảm trong ống dây ngược chiều dòng nguồn, một phần rẽ qua điện kế cộng thêm vào dòng qua điện kế.
+B: Dòng Foucault trong lõi sắt.
+C: Điện trở của điện kế giảm.
+D: Hiện tượng hỗ cảm với nguồn điện.
+ANS: A
+SOL:
+Theo slide Chương 11 (thí nghiệm tự cảm):
+- Đóng K: dòng qua ống dây tăng ⇒ từ thông tăng ⇒ xuất hiện dòng **tự cảm ngược chiều** dòng nguồn trong ống dây (chống lại sự tăng). Một phần dòng tự cảm này rẽ qua điện kế theo chiều từ A → B, **cộng thêm** vào dòng nguồn ⇒ kim vượt quá a.
+- Ngắt K: dòng tự cảm **cùng chiều** dòng ban đầu trong ống dây, chạy qua điện kế theo chiều ngược ⇒ kim lệch quá số 0.
+**Kết luận:** chọn **A**.
+
+@@ C13 | new
+Q: Dòng điện dịch là:
+A: Dòng chuyển dời có hướng của các điện tích tự do.
+B: Đại lượng đặc trưng cho điện trường biến thiên theo thời gian, có mật độ $\vec J_{dịch} = \dfrac{\partial\vec D}{\partial t}$ và chỉ có tác dụng sinh ra từ trường.
+C: Dòng điện chạy trong điện môi gây tỏa nhiệt Joule–Lenz.
+D: Dòng của các điện tích liên kết dịch chuyển trong tụ.
+ANS: B
+SOL:
+- Dòng điện **dẫn**: dòng các điện tích chuyển dời có hướng (A).
+- Dòng điện **dịch**: điện trường biến thiên theo thời gian, mật độ
+$$\vec J_{dịch} = \frac{\partial\vec D}{\partial t}$$
+Theo Maxwell, đặc tính **duy nhất** của dòng điện dịch là tạo ra từ trường như dòng điện dẫn (không tỏa nhiệt Joule–Lenz ⇒ C sai).
+**Kết luận:** chọn **B**.
+
+@@ C13 | new
+Q: Theo Maxwell, khi tụ điện đang **phóng điện** ($\vec D$ trong tụ đang giảm), vectơ mật độ dòng điện dịch trong tụ:
+A: Cùng chiều với $\vec D$.
+B: Ngược chiều với $\vec D$, cùng chiều với dòng điện dẫn trong mạch.
+C: Vuông góc với $\vec D$.
+D: Bằng 0.
+ANS: B
+SOL:
+$\vec J_{dịch} = \dfrac{\partial\vec D}{\partial t}$:
+- D **tăng** (tụ đang tích điện) ⇒ $\vec J_{dịch}$ cùng chiều $\vec D$.
+- D **giảm** (tụ đang phóng điện) ⇒ $\vec J_{dịch}$ **ngược chiều** $\vec D$.
+Trong cả hai trường hợp, dòng điện dịch chạy qua tụ **cùng chiều** dòng điện dẫn trong mạch và có cường độ bằng dòng điện dẫn (dòng điện khép kín).
+**Kết luận:** chọn **B**.
+
+@@ C13 | new
+Q: Tụ điện phẳng không khí, diện tích mỗi bản 100 cm², khoảng cách 1 mm. Hiệu điện thế giữa hai bản biến thiên với tốc độ $10^{6}$ V/s. Cường độ dòng điện dịch qua tụ là:
+A: $8,86\cdot10^{-5}$ A
+B: $8,86\cdot10^{-11}$ A
+C: $8,86\cdot10^{-2}$ A
+D: $10^{6}$ A
+ANS: A
+SOL:
+**Bước 1 – Điện dung:** $C = \dfrac{\varepsilon_0 S}{d} = \dfrac{8,86\cdot10^{-12}\times 10^{-2}}{10^{-3}} = 8,86\cdot10^{-11}$ F.
+**Bước 2 – Dòng điện dịch** bằng dòng điện dẫn nạp/phóng tụ:
+$$I_{dịch} = S\frac{dD}{dt} = \frac{dq}{dt} = C\frac{dU}{dt} = 8,86\cdot10^{-11}\times 10^{6} = 8,86\cdot10^{-5}\ \text{A}$$
+**Kết luận:** chọn **A**.
+
+@@ C13 | new
+Q: Phương trình Maxwell–Faraday (dạng tích phân) là:
+A: $\displaystyle\oint_C\vec E\cdot d\vec l = -\frac{d}{dt}\int_S\vec B\cdot d\vec S$
+B: $\displaystyle\oint_C\vec H\cdot d\vec l = \int_S\left(\vec J + \frac{\partial\vec D}{\partial t}\right)\cdot d\vec S$
+C: $\displaystyle\oint_S\vec D\cdot d\vec S = \sum q$
+D: $\displaystyle\oint_S\vec B\cdot d\vec S = 0$
+ANS: A
+SOL:
+**Hệ 4 phương trình Maxwell (dạng tích phân):**
+- **Maxwell–Faraday** (luận điểm I): $\oint\vec E\cdot d\vec l = -\dfrac{d}{dt}\int\vec B\cdot d\vec S$ → A.
+- **Maxwell–Ampère** (luận điểm II): B.
+- **O–G điện:** C.
+- **O–G từ:** D.
+**Kết luận:** chọn **A**.
+
+@@ C13 | new
+Q: Phương trình Maxwell–Ampère cho biết:
+A: Từ trường chỉ do dòng điện dẫn sinh ra.
+B: Từ trường được sinh ra bởi cả dòng điện dẫn và dòng điện dịch (điện trường biến thiên): $\displaystyle\oint\vec H\cdot d\vec l = \int_S\left(\vec J + \frac{\partial\vec D}{\partial t}\right)d\vec S$.
+C: Điện trường xoáy do từ trường biến thiên sinh ra.
+D: Không tồn tại từ tích.
+ANS: B
+SOL:
+Maxwell mở rộng định lý Ampère bằng **dòng điện toàn phần** = dòng dẫn + dòng dịch:
+$$\vec J_{tp} = \vec J_{dẫn} + \frac{\partial\vec D}{\partial t}\ \Rightarrow\ \oint_C\vec H\cdot d\vec l = \int_S\left(\vec J + \frac{\partial\vec D}{\partial t}\right)\cdot d\vec S$$
+C là nội dung phương trình Maxwell–Faraday; D là O–G cho từ trường.
+**Kết luận:** chọn **B**.
+
+@@ C13 | new
+Q: Phát biểu nào đúng về **trường điện từ**?
+A: Điện trường và từ trường là hai trường độc lập, không liên quan nhau.
+B: Điện trường biến thiên sinh ra từ trường và từ trường biến thiên sinh ra điện trường; chúng là hai mặt của một trường thống nhất gọi là trường điện từ.
+C: Trường điện từ chỉ tồn tại trong dây dẫn.
+D: Trường điện từ không mang năng lượng.
+ANS: B
+SOL:
+Theo hai luận điểm Maxwell: từ trường biến thiên → điện trường xoáy; điện trường biến thiên → từ trường. Hai trường liên hệ chặt chẽ, chuyển hóa lẫn nhau ⇒ **trường điện từ** thống nhất, lan truyền trong không gian (sóng điện từ) và mang năng lượng với mật độ
+$$w = \frac12(\vec E\cdot\vec D + \vec B\cdot\vec H)$$
+**Kết luận:** chọn **B**.
+
+@@ C13 | new
+Q: Điện trường xoáy khác điện trường tĩnh ở chỗ:
+A: Điện trường xoáy có đường sức khép kín và lưu số $\displaystyle\oint\vec E\cdot d\vec l \neq 0$ (không phải trường thế).
+B: Điện trường xoáy do điện tích đứng yên sinh ra.
+C: Điện trường xoáy có đường sức hở.
+D: Công của điện trường xoáy trên đường cong kín bằng 0.
+ANS: A
+SOL:
+
+- **Nguồn gốc:** tĩnh do điện tích đứng yên; xoáy do **từ trường biến thiên**.
+- **Đường sức:** tĩnh – hở; xoáy – **khép kín**.
+- **Lưu số:** tĩnh $\oint\vec E\cdot d\vec l = 0$ (trường thế); xoáy $\oint\vec E\cdot d\vec l = -\dfrac{d\Phi_m}{dt} \neq 0$.
+**Kết luận:** chọn **A**.

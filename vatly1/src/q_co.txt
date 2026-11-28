@@ -1,0 +1,593 @@
+@@ C1 | new
+Q: Một chất điểm chuyển động thẳng với phương trình $x = 2t^3 - 3t^2 + 5$ (m, s). Gia tốc của chất điểm tại thời điểm t = 2 s là:
+A: 12 m/s²
+B: 18 m/s²
+C: 24 m/s²
+D: 6 m/s²
+ANS: B
+SOL:
+**Bước 1 – Vận tốc** là đạo hàm bậc nhất của tọa độ:
+$$v = \frac{dx}{dt} = 6t^2 - 6t$$
+**Bước 2 – Gia tốc** là đạo hàm của vận tốc:
+$$a = \frac{dv}{dt} = 12t - 6$$
+**Bước 3 – Thay t = 2 s:** $a = 12\times 2 - 6 = 18\ \text{m/s}^2$.
+**Kết luận:** chọn **B**.
+
+@@ C1 | new
+Q: Một chất điểm chuyển động tròn bán kính R = 0,5 m, góc quay phụ thuộc thời gian theo $\theta = 2 + 3t^2$ (rad). Gia tốc toàn phần tại t = 1 s là:
+A: 3 m/s²
+B: 18 m/s²
+C: 18,25 m/s²
+D: 21 m/s²
+ANS: C
+SOL:
+**Bước 1 – Vận tốc góc và gia tốc góc:**
+$$\omega = \frac{d\theta}{dt} = 6t \Rightarrow \omega(1) = 6\ \text{rad/s};\qquad \gamma = \frac{d\omega}{dt} = 6\ \text{rad/s}^2$$
+**Bước 2 – Hai thành phần gia tốc:**
+$$a_t = \gamma R = 6\times 0,5 = 3\ \text{m/s}^2;\qquad a_n = \omega^2 R = 36\times 0,5 = 18\ \text{m/s}^2$$
+**Bước 3 – Gia tốc toàn phần:**
+$$a = \sqrt{a_t^2 + a_n^2} = \sqrt{9 + 324} = \sqrt{333} \approx 18,25\ \text{m/s}^2$$
+**Kết luận:** chọn **C**.
+
+@@ C1 | new
+Q: Một đoàn tàu bắt đầu chạy vào đoạn đường tròn bán kính 1 km, dài 600 m với vận tốc 54 km/h. Đoàn tàu chạy hết đoạn đường đó trong 30 s (biến đổi đều). Gia tốc toàn phần của tàu ở cuối đoạn đường là:
+A: 0,33 m/s²
+B: 0,63 m/s²
+C: 0,71 m/s²
+D: 1,0 m/s²
+ANS: C
+SOL:
+**Bước 1 – Đổi SI:** $v_0 = 54$ km/h $= 15$ m/s; $R = 1000$ m.
+**Bước 2 – Gia tốc tiếp tuyến** từ $s = v_0t + \dfrac12 a_t t^2$:
+$$600 = 15\times 30 + \frac12 a_t\times 30^2 \Rightarrow 450 a_t = 150 \Rightarrow a_t = \frac13 \approx 0,333\ \text{m/s}^2$$
+**Bước 3 – Vận tốc cuối:** $v = v_0 + a_t t = 15 + \dfrac13\times 30 = 25$ m/s.
+**Bước 4 – Gia tốc pháp tuyến:** $a_n = \dfrac{v^2}{R} = \dfrac{625}{1000} = 0,625\ \text{m/s}^2$.
+**Bước 5:**
+$$a = \sqrt{a_t^2 + a_n^2} = \sqrt{0,111 + 0,391} \approx 0,71\ \text{m/s}^2$$
+**Kết luận:** chọn **C**. (Đây là ví dụ 3 trong slide Chương 1.)
+
+@@ C1 | new
+Q: Một vô lăng sau khi bắt đầu quay được 1 phút thì đạt vận tốc 700 vòng/phút (quay nhanh dần đều). Gia tốc góc của vô lăng và số vòng quay được trong phút đó là:
+A: $\gamma \approx 11,7\ \text{rad/s}^2$; 700 vòng
+B: $\gamma \approx 1,22\ \text{rad/s}^2$; 700 vòng
+C: $\gamma \approx 1,22\ \text{rad/s}^2$; 350 vòng
+D: $\gamma \approx 0,61\ \text{rad/s}^2$; 350 vòng
+ANS: C
+SOL:
+**Bước 1 – Đổi vận tốc góc:**
+$$\omega = 700\ \text{vòng/phút} = \frac{700\times 2\pi}{60} \approx 73,3\ \text{rad/s}$$
+**Bước 2 – Gia tốc góc** ($\omega_0 = 0$, t = 60 s):
+$$\gamma = \frac{\omega}{t} = \frac{73,3}{60} \approx 1,22\ \text{rad/s}^2$$
+**Bước 3 – Góc quay và số vòng:**
+$$\theta = \frac12\gamma t^2 = \frac12\times 1,222\times 3600 \approx 2199\ \text{rad} \Rightarrow N = \frac{\theta}{2\pi} \approx 350\ \text{vòng}$$
+(Cách nhanh: $N = \dfrac{n_0 + n}{2}t = \dfrac{0 + 700}{2}\times 1 = 350$ vòng.)
+**Kết luận:** chọn **C**.
+
+@@ C1 | new
+Q: Từ độ cao h = 20 m, một hòn đá được ném theo phương ngang với $v_0 = 15$ m/s. Lấy g = 10 m/s². Tầm xa của hòn đá là:
+A: 15 m
+B: 20 m
+C: 30 m
+D: 45 m
+ANS: C
+SOL:
+**Bước 1 – Thời gian rơi** (phương đứng là rơi tự do):
+$$h = \frac12 gt^2 \Rightarrow t = \sqrt{\frac{2h}{g}} = \sqrt{\frac{40}{10}} = 2\ \text{s}$$
+**Bước 2 – Tầm xa** (phương ngang thẳng đều):
+$$L = v_0 t = 15\times 2 = 30\ \text{m}$$
+**Kết luận:** chọn **C**.
+
+@@ C1 | new
+Q: Một vật được ném từ mặt đất với $v_0 = 20$ m/s, hợp với phương ngang góc 30°. Bỏ qua sức cản, g = 10 m/s². Độ cao cực đại và tầm xa của vật lần lượt là:
+A: 5 m; 34,6 m
+B: 10 m; 34,6 m
+C: 5 m; 20 m
+D: 15 m; 40 m
+ANS: A
+SOL:
+**Phân tích:** $v_{0x} = v_0\cos\alpha$, $v_{0y} = v_0\sin\alpha = 10$ m/s.
+**Độ cao cực đại** (khi $v_y = 0$):
+$$H = \frac{v_0^2\sin^2\alpha}{2g} = \frac{400\times 0,25}{20} = 5\ \text{m}$$
+**Tầm xa:**
+$$L = \frac{v_0^2\sin 2\alpha}{g} = \frac{400\times\sin 60°}{10} = 40\times 0,866 \approx 34,6\ \text{m}$$
+**Kết luận:** chọn **A**.
+TIP: Thời gian lên đỉnh $t = v_0\sin\alpha/g$ (câu 15 đề giữa kỳ), tổng thời gian bay gấp đôi.
+
+@@ C1 | new
+Q: Một vật rắn quay đều 10 vòng trong 2 s quanh trục cố định, momen quán tính đối với trục là I = 1 kg·m². Momen động lượng của vật là:
+A: 3,14 kg·m²/s
+B: 31,4 kg·m²/s
+C: 62,8 kg·m²/s
+D: 5 kg·m²/s
+ANS: B
+SOL:
+**Bước 1 – Tần số:** $f = \dfrac{N}{t} = \dfrac{10}{2} = 5$ vòng/s.
+**Bước 2 – Vận tốc góc:** $\omega = 2\pi f = 10\pi \approx 31,4$ rad/s.
+**Bước 3 – Momen động lượng:**
+$$L = I\omega = 1\times 31,4 = 31,4\ \text{kg·m}^2/\text{s}$$
+**Kết luận:** chọn **B**. (Câu 1 đề giữa kỳ 0424.)
+
+@@ C1 | new
+Q: Phát biểu nào sau đây về **gia tốc pháp tuyến** là đúng?
+A: Đặc trưng cho sự thay đổi độ lớn của vận tốc, có độ lớn $a_n = \dfrac{dv}{dt}$.
+B: Đặc trưng cho sự thay đổi phương của vận tốc, có độ lớn $a_n = \dfrac{v^2}{R}$, hướng vào tâm quỹ đạo.
+C: Luôn bằng 0 trong chuyển động tròn đều.
+D: Cùng phương với vectơ vận tốc.
+ANS: B
+SOL:
+- $a_n = \dfrac{v^2}{R} = \omega^2 R$, có phương vuông góc với $\vec v$, hướng vào **tâm** cong của quỹ đạo, đặc trưng cho sự thay đổi **phương** của vận tốc. → B đúng.
+- A là tính chất của $a_t$. D cũng là của $a_t$ (tiếp tuyến).
+- C sai: tròn đều thì $a_t = 0$ nhưng $a_n \neq 0$.
+**Kết luận:** chọn **B**.
+
+@@ C1 | new
+Q: Dạng tổng quát của định luật II Newton là:
+A: $\vec F = m\vec v$
+B: $\dfrac{d\vec p}{dt} = \vec F$
+C: $\vec F = \dfrac{d\vec v}{dt}$
+D: $\vec p = \vec F\, t^2$
+ANS: B
+SOL:
+Định luật II Newton dạng động lượng (dạng tổng quát, đúng cả khi khối lượng thay đổi):
+$$\frac{d\vec p}{dt} = \vec F,\qquad \vec p = m\vec v$$
+Khi m không đổi: $\dfrac{d(m\vec v)}{dt} = m\vec a = \vec F$.
+Hệ quả – **định lý động lượng**: $\Delta\vec p = \displaystyle\int \vec F\,dt$ (xung lượng của lực).
+**Kết luận:** chọn **B**.
+
+@@ C1 | new
+Q: Hệ quy chiếu chuyển động với gia tốc $\vec A$ so với hệ quán tính. Lực quán tính tác dụng lên vật khối lượng m trong hệ đó là:
+A: $\vec F_{qt} = m\vec A$
+B: $\vec F_{qt} = -m\vec A$
+C: $\vec F_{qt} = -m\vec g$
+D: $\vec F_{qt} = 0$
+ANS: B
+SOL:
+Trong hệ quy chiếu **phi quán tính** có gia tốc $\vec A$, ngoài các lực thật còn phải thêm **lực quán tính**:
+$$\vec F_{qt} = -m\vec A$$
+Dấu "−": lực quán tính luôn **ngược chiều** gia tốc của hệ (ví dụ xe phanh gấp, người bị đẩy về phía trước).
+**Kết luận:** chọn **B**.
+
+@@ C1 | new
+Q: Một người khối lượng 60 kg đứng trong thang máy đang đi lên nhanh dần đều với gia tốc 2 m/s². Lấy g = 10 m/s². Lực người nén lên sàn thang máy là:
+A: 480 N
+B: 600 N
+C: 720 N
+D: 120 N
+ANS: C
+SOL:
+**Chọn chiều dương hướng lên.** Định luật II Newton cho người: $N - mg = ma$
+$$N = m(g + a) = 60\times(10 + 2) = 720\ \text{N}$$
+Theo định luật III Newton, người nén lên sàn một lực bằng $N = 720$ N (lớn hơn trọng lượng → "tăng trọng").
+**Kết luận:** chọn **C**.
+TIP: Đi lên nhanh dần / đi xuống chậm dần: N = m(g + a). Đi lên chậm dần / đi xuống nhanh dần: N = m(g − a).
+
+@@ C1 | new
+Q: Một vật trượt xuống mặt phẳng nghiêng góc 30° so với phương ngang, hệ số ma sát trượt k = 0,2. Lấy g = 10 m/s². Gia tốc của vật là:
+A: 5 m/s²
+B: 3,27 m/s²
+C: 6,73 m/s²
+D: 1,73 m/s²
+ANS: B
+SOL:
+**Phân tích lực dọc mặt nghiêng** (chiều dương hướng xuống dốc):
+$$ma = mg\sin\alpha - F_{ms} = mg\sin\alpha - kmg\cos\alpha$$
+$$a = g(\sin\alpha - k\cos\alpha) = 10\times(0,5 - 0,2\times 0,866) = 10\times 0,3268 \approx 3,27\ \text{m/s}^2$$
+**Kết luận:** chọn **B**.
+
+@@ C1 | new
+Q: Một ô tô khối lượng 1600 kg chuyển động đều với v = 36 km/h qua một cầu **vồng lên** bán kính R = 100 m. Lấy g = 10 m/s². Lực nén của ô tô lên cầu tại điểm cao nhất là:
+A: 17600 N
+B: 16000 N
+C: 14400 N
+D: 1600 N
+ANS: C
+SOL:
+**Bước 1:** v = 36 km/h = 10 m/s.
+**Bước 2 – Tại đỉnh cầu vồng**, hợp lực hướng **xuống** (về tâm cong) đóng vai trò lực hướng tâm:
+$$mg - N = \frac{mv^2}{R} \Rightarrow N = mg - \frac{mv^2}{R}$$
+$$N = 16000 - \frac{1600\times 100}{100} = 16000 - 1600 = 14400\ \text{N}$$
+**Kết luận:** chọn **C**.
+TIP: Cầu võng xuống (câu 17 giữa kỳ): N = mg + mv²/R = 17600 N. Cầu vồng lên: N = mg − mv²/R.
+
+@@ C1 | new
+Q: Một quả bóng khối lượng 0,2 kg bay với vận tốc 10 m/s đập vuông góc vào tường rồi bật ngược trở lại với cùng tốc độ. Thời gian va chạm 0,05 s. Lực trung bình tường tác dụng lên bóng là:
+A: 40 N
+B: 80 N
+C: 0 N
+D: 20 N
+ANS: B
+SOL:
+**Định lý biến thiên động lượng:** $\Delta\vec p = \vec F_{tb}\,\Delta t$.
+Chọn chiều dương là chiều bật ra: $p_1 = -mv$, $p_2 = +mv$
+$$\Delta p = mv - (-mv) = 2mv = 2\times 0,2\times 10 = 4\ \text{kg·m/s}$$
+$$F_{tb} = \frac{\Delta p}{\Delta t} = \frac{4}{0,05} = 80\ \text{N}$$
+**Kết luận:** chọn **B**. (Đáp án C là bẫy khi quên đổi dấu vận tốc.)
+
+@@ C1 | new
+Q: Một khẩu súng khối lượng 5 kg bắn ra viên đạn khối lượng 10 g với vận tốc 500 m/s theo phương ngang. Vận tốc giật lùi của súng là:
+A: 0,5 m/s
+B: 1 m/s
+C: 2 m/s
+D: 10 m/s
+ANS: B
+SOL:
+**Định luật bảo toàn động lượng** (hệ súng + đạn ban đầu đứng yên, nội lực rất lớn):
+$$0 = m\vec v + M\vec V \Rightarrow V = -\frac{mv}{M}$$
+$$|V| = \frac{0,01\times 500}{5} = 1\ \text{m/s}$$
+Dấu "−": súng giật **ngược** chiều đạn.
+**Kết luận:** chọn **B**.
+
+@@ C1 | new
+Q: Phát biểu nào đúng về **định luật III Newton**?
+A: Lực và phản lực cùng đặt vào một vật nên chúng cân bằng nhau.
+B: Lực và phản lực cùng phương, ngược chiều, cùng độ lớn và đặt vào hai vật khác nhau.
+C: Lực và phản lực luôn khác bản chất.
+D: Phản lực xuất hiện sau lực một khoảng thời gian.
+ANS: B
+SOL:
+Định luật III: $\vec F_{12} = -\vec F_{21}$.
+- Cùng phương, ngược chiều, cùng độ lớn, **cùng bản chất**, xuất hiện và mất đi **đồng thời**.
+- Đặt vào **hai vật khác nhau** ⇒ không bao giờ cân bằng nhau (A sai).
+**Kết luận:** chọn **B**.
+
+@@ C1 | new
+Q: Nội dung **nguyên lý tương đối Galilê** là:
+A: Các định luật cơ học có dạng như nhau trong mọi hệ quy chiếu quán tính.
+B: Vận tốc ánh sáng là như nhau trong mọi hệ quy chiếu.
+C: Khoảng thời gian phụ thuộc vào hệ quy chiếu.
+D: Các định luật cơ học chỉ đúng trong hệ quy chiếu gắn với Trái Đất.
+ANS: A
+SOL:
+**Nguyên lý tương đối Galilê:** "Các định luật cơ học (các phương trình động lực học) có **dạng như nhau** trong mọi hệ quy chiếu **quán tính**."
+- B là tiên đề của thuyết tương đối hẹp Einstein.
+- C sai trong cơ học cổ điển: thời gian có tính **tuyệt đối**.
+**Kết luận:** chọn **A**.
+TIP: Câu 7 đề giữa kỳ: "Hệ quy chiếu quán tính là hệ trong đó định luật I Newton (quán tính) được nghiệm đúng."
+
+@@ C1 | new
+Q: Một chất điểm chuyển động tròn bán kính R = 10 cm, có vận tốc dài v = 60 cm/s. Vận tốc góc của chất điểm là:
+A: 0,6 rad/s
+B: 6 rad/s
+C: 60 rad/s
+D: 600 rad/s
+ANS: B
+SOL:
+Liên hệ vận tốc dài – vận tốc góc: $v = \omega R$
+$$\omega = \frac{v}{R} = \frac{60\ \text{cm/s}}{10\ \text{cm}} = 6\ \text{rad/s}$$
+**Kết luận:** chọn **B**. (Câu 3 đề giữa kỳ.)
+
+@@ C2 | new
+Q: Một trụ đặc đồng chất khối lượng m = 100 kg, bán kính R = 0,5 m đang quay quanh trục của nó. Tác dụng lên trụ một lực hãm F = 243,4 N tiếp tuyến với mặt trụ, sau 31,4 s trụ dừng lại. Vận tốc góc lúc bắt đầu hãm là:
+A: 48,7 rad/s
+B: 305,7 rad/s
+C: 9,74 rad/s
+D: 152,8 rad/s
+ANS: B
+SOL:
+**Bước 1 – Momen quán tính trụ đặc:** $I = \dfrac12 mR^2 = \dfrac12\times 100\times 0,25 = 12,5\ \text{kg·m}^2$.
+**Bước 2 – Momen lực hãm:** $M = FR = 243,4\times 0,5 = 121,7$ N·m.
+**Bước 3 – Gia tốc góc** (phương trình cơ bản chuyển động quay):
+$$\gamma = \frac{M}{I} = \frac{121,7}{12,5} \approx 9,74\ \text{rad/s}^2$$
+**Bước 4 – Quay chậm dần đều tới dừng:** $0 = \omega_0 - \gamma t$
+$$\omega_0 = \gamma t = 9,74\times 31,4 \approx 305,7\ \text{rad/s}\ (\approx 48,7\ \text{vòng/s})$$
+**Kết luận:** chọn **B**. (Ví dụ 1 slide Chương 2; A là bẫy đơn vị vòng/s.)
+
+@@ C2 | new
+Q: Một bánh xe có momen quán tính đối với trục cố định I = 4 kg·m², đang đứng yên thì chịu momen lực 40 N·m. Bỏ qua ma sát. Thời gian để bánh xe đạt vận tốc góc 200 rad/s là:
+A: 2 s
+B: 5 s
+C: 20 s
+D: 50 s
+ANS: C
+SOL:
+**Bước 1:** $M = I\gamma \Rightarrow \gamma = \dfrac{M}{I} = \dfrac{40}{4} = 10\ \text{rad/s}^2$.
+**Bước 2:** Từ nghỉ: $\omega = \gamma t \Rightarrow t = \dfrac{\omega}{\gamma} = \dfrac{200}{10} = 20$ s.
+**Kết luận:** chọn **C**. (Câu 12 đề giữa kỳ.)
+
+@@ C2 | new
+Q: Ròng rọc là một đĩa đặc khối lượng M = 2 kg. Vắt qua ròng rọc một sợi dây không giãn, hai đầu treo hai vật $m_1 = 2$ kg và $m_2 = 1$ kg. Dây không trượt trên ròng rọc, bỏ qua ma sát trục, g = 10 m/s². Gia tốc của các vật là:
+A: 3,33 m/s²
+B: 2,5 m/s²
+C: 5 m/s²
+D: 2 m/s²
+ANS: B
+SOL:
+**Viết phương trình cho từng vật** (m₁ đi xuống):
+$$m_1g - T_1 = m_1a;\qquad T_2 - m_2g = m_2a$$
+**Ròng rọc:** $(T_1 - T_2)R = I\gamma = \dfrac12 MR^2\cdot\dfrac{a}{R} \Rightarrow T_1 - T_2 = \dfrac12 Ma$
+**Cộng 3 phương trình:**
+$$a = \frac{(m_1 - m_2)g}{m_1 + m_2 + \frac{M}{2}} = \frac{(2 - 1)\times 10}{2 + 1 + 1} = 2,5\ \text{m/s}^2$$
+**Kết luận:** chọn **B**. (A là kết quả khi bỏ qua khối lượng ròng rọc.)
+
+@@ C2 | new
+Q: Một đĩa tròn khối lượng $m_1 = 100$ kg quay với $\omega_1 = 10$ vòng/phút quanh trục thẳng đứng qua tâm. Một người khối lượng $m_2 = 60$ kg đứng ở mép đĩa. Khi người đi vào đứng ở tâm đĩa, vận tốc góc của đĩa là (coi người là chất điểm):
+A: 10 vòng/phút
+B: 16 vòng/phút
+C: 22 vòng/phút
+D: 4,5 vòng/phút
+ANS: C
+SOL:
+**Bảo toàn momen động lượng** (momen ngoại lực đối với trục bằng 0): $I_1\omega_1 = I_2\omega_2$.
+**Bước 1 – Lúc người ở mép:**
+$$I_1 = \frac12 m_1R^2 + m_2R^2 = (50 + 60)R^2 = 110R^2$$
+**Bước 2 – Lúc người ở tâm:** $I_2 = \dfrac12 m_1R^2 = 50R^2$.
+**Bước 3:**
+$$\omega_2 = \frac{I_1}{I_2}\omega_1 = \frac{110}{50}\times 10 = 22\ \text{vòng/phút}$$
+**Kết luận:** chọn **C**. (Ví dụ 3 slide Chương 2.)
+
+@@ C2 | new
+Q: Momen quán tính của thanh mảnh đồng chất dài l, khối lượng m đối với trục vuông góc với thanh và đi qua **một đầu thanh** là:
+A: $\dfrac{ml^2}{12}$
+B: $\dfrac{ml^2}{3}$
+C: $\dfrac{ml^2}{2}$
+D: $ml^2$
+ANS: B
+SOL:
+**Trục qua trung điểm:** $I_G = \dfrac{ml^2}{12}$.
+**Trục qua đầu thanh** – dùng định lý Steiner–Huygens với $d = \dfrac l2$:
+$$I = I_G + md^2 = \frac{ml^2}{12} + \frac{ml^2}{4} = \frac{ml^2}{3}$$
+**Kết luận:** chọn **B**.
+
+@@ C2 | new
+Q: Đĩa tròn đồng chất khối lượng m = 2 kg, bán kính R = 0,2 m. Momen quán tính của đĩa đối với trục vuông góc với mặt đĩa và đi qua **mép đĩa** là:
+A: 0,04 kg·m²
+B: 0,08 kg·m²
+C: 0,12 kg·m²
+D: 0,16 kg·m²
+ANS: C
+SOL:
+**Định lý Steiner–Huygens:** $I_\Delta = I_G + md^2$, với $d$ là khoảng cách giữa hai trục song song.
+- Trục qua tâm: $I_G = \dfrac12 mR^2 = \dfrac12\times 2\times 0,04 = 0,04\ \text{kg·m}^2$.
+- Trục qua mép: $d = R$
+$$I = 0,04 + 2\times 0,2^2 = 0,04 + 0,08 = 0,12\ \text{kg·m}^2$$
+**Kết luận:** chọn **C**.
+
+@@ C2 | new
+Q: Một đĩa đặc đồng chất khối lượng 2 kg lăn không trượt trên mặt phẳng ngang với vận tốc khối tâm 3 m/s. Động năng **tịnh tiến** và động năng **toàn phần** của đĩa lần lượt là:
+A: 9 J; 9 J
+B: 9 J; 13,5 J
+C: 18 J; 27 J
+D: 4,5 J; 13,5 J
+ANS: B
+SOL:
+**Động năng tịnh tiến:** $W_{tt} = \dfrac12 mv^2 = \dfrac12\times 2\times 9 = 9$ J.
+**Động năng quay** ($I = \dfrac12 mR^2$, lăn không trượt $\omega = v/R$):
+$$W_q = \frac12 I\omega^2 = \frac12\cdot\frac12 mR^2\cdot\frac{v^2}{R^2} = \frac14 mv^2 = 4,5\ \text{J}$$
+**Toàn phần:** $W = 9 + 4,5 = 13,5$ J $= \dfrac34 mv^2$.
+**Kết luận:** chọn **B**.
+TIP: Câu 4 giữa kỳ chỉ hỏi động năng tịnh tiến = 9 J. Đọc kỹ đề hỏi phần nào!
+
+@@ C2 | new
+Q: Một quả cầu đặc đồng chất lăn không trượt. Tỉ số giữa động năng quay và động năng toàn phần của nó là:
+A: $\dfrac25$
+B: $\dfrac27$
+C: $\dfrac57$
+D: $\dfrac12$
+ANS: B
+SOL:
+Quả cầu đặc: $I = \dfrac25 mR^2$; lăn không trượt $\omega = \dfrac vR$.
+$$W_q = \frac12\cdot\frac25 mR^2\cdot\frac{v^2}{R^2} = \frac15 mv^2;\qquad W_{tt} = \frac12 mv^2$$
+$$\frac{W_q}{W} = \frac{\frac15}{\frac12 + \frac15} = \frac{0,2}{0,7} = \frac27$$
+**Kết luận:** chọn **B**.
+
+@@ C2 | new
+Q: Một trụ đặc đồng chất lăn không trượt từ đỉnh dốc cao h = 1,2 m xuống (vận tốc đầu bằng 0). Lấy g = 10 m/s². Vận tốc khối tâm ở chân dốc là:
+A: 4,9 m/s
+B: 4 m/s
+C: 3,5 m/s
+D: 2,8 m/s
+ANS: B
+SOL:
+**Bảo toàn cơ năng** (lăn không trượt, ma sát nghỉ không sinh công):
+$$mgh = \frac12 mv^2 + \frac12 I\omega^2 = \frac12 mv^2 + \frac14 mv^2 = \frac34 mv^2$$
+$$v = \sqrt{\frac{4gh}{3}} = \sqrt{\frac{4\times 10\times 1,2}{3}} = \sqrt{16} = 4\ \text{m/s}$$
+A là kết quả $\sqrt{2gh}$ khi trượt không ma sát.
+**Kết luận:** chọn **B**.
+
+@@ C2 | new
+Q: Thanh đồng chất dài l = 1 m, khối lượng m có thể quay không ma sát quanh trục nằm ngang qua một đầu. Thanh được thả từ vị trí nằm ngang. Lấy g = 10 m/s². Vận tốc góc của thanh khi qua vị trí thẳng đứng là:
+A: 3,16 rad/s
+B: 4,47 rad/s
+C: 5,48 rad/s
+D: 7,75 rad/s
+ANS: C
+SOL:
+**Bảo toàn cơ năng:** khối tâm hạ xuống một đoạn $\dfrac l2$:
+$$mg\frac l2 = \frac12 I\omega^2 = \frac12\cdot\frac{ml^2}{3}\omega^2$$
+$$\omega = \sqrt{\frac{3g}{l}} = \sqrt{30} \approx 5,48\ \text{rad/s}$$
+**Kết luận:** chọn **C**.
+
+@@ C2 | new
+Q: Diễn viên múa ba-lê đang quay trên mũi giày, khi khép hai tay lại thì:
+A: Momen quán tính giảm, vận tốc góc tăng.
+B: Momen quán tính tăng, vận tốc góc giảm.
+C: Momen quán tính và vận tốc góc đều không đổi.
+D: Momen động lượng tăng.
+ANS: A
+SOL:
+Momen ngoại lực đối với trục quay ≈ 0 ⇒ **momen động lượng bảo toàn**:
+$$L = I\omega = \text{const}$$
+Khép tay ⇒ khối lượng dồn về gần trục ⇒ $I$ **giảm** ⇒ $\omega$ **tăng** (quay nhanh hơn). L không đổi nên D sai.
+**Kết luận:** chọn **A**.
+
+@@ C2 | new
+Q: Momen quán tính của vật rắn đối với một trục quay **không** phụ thuộc vào:
+A: Khối lượng của vật.
+B: Sự phân bố khối lượng đối với trục.
+C: Vị trí của trục quay.
+D: Tốc độ góc của vật.
+ANS: D
+SOL:
+$$I = \sum_i m_i r_i^2 = \int r^2\,dm$$
+I phụ thuộc khối lượng, cách phân bố khối lượng (hình dạng) và vị trí trục ($r_i$ là khoảng cách tới trục). Không chứa $\omega$ ⇒ không phụ thuộc tốc độ quay.
+**Kết luận:** chọn **D**.
+
+@@ C2 | new
+Q: Một lực F = 10 N đặt tại điểm cách trục quay 0,5 m; góc giữa vectơ $\vec r$ và $\vec F$ là 30°, $\vec F$ nằm trong mặt phẳng vuông góc với trục. Độ lớn momen lực đối với trục là:
+A: 5 N·m
+B: 4,33 N·m
+C: 2,5 N·m
+D: 10 N·m
+ANS: C
+SOL:
+**Định nghĩa:** $\vec M = \vec r\wedge\vec F$ ⇒ độ lớn
+$$M = rF\sin\alpha = 0,5\times 10\times\sin 30° = 2,5\ \text{N·m}$$
+(Tương đương $M = F\cdot d$ với cánh tay đòn $d = r\sin\alpha = 0,25$ m.)
+**Kết luận:** chọn **C**.
+
+@@ C2 | new
+Q: Phương trình cơ bản của chuyển động quay của vật rắn quanh một trục cố định là:
+A: $\vec F = m\vec a$
+B: $\vec M = I\vec\gamma$
+C: $\vec L = m\vec v$
+D: $M = I\omega$
+ANS: B
+SOL:
+$$\vec M = I\vec\gamma\quad\text{hay}\quad \frac{d\vec L}{dt} = \vec M,\ \ \vec L = I\vec\omega$$
+"Momen lực ↔ lực", "momen quán tính ↔ khối lượng", "gia tốc góc ↔ gia tốc" — tương tự định luật II Newton.
+- D sai: $I\omega$ là momen động lượng chứ không phải momen lực.
+**Kết luận:** chọn **B**.
+
+@@ C3 | new
+Q: Một vật khối lượng 2 kg tăng tốc từ 2 m/s lên 4 m/s. Công của hợp lực tác dụng lên vật là:
+A: 4 J
+B: 8 J
+C: 12 J
+D: 16 J
+ANS: C
+SOL:
+**Định lý động năng:** công của ngoại lực bằng độ biến thiên động năng
+$$A = W_{đ2} - W_{đ1} = \frac12 m(v_2^2 - v_1^2) = \frac12\times 2\times(16 - 4) = 12\ \text{J}$$
+**Kết luận:** chọn **C**.
+
+@@ C3 | new
+Q: Trường lực thế là trường lực mà:
+A: Công của lực luôn bằng 0.
+B: Công của lực khi dịch chuyển chất điểm chỉ phụ thuộc điểm đầu và điểm cuối, không phụ thuộc dạng đường đi.
+C: Lực luôn vuông góc với đường đi.
+D: Công của lực trên đường cong kín luôn dương.
+ANS: B
+SOL:
+**Định nghĩa:** Trường lực thế là trường lực mà công $A_{MN}$ không phụ thuộc dạng đường đi, chỉ phụ thuộc vị trí điểm đầu M và điểm cuối N.
+**Hệ quả:** công trên đường cong kín bằng 0: $\displaystyle\oint\vec F\cdot d\vec s = 0$ (D sai).
+Ví dụ: trọng trường, trường tĩnh điện, lực đàn hồi. (Lực ma sát **không** phải lực thế.)
+**Kết luận:** chọn **B**.
+
+@@ C3 | new
+Q: Công suất tức thời của lực $\vec F$ tác dụng lên vật có vận tốc $\vec v$ là:
+A: $P = \vec F\cdot\vec v$
+B: $P = \vec F\wedge\vec v$
+C: $P = F/v$
+D: $P = Fs$
+ANS: A
+SOL:
+$$P = \frac{dA}{dt} = \frac{\vec F\cdot d\vec s}{dt} = \vec F\cdot\vec v = Fv\cos\alpha$$
+Đơn vị: watt (W) = J/s. Công là đại lượng **vô hướng** (có thể dương, âm, bằng 0) → công suất là tích vô hướng.
+**Kết luận:** chọn **A**.
+
+@@ C3 | new
+Q: Phát biểu nào đúng về **công**?
+A: Công là đại lượng luôn dương.
+B: Công là đại lượng vô hướng.
+C: Công là đại lượng vectơ.
+D: Công là năng lượng.
+ANS: B
+SOL:
+$$A = \vec F\cdot\vec s = Fs\cos\alpha$$
+Tích vô hướng ⇒ công là **đại lượng vô hướng**; dấu tùy góc α: $\alpha < 90°$ công phát động (dương), $\alpha > 90°$ công cản (âm), $\alpha = 90°$ công bằng 0.
+D sai: công là **số đo phần năng lượng được truyền/chuyển hóa**, không phải bản thân năng lượng.
+**Kết luận:** chọn **B**. (Câu 20 đề giữa kỳ.)
+
+@@ C3 | new
+Q: Vật $m_1 = 2$ kg chuyển động với vận tốc 3 m/s va chạm **mềm** vào vật $m_2 = 1$ kg đang đứng yên. Phần động năng chuyển thành nhiệt là:
+A: 9 J
+B: 6 J
+C: 3 J
+D: 0 J
+ANS: C
+SOL:
+**Bước 1 – Bảo toàn động lượng** (sau va chạm hai vật dính nhau):
+$$m_1v_1 = (m_1 + m_2)v \Rightarrow v = \frac{2\times 3}{3} = 2\ \text{m/s}$$
+**Bước 2 – Động năng trước và sau:**
+$$W_1 = \frac12\times 2\times 3^2 = 9\ \text{J};\qquad W_2 = \frac12\times 3\times 2^2 = 6\ \text{J}$$
+**Bước 3:** $Q = W_1 - W_2 = 3$ J.
+**Kết luận:** chọn **C**. (Va chạm mềm: bảo toàn động lượng nhưng **không** bảo toàn động năng.)
+
+@@ C3 | new
+Q: Hai quả cầu có khối lượng bằng nhau va chạm **đàn hồi xuyên tâm**, quả 2 đang đứng yên. Sau va chạm:
+A: Hai quả dính vào nhau chuyển động với vận tốc v/2.
+B: Quả 1 dừng lại, quả 2 chuyển động với vận tốc ban đầu của quả 1.
+C: Cả hai quả đứng yên.
+D: Quả 1 bật ngược lại với vận tốc v.
+ANS: B
+SOL:
+Va chạm đàn hồi xuyên tâm (bảo toàn cả động lượng và động năng):
+$$v_1' = \frac{(m_1 - m_2)v_1 + 2m_2v_2}{m_1 + m_2},\qquad v_2' = \frac{(m_2 - m_1)v_2 + 2m_1v_1}{m_1 + m_2}$$
+Với $m_1 = m_2$, $v_2 = 0$: $v_1' = 0$, $v_2' = v_1$ ⇒ hai quả **trao đổi vận tốc**.
+**Kết luận:** chọn **B**.
+
+@@ C3 | new
+Q: Một ô tô khối lượng m = 2 tấn chuyển động đều lên dốc nghiêng 30° với vận tốc 36 km/h. Hệ số ma sát k = 0,1, g = 10 m/s². Công suất động cơ là:
+A: 100 kW
+B: 117,3 kW
+C: 11,7 kW
+D: 82,7 kW
+ANS: B
+SOL:
+**Bước 1 – SI:** m = 2000 kg; v = 10 m/s.
+**Bước 2 – Lực kéo lên dốc đều:**
+$$F_k = mg(\sin\alpha + k\cos\alpha) = 20000\times(0,5 + 0,1\times 0,866) = 20000\times 0,5866 = 11732\ \text{N}$$
+**Bước 3:** $P = F_kv = 11732\times 10 = 117320\ \text{W} \approx 117,3\ \text{kW}$.
+**Kết luận:** chọn **B**. (D là kết quả khi dùng công thức xuống dốc.)
+
+@@ C3 | new
+Q: Một lò xo độ cứng k = 100 N/m bị nén 5 cm. Thế năng đàn hồi của lò xo là:
+A: 0,125 J
+B: 0,25 J
+C: 2,5 J
+D: 250 J
+ANS: A
+SOL:
+$$W_t = \frac12 kx^2 = \frac12\times 100\times(0,05)^2 = 0,125\ \text{J}$$
+Nhớ đổi $x = 5\ \text{cm} = 0,05\ \text{m}$ (D là kết quả quên đổi).
+**Kết luận:** chọn **A**.
+
+@@ C3 | new
+Q: Một ô tô khối lượng 1 tấn tăng tốc từ trạng thái nghỉ đến 72 km/h trong 10 s trên đường ngang. Bỏ qua ma sát. Công suất trung bình của động cơ là:
+A: 2 kW
+B: 20 kW
+C: 200 kW
+D: 40 kW
+ANS: B
+SOL:
+**Bước 1:** v = 72 km/h = 20 m/s.
+**Bước 2 – Công động cơ** = độ tăng động năng:
+$$A = \frac12 mv^2 = \frac12\times 1000\times 400 = 2\cdot10^{5}\ \text{J}$$
+**Bước 3:** $P_{tb} = \dfrac{A}{t} = \dfrac{2\cdot10^{5}}{10} = 2\cdot10^{4}\ \text{W} = 20\ \text{kW}$.
+**Kết luận:** chọn **B**.
+
+@@ C3 | new
+Q: Cơ năng của một chất điểm được bảo toàn khi:
+A: Chất điểm chỉ chịu tác dụng của lực ma sát.
+B: Chất điểm chuyển động trong trường lực thế (chỉ chịu lực thế).
+C: Chất điểm chuyển động thẳng đều.
+D: Tổng ngoại lực bằng 0.
+ANS: B
+SOL:
+**Định luật bảo toàn cơ năng:** khi chất điểm chỉ chịu tác dụng của **lực thế**:
+$$W = W_đ + W_t = \frac12 mv^2 + W_t(\vec r) = \text{const}$$
+- Có ma sát (lực không thế) ⇒ cơ năng giảm, chuyển thành nhiệt.
+- D: tổng lực bằng 0 thì **động lượng** bảo toàn, cơ năng chưa chắc (ví dụ vật đi lên đều).
+**Kết luận:** chọn **B**.
+
+@@ C3 | new
+Q: Một vật được ném thẳng đứng lên từ mặt đất với vận tốc 20 m/s. Bỏ qua sức cản, g = 10 m/s². Độ cao cực đại vật đạt được là:
+A: 10 m
+B: 20 m
+C: 40 m
+D: 2 m
+ANS: B
+SOL:
+**Bảo toàn cơ năng** (gốc thế năng tại mặt đất):
+$$\frac12 mv_0^2 = mgH \Rightarrow H = \frac{v_0^2}{2g} = \frac{400}{20} = 20\ \text{m}$$
+**Kết luận:** chọn **B**.

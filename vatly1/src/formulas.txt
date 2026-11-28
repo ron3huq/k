@@ -1,0 +1,100 @@
+# C1 | Động học & động lực học chất điểm
+Vận tốc, gia tốc :: $\vec v = \dfrac{d\vec r}{dt}$, $\quad\vec a = \dfrac{d\vec v}{dt}$
+Thẳng biến đổi đều :: $v = v_0 + at$, $\ s = v_0t + \dfrac{at^2}{2}$, $\ v^2 - v_0^2 = 2as$
+Chuyển động tròn :: $\omega = \dfrac{d\theta}{dt} = 2\pi f = \dfrac{2\pi}{T}$, $\quad v = \omega R$, $\quad\gamma = \dfrac{d\omega}{dt}$
+Gia tốc tiếp tuyến (đổi độ lớn) :: $a_t = \dfrac{dv}{dt} = \gamma R$
+Gia tốc pháp tuyến (đổi phương) :: $a_n = \dfrac{v^2}{R} = \omega^2R$, $\quad a = \sqrt{a_t^2 + a_n^2}$
+Ném ngang :: $v_x = v_0$, $\ v_y = gt$, $\ t_{rơi} = \sqrt{\dfrac{2h}{g}}$, $\ L = v_0t$
+Ném xiên :: $H = \dfrac{v_0^2\sin^2\alpha}{2g}$, $\quad L = \dfrac{v_0^2\sin2\alpha}{g}$, $\quad t_{lên} = \dfrac{v_0\sin\alpha}{g}$
+Định luật II Newton :: $\dfrac{d\vec p}{dt} = \vec F$, $\quad\vec p = m\vec v$, $\quad\Delta\vec p = \vec F_{tb}\Delta t$
+Lực quán tính :: $\vec F_{qt} = -m\vec A$
+Cầu vồng / võng (tại đỉnh / đáy) :: $N = mg \mp \dfrac{mv^2}{R}$
+Mặt phẳng nghiêng :: $a = g(\sin\alpha - k\cos\alpha)$
+Momen động lượng chất điểm :: $\vec L = \vec r\wedge m\vec v$, $\quad\dfrac{d\vec L}{dt} = \vec M$
+
+# C2 | Động lực học vật rắn
+Momen lực :: $\vec M = \vec r\wedge\vec F$, $\quad M = rF\sin\alpha = Fd$
+Phương trình cơ bản chuyển động quay :: $\vec M = I\vec\gamma$, $\quad\dfrac{d\vec L}{dt} = \vec M$, $\quad L = I\omega$
+Momen quán tính :: $I = \displaystyle\sum m_ir_i^2 = \int r^2dm$
+Vành / trụ rỗng :: $I = mR^2$
+Đĩa / trụ đặc :: $I = \dfrac12 mR^2$
+Quả cầu đặc :: $I = \dfrac25 mR^2$
+Thanh (trục qua giữa / qua đầu) :: $I = \dfrac{ml^2}{12}$ / $\dfrac{ml^2}{3}$
+Định lý Steiner–Huygens :: $I = I_G + md^2$
+Bảo toàn momen động lượng :: $\sum M = 0 \Rightarrow I_1\omega_1 = I_2\omega_2$
+Động năng lăn không trượt :: $W = \dfrac12 mv^2 + \dfrac12 I\omega^2$, $\quad\omega = \dfrac vR$
+Lăn xuống dốc cao h :: Trụ đặc $v = \sqrt{\dfrac{4gh}{3}}$; vành $v = \sqrt{gh}$; cầu đặc $v = \sqrt{\dfrac{10gh}{7}}$
+
+# C3 | Năng lượng
+Công, công suất :: $A = \displaystyle\int\vec F\cdot d\vec s$, $\quad P = \dfrac{dA}{dt} = \vec F\cdot\vec v$
+Định lý động năng :: $A = \dfrac12 mv_2^2 - \dfrac12 mv_1^2$
+Thế năng :: $W_t = mgh$, $\quad W_t = \dfrac12 kx^2$
+Bảo toàn cơ năng (chỉ lực thế) :: $W_đ + W_t = \text{const}$
+Ô tô lên / xuống dốc đều :: $F_k = mg(k\cos\alpha \pm \sin\alpha)$, $\quad P = F_kv$
+Va chạm mềm :: $m_1v_1 + m_2v_2 = (m_1 + m_2)v$
+Va chạm đàn hồi :: $v_1' = \dfrac{(m_1 - m_2)v_1 + 2m_2v_2}{m_1 + m_2}$
+
+# C7 | Trường tĩnh điện
+Hằng số :: $k = \dfrac{1}{4\pi\varepsilon_0} = 9\cdot10^{9}$, $\quad\varepsilon_0 = 8,86\cdot10^{-12}$ F/m, $\quad e = 1,6\cdot10^{-19}$ C
+Định luật Coulomb :: $F = k\dfrac{|q_1q_2|}{\varepsilon r^2}$
+Điện trường điện tích điểm :: $\vec E = \dfrac{\vec F}{q}$, $\quad E = \dfrac{k|Q|}{\varepsilon r^2}$
+Cảm ứng điện :: $\vec D = \varepsilon_0\varepsilon\vec E$, $\quad D = \dfrac{|Q|}{4\pi r^2}$
+Định lý O–G :: $\displaystyle\oint_S\vec D\cdot d\vec S = \sum q_{trong}$, $\quad\Phi_E = \dfrac{\sum q}{\varepsilon_0\varepsilon}$
+Vòng dây (trên trục) :: $E = \dfrac{kQh}{(R^2 + h^2)^{3/2}}$
+Nửa vòng dây (tại tâm) :: $E = \dfrac{2kQ}{\pi R^2}$
+Dây thẳng dài vô hạn :: $E = \dfrac{\lambda}{2\pi\varepsilon_0\varepsilon r} = \dfrac{2k\lambda}{\varepsilon r}$
+Mặt phẳng vô hạn :: $E = \dfrac{\sigma}{2\varepsilon_0\varepsilon}$ (không phụ thuộc r)
+Hai mặt phẳng trái dấu :: $E = \dfrac{\sigma}{\varepsilon_0\varepsilon}$ (giữa), $0$ (ngoài)
+Mặt cầu tích điện :: $r < R$: $E = 0$; $\quad r > R$: $E = \dfrac{kq}{\varepsilon r^2}$
+Khối cầu điện môi tích điện đều :: $r < R$: $E = \dfrac{kqr}{\varepsilon R^3} = \dfrac{\rho r}{3\varepsilon_0\varepsilon}$
+Điện thế :: $V = \dfrac{kQ}{\varepsilon r}$, $\quad V_M = \displaystyle\sum\frac{kq_i}{\varepsilon r_i}$
+Công lực điện :: $A_{MN} = q(V_M - V_N)$, $\quad U = Ed$
+Liên hệ E – V :: $\vec E = -\text{grad}\,V$
+
+# C8 | Vật dẫn – Tụ điện
+Vật dẫn cân bằng tĩnh điện :: $E_{trong} = 0$, vật đẳng thế, điện tích ở mặt ngoài
+Quả cầu kim loại :: $V = \dfrac{kQ}{\varepsilon R}$, $\quad C = 4\pi\varepsilon_0\varepsilon R$
+Tụ phẳng :: $C = \dfrac{\varepsilon_0\varepsilon S}{d}$, $\quad E = \dfrac{U}{d} = \dfrac{\sigma}{\varepsilon_0\varepsilon}$
+Ghép tụ :: Nối tiếp $\dfrac1C = \dfrac1{C_1} + \dfrac1{C_2}$; song song $C = C_1 + C_2$
+Năng lượng tụ :: $W = \dfrac12 CU^2 = \dfrac12 QU = \dfrac{Q^2}{2C}$
+Mật độ năng lượng điện trường :: $w = \dfrac12\varepsilon_0\varepsilon E^2$, $\quad W = w\cdot Sd$
+Mẹo tụ :: Nối nguồn → U giữ nguyên; ngắt nguồn → Q giữ nguyên
+
+# C9 | Điện môi
+Vectơ phân cực :: $\vec P_e = \chi_e\varepsilon_0\vec E$, $\quad\varepsilon = 1 + \chi_e$
+Điện tích liên kết :: $\sigma' = P_{en} = (\varepsilon - 1)\varepsilon_0E$
+Theo σ tự do :: $\sigma' = \sigma\left(1 - \dfrac1\varepsilon\right)$
+Điện trường trong điện môi :: $E = \dfrac{E_0}{\varepsilon}$
+
+# C10 | Từ trường
+Liên hệ B – H :: $\vec B = \mu_0\mu\vec H$, $\quad\mu_0 = 4\pi\cdot10^{-7}$ H/m
+Đoạn dây thẳng :: $H = \dfrac{I}{4\pi h}(\sin\theta_1 + \sin\theta_2)$
+Dây dài vô hạn :: $H = \dfrac{I}{2\pi h}$, $\quad B = \dfrac{\mu_0I}{2\pi h}$
+Tâm khung vuông cạnh a :: $H = \dfrac{2\sqrt2\,I}{\pi a}$
+Tâm vòng tròn N vòng :: $H = \dfrac{NI}{2R}$, $\quad B = \dfrac{N\mu_0I}{2R}$
+Ống dây dài :: $B = \mu_0\mu nI$, $\quad n = \dfrac Nl$
+Lực Ampère :: $F = BIl\sin\alpha$
+Hai dây song song :: $\dfrac Fl = \dfrac{\mu_0I_1I_2}{2\pi d}$ (cùng chiều hút)
+Lực Lorentz :: $F = |q|vB\sin\alpha$, $\quad R = \dfrac{mv}{|q|B}$, $\quad T = \dfrac{2\pi m}{|q|B}$
+Không lệch trong E và B :: $v = \dfrac EB$
+Tăng tốc qua U :: $v = \sqrt{\dfrac{2|q|U}{m}}$
+Từ thông, O–G từ :: $\Phi = BS\cos\alpha$, $\quad\displaystyle\oint\vec B\cdot d\vec S = 0$
+Định lý Ampère :: $\displaystyle\oint_C\vec H\cdot d\vec l = \sum I$
+Công lực từ :: $A = I\Delta\Phi$
+
+# C11 | Cảm ứng điện từ
+Định luật Faraday – Lenz :: $\mathcal{E}_c = -\dfrac{d\Phi}{dt}$, $\quad|\mathcal{E}_c| = N\dfrac{|\Delta\Phi|}{\Delta t}$
+Thanh chuyển động :: $\mathcal{E}_c = Blv$
+Thanh quay quanh một đầu :: $\mathcal{E}_c = \dfrac12 B\omega l^2$
+Khung quay :: $\mathcal{E}_{max} = NBS\omega$
+Tự cảm :: $\mathcal{E}_{tc} = -L\dfrac{di}{dt}$, $\quad L = \mu_0\mu\dfrac{N^2S}{l}$
+Hỗ cảm :: $\mathcal{E}_2 = -M\dfrac{di_1}{dt}$
+Năng lượng từ trường :: $W = \dfrac12 LI^2$, $\quad w = \dfrac12 BH = \dfrac{B^2}{2\mu_0\mu}$
+
+# C13 | Trường điện từ (Maxwell)
+Luận điểm I :: Từ trường biến thiên → điện trường xoáy
+Maxwell–Faraday :: $\displaystyle\oint\vec E\cdot d\vec l = -\frac{d}{dt}\int\vec B\cdot d\vec S$
+Luận điểm II :: Điện trường biến thiên → từ trường
+Dòng điện dịch :: $\vec J_{dịch} = \dfrac{\partial\vec D}{\partial t}$, $\quad I_{dịch} = C\dfrac{dU}{dt}$
+Maxwell–Ampère :: $\displaystyle\oint\vec H\cdot d\vec l = \int\left(\vec J + \frac{\partial\vec D}{\partial t}\right)\cdot d\vec S$
+O–G :: $\displaystyle\oint\vec D\cdot d\vec S = \sum q$, $\quad\displaystyle\oint\vec B\cdot d\vec S = 0$
