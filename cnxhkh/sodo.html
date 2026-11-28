@@ -15,6 +15,8 @@ h1{font-size:24px;font-weight:800;margin:0;text-wrap:balance}
 .tools{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);display:flex;flex-wrap:wrap;gap:8px;padding:8px 0;border-bottom:1px solid var(--ln)}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
 .tools a,.tools button{font:600 13px var(--f);border:1px solid var(--ln);background:var(--card);color:var(--tx);border-radius:999px;padding:5px 11px;text-decoration:none;cursor:pointer}
+.tools select{font:600 13px var(--f);border:1px solid var(--ln);background:var(--card);color:var(--tx);border-radius:999px;padding:5px 8px}
+.reading{outline:2px solid var(--ac);outline-offset:3px;border-radius:6px;background:var(--acs)}
 .tools button#hide{background:var(--ac);border-color:var(--ac);color:var(--card)}
 .tools button:focus-visible,.tools a:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
 section{margin-top:26px}
@@ -46,6 +48,8 @@ td:first-child{font-weight:800;color:var(--ac);white-space:nowrap}
 
 <nav class="tools">
 <button id="hide" type="button">Che đáp án</button>
+<button id="read" type="button">🔊 Đọc sơ đồ</button>
+<select id="spd" aria-label="Tốc độ đọc"><option value="0.8">Chậm</option><option value="1" selected>Vừa</option><option value="1.2">Nhanh</option><option value="1.45">Rất nhanh</option></select>
 <a href="#meo">Cách ôn</a><a href="#so">Số & năm</a>
 <a href="#c1">C1</a><a href="#c2">C2</a><a href="#c3">C3</a><a href="#c4">C4</a><a href="#c5">C5</a><a href="#c6">C6</a><a href="#c7">C7</a>
 </nav>
@@ -276,6 +280,58 @@ td:first-child{font-weight:800;color:var(--ac);white-space:nowrap}
 </div>
 
 <script>
+var AB=[["CNXHKH","chủ nghĩa xã hội khoa học"],["CNXH","chủ nghĩa xã hội"],["CNTB","chủ nghĩa tư bản"],["CNCS","chủ nghĩa cộng sản"],["TBCN","tư bản chủ nghĩa"],["XHCN","xã hội chủ nghĩa"],["CSCN","cộng sản chủ nghĩa"],["GCCN","giai cấp công nhân"],["TLSX","tư liệu sản xuất"],["LLSX","lực lượng sản xuất"],["QHSX","quan hệ sản xuất"],["KT-XH","kinh tế xã hội"],["CT-XH","chính trị xã hội"],["HĐH","hiện đại hóa"],["CNH","công nghiệp hóa"],["KTCT","kinh tế chính trị"],["C.Mác","Các Mác"],["Ph.Ăngghen","Ăng ghen"],["V.I.Lênin","Lê nin"],["Ph.Hêghen","Hê ghen"],["L.Phoiơbắc","Phoi ơ bắc"]];
+var AB2=[["PTSX","phương thức sản xuất"],["TP.HCM","Thành phố Hồ Chí Minh"],["NQ/TW","nghị quyết của Bộ Chính trị"],["NEP","chính sách kinh tế mới"],["J.Xtalin","Xta lin"],["A.Xmít","A đam Xmít"],["D.Ricácđô","Ri các đô"],["S.Phuriê","Phu ri ê"],["R.Oen","Ô oen"],["H.Xanh Ximông","Xanh Xi mông"],["Xanh Ximông","Xanh Xi mông"],["G.Đi-mi-trốp","Đi mi trốp"],["T.Morơ","Tô mát Mo rơ"],["Ph.Hêghen","Hê ghen"]];
+var ROM={I:1,II:2,III:3,IV:4,V:5,VI:6,VII:7,VIII:8,IX:9,X:10,XI:11,XII:12,XIII:13,XIV:14,XV:15,XVI:16,XVII:17,XVIII:18,XIX:19,XX:20,XXI:21};
+function clean(t){t=t.replace(/Mác\s*[-–]\s*Lênin/g,"Mác Lê nin").replace(/vợ\s*[-–]\s*chồng/g,"vợ chồng");AB2.concat(AB).forEach(function(a){t=t.split(a[0]).join(a[1])});
+  t=t.replace(/\((\d{1,2})\/(\d{4})\)/g,", tháng $1 năm $2,").replace(/(\d{1,2})\/(\d{4})/g,"tháng $1 năm $2").replace(/\((\d{4})\)/g,", năm $1,")
+   .replace(/(^|[^\p{L}])([IVX]{1,5})(?=[^\p{L}]|$)/gu,function(m,a,r){return ROM[r]?a+ROM[r]:m})
+   .replace(/(^|[^\p{L}])(\p{Lu}{2,})(?=[^\p{L}]|$)/gu,function(m,a,w){return a+w.toLowerCase()})
+   .replace(/\(([^)]*)\)/g,", $1,").replace(/\s[-–]\s/g," ").replace(/→/g," dẫn đến ").replace(/&/g," và ").replace(/%/g," phần trăm")
+   .replace(/\.\.\./g,", ").replace(/['"“”]/g,"").replace(/\s*,\s*,/g,",").replace(/,\s*([.?!:])/g,"$1").replace(/\s+,/g,",").replace(/\s+/g," ").trim();
+  return t}
+function phrase(q,a,ok){var head=ok?["Chính xác!","Đúng rồi!","Giỏi lắm!"][Math.floor(Math.random()*3)]:"Chưa đúng rồi.";q=q.trim();a=a.trim();
+  var low=a.charAt(0).toLowerCase()+a.slice(1),m;
+  if(/:$/.test(q)){var st=q.slice(0,-1).trim();return[head,st+" "+low+"."]}
+  if((m=q.match(/^(.*)\slà gì\?$/)))return[head,m[1]+" là "+low+"."];
+  var neg=/không/i.test(q);
+  if(!neg&&(m=q.match(/^(.+?) nào là (.+)\?$/)))return[head,m[2].charAt(0).toUpperCase()+m[2].slice(1)+" là "+low+"."];
+  if(!neg&&(m=q.match(/^Đâu là (.+)\?$/)))return[head,m[1].charAt(0).toUpperCase()+m[1].slice(1)+" là "+low+"."];
+  if(/\?$/.test(q))return[head,q,"Đáp án là: "+a+"."];
+  return[head,q+", "+low+"."]}
+
+/* ---------- đọc sơ đồ lặp lại liên tục ---------- */
+var TTS="speechSynthesis" in window,VI=null,ITEMS=[],IX=0,ON=false,TOK=0,LOCK=null;
+function pickV(){if(!TTS)return;VI=speechSynthesis.getVoices().filter(function(x){return /^vi/i.test(x.lang)})[0]||null}
+if(TTS){pickV();speechSynthesis.onvoiceschanged=pickV}
+function T(e){return e.textContent.replace(/\s+/g," ").trim()}
+function pre2(t){return t.replace(/→/g," đến ").replace(/40s/g,"những năm 40").replace(/3\/4/g,"ba phần tư").replace(/(\d{4})–(\d{4})/g,"$1 đến $2").replace(/\s\/\s/g,", ").replace(/\s=\s/g," là ").replace(/\s\+\s/g," và ").replace(/·/g,",").replace(/\bx([234])\b/g,"nhân $1").replace(/^Thần chú:/,"Mẹo nhớ:").replace(/^Mẹo:/,"Mẹo nhớ:")}
+function fix(t){return clean(pre2(t)).replace(/,\s*;/g,";").replace(/,\s*\./g,".")}
+function collect(){ITEMS=[{el:document.querySelector("#so h2"),t:"Bảng các mốc năm hay ra đề.",gap:1500}];
+  document.querySelectorAll("#so tr").forEach(function(tr,i){if(!i)return;var td=tr.querySelectorAll("td");ITEMS.push({el:tr,t:T(td[0])+": "+T(td[1])+".",gap:600})});
+  for(var c=1;c<=7;c++){var sec=document.getElementById("c"+c);ITEMS.push({el:sec.querySelector("h2"),t:"Chương "+c+". "+T(sec.querySelector("h2")).replace(/^Chương \d+/,"")+".",gap:1500});
+    sec.querySelectorAll(".tree > li").forEach(function(li){var b=li.querySelector(":scope > b");ITEMS.push({el:b,t:T(b)+".",gap:900});
+      li.querySelectorAll(":scope > ul > li").forEach(function(x){ITEMS.push({el:x,t:T(x).replace(/:$/,"")+".",gap:600})})});
+    var tip=sec.querySelector(".tip");ITEMS.push({el:tip,t:T(tip),gap:1500})}
+  ITEMS.push({el:document.querySelector("h1"),t:"Hết sơ đồ. Đọc lại từ đầu.",gap:1500})}
+function mark(it){document.querySelectorAll(".reading").forEach(function(e){e.classList.remove("reading")});if(it&&it.el){it.el.classList.add("reading");
+  it.el.querySelectorAll(".v").forEach(function(v){v.classList.add("show")});try{it.el.scrollIntoView({block:"center",behavior:"smooth"})}catch(e){it.el.scrollIntoView()}}}
+function step(tok){if(!ON||tok!==TOK)return;var it=ITEMS[IX];mark(it);var done=false,t=fix(it.t);
+  var u=new SpeechSynthesisUtterance(t);u.lang="vi-VN";if(VI)u.voice=VI;u.rate=+document.getElementById("spd").value;
+  var nx=function(){if(done)return;done=true;clearTimeout(fb);if(!ON||tok!==TOK)return;IX=(IX+1)%ITEMS.length;try{localStorage.setItem("cnxh-sodo-ix",IX)}catch(e){}setTimeout(function(){step(tok)},it.gap/u.rate)};
+  u.onend=nx;u.onerror=nx;var fb=setTimeout(nx,(2+t.length/(9*u.rate))*1000);speechSynthesis.speak(u)}
+function startRead(){if(!TTS){alertBox("Trình duyệt này không có chức năng đọc. Hãy mở bằng Chrome hoặc Safari.");return}
+  if(!ITEMS.length)collect();ON=true;TOK++;rb.textContent="⏸ Dừng đọc";try{speechSynthesis.cancel()}catch(e){}
+  try{navigator.wakeLock&&navigator.wakeLock.request("screen").then(function(l){LOCK=l}).catch(function(){})}catch(e){}
+  var tok=TOK,heard=false,u0=new SpeechSynthesisUtterance("Bắt đầu đọc sơ đồ");u0.lang="vi-VN";if(VI)u0.voice=VI;u0.onstart=function(){heard=true};
+  var go=function(){if(tok===TOK)step(tok)};u0.onend=go;u0.onerror=go;speechSynthesis.speak(u0);
+  setTimeout(function(){if(!heard&&ON&&tok===TOK)alertBox("Không nghe thấy tiếng? Hãy mở link bằng Chrome hoặc Safari (không mở trong ứng dụng Claude), tắt chế độ im lặng, tăng âm lượng và cài giọng Tiếng Việt trong phần Chuyển văn bản thành giọng nói.")},3500)}
+function stopRead(){ON=false;TOK++;try{speechSynthesis.cancel()}catch(e){}rb.textContent="🔊 Đọc sơ đồ";mark(null);try{LOCK&&LOCK.release()}catch(e){}LOCK=null}
+function alertBox(m){var d=document.getElementById("rdMsg");if(!d){d=document.createElement("p");d.id="rdMsg";d.className="tip";document.querySelector(".tools").after(d)}d.textContent=m}
+var rb=document.getElementById("read");
+try{IX=+localStorage.getItem("cnxh-sodo-ix")||0}catch(e){}
+rb.onclick=function(){ON?stopRead():startRead()};
+document.getElementById("spd").onchange=function(){if(ON){var i=IX;stopRead();IX=i;startRead()}};
 var btn=document.getElementById('hide');
 btn.onclick=function(){var on=document.body.classList.toggle('quiz');
 document.querySelectorAll('.v.show').forEach(function(e){e.classList.remove('show')});
