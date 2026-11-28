@@ -6,10 +6,11 @@
 <title>Ôn thi C++ PTIT</title>
 <style>
 :root{--bg:#f7f7f4;--card:#fff;--tx:#1d1d1b;--mut:#5d5d58;--bd:#d9d8d2;--ac:#1f5fbf;--acbg:#e6eefb;--ok:#17803d;--okbg:#e3f4e8;--bad:#b42318;--badbg:#fdeceb;--warn:#8a5a00;--warnbg:#fff4d6;--code:#f3f2ee;--kw:#8a2bb5;--ty:#0b6e99;--st:#a3480b;--nu:#16794a;--cm:#7b7b74;--pp:#a01f5b;--mask:#ffe08a;--diff:#fff2b3}
-@media (prefers-color-scheme:dark){:root{--bg:#161615;--card:#21211f;--tx:#ecebe6;--mut:#a9a8a1;--bd:#3a3936;--ac:#7fb0ff;--acbg:#1f2b40;--ok:#6fd08c;--okbg:#17301f;--bad:#ff8a80;--badbg:#3a1a18;--warn:#f2c14e;--warnbg:#3a2f12;--code:#1a1a19;--kw:#d49cff;--ty:#6cc4ee;--st:#f0a070;--nu:#7fd6a0;--cm:#8d8c86;--pp:#ff86b8;--mask:#6b5410;--diff:#3d3510}}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#161615;--card:#21211f;--tx:#ecebe6;--mut:#a9a8a1;--bd:#3a3936;--ac:#7fb0ff;--acbg:#1f2b40;--ok:#6fd08c;--okbg:#17301f;--bad:#ff8a80;--badbg:#3a1a18;--warn:#f2c14e;--warnbg:#3a2f12;--code:#1a1a19;--kw:#d49cff;--ty:#6cc4ee;--st:#f0a070;--nu:#7fd6a0;--cm:#8d8c86;--pp:#ff86b8;--mask:#6b5410;--diff:#3d3510;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#161615;--card:#21211f;--tx:#ecebe6;--mut:#a9a8a1;--bd:#3a3936;--ac:#7fb0ff;--acbg:#1f2b40;--ok:#6fd08c;--okbg:#17301f;--bad:#ff8a80;--badbg:#3a1a18;--warn:#f2c14e;--warnbg:#3a2f12;--code:#1a1a19;--kw:#d49cff;--ty:#6cc4ee;--st:#f0a070;--nu:#7fd6a0;--cm:#8d8c86;--pp:#ff86b8;--mask:#6b5410;--diff:#3d3510;color-scheme:dark}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--tx);font:17px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
-header{position:sticky;top:0;z-index:5;background:var(--card);border-bottom:1px solid var(--bd)}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--card);border-bottom:1px solid var(--bd)}
 .top{display:flex;align-items:center;gap:12px;padding:8px 16px;flex-wrap:wrap}
 .top h1{font-size:19px;margin:0}
 .bar{flex:1;min-width:160px;height:10px;background:var(--bd);border-radius:6px;overflow:hidden}
@@ -118,6 +119,11 @@ function today() { var d = new Date(); return d.getFullYear() + '-' + pad(d.getM
 function dayDiff(a, b) { return Math.round((new Date(b + 'T00:00:00') - new Date(a + 'T00:00:00')) / 864e5); }
 function bodau(s) { return String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/đ/g, 'd'); }
 function shuffle(a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+function ask(btn, msg, fn) {
+  if (btn.getAttribute('data-armed')) { fn(); return; }
+  var old = btn.textContent; btn.setAttribute('data-armed', '1'); btn.textContent = msg;
+  setTimeout(function () { if (btn.isConnected) { btn.removeAttribute('data-armed'); btn.textContent = old; } }, 4000);
+}
 function pick(a) { return a[Math.floor(Math.random() * a.length)]; }
 
 // ---------- luu tien do ----------
@@ -428,7 +434,7 @@ function renderHome() {
     '<div class="card noprint"><button class="badb" id="reset">🗑️ Xóa toàn bộ tiến độ</button> <span class="small mut">Tiến độ lưu trong trình duyệt này (localStorage), không gửi đi đâu.</span></div>';
   $('s-home').innerHTML = h;
   refreshProgress();
-  $('reset').onclick = function () { if (confirm('Xóa hết tiến độ, kế hoạch, điểm minigame?')) { S = {}; save(); load(); renderAllTabs(); } };
+  $('reset').onclick = function () { ask(this, '⚠️ Bấm lần nữa để XÓA HẾT', function () { S = {}; save(); load(); renderAllTabs(); }); };
 }
 document.addEventListener('change', function (e) {
   var k = e.target.getAttribute && e.target.getAttribute('data-plan');
@@ -612,12 +618,12 @@ function gExam() {
   });
   $('gbox').innerHTML = h;
   [].forEach.call(document.querySelectorAll('[data-ex]'), function (ta) { ta.addEventListener('input', function () { E.ans[ta.getAttribute('data-ex')] = ta.value; save(); }); });
-  $('esub').onclick = function () { if (E.done || confirm('Nộp bài và xem đáp án?')) { E.done = true; save(); gExam(); } };
-  $('enew').onclick = function () { if (confirm('Bỏ bài thi hiện tại và tạo đề mới?')) { newExam(); gExam(); } };
-  if (E.done) { $('esub').style.display = 'none'; $('etimer').textContent = '✅ Đã nộp bài. So sánh từng câu bên dưới.'; return; }
+  $('esub').onclick = function () { ask(this, '📤 Bấm lần nữa để nộp', function () { E.done = true; save(); gExam(); }); };
+  $('enew').onclick = function () { ask(this, '🔄 Bấm lần nữa: bỏ bài, tạo đề mới', function () { newExam(); gExam(); }); };
+  if (E.done) { $('esub').style.display = 'none'; $('etimer').textContent = '✅ Đã nộp bài (hoặc hết giờ). So sánh từng câu bên dưới.'; return; }
   function tick() {
     var left = EXAM_MS - (Date.now() - E.start);
-    if (left <= 0) { clearInterval(TMR); TMR = null; E.done = true; save(); alert('Hết giờ! Xem đáp án nhé.'); gExam(); return; }
+    if (left <= 0) { clearInterval(TMR); TMR = null; E.done = true; save(); gExam(); return; }
     var m = Math.floor(left / 60000), s = Math.floor(left / 1000) % 60, el = $('etimer');
     if (el) { el.textContent = '⏳ ' + pad(m) + ':' + pad(s); el.style.color = left < 10 * 60000 ? 'var(--bad)' : ''; } else { clearInterval(TMR); TMR = null; }
   }
@@ -687,7 +693,11 @@ function printBook(only1) {
   });
   $('book').innerHTML = h; doPrint();
 }
-function doPrint() { document.body.classList.add('pbook'); setTimeout(function () { window.print(); }, 50); }
+var EMB = location.protocol !== 'file:' && window.self !== window.top;
+function doPrint() {
+  if (EMB) { var n = document.createElement('div'); n.className = 'card'; n.style.borderColor = 'var(--warn)'; n.textContent = 'Trang xem trên claude.ai không cho in. Muốn in: tải file on_thi.html về máy, mở bằng Chrome hoặc Edge rồi bấm nút In.'; var a = document.querySelector('section.show'); a.insertBefore(n, a.firstChild); window.scrollTo(0, 0); return; }
+  document.body.classList.add('pbook'); setTimeout(function () { window.print(); }, 50);
+}
 window.addEventListener('afterprint', function () { document.body.classList.remove('pbook'); });
 
 // ---------- tabs ----------
